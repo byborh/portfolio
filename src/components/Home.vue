@@ -8,12 +8,14 @@ const skills = ref([
   { name: 'Docker', icon: 'bi bi-box' },
   { name: 'Spring Boot', icon: 'bi bi-cpu' },
   { name: 'Angular', icon: 'bi bi-diagram-3' },
-  { name: 'CI/CD', icon: 'bi bi-git' },
+  { name: 'CI/CD', icon: 'bi bi-arrow-repeat' },
   { name: 'SQL', icon: 'bi bi-database' },
   { name: 'Redis', icon: 'bi bi-lightning-charge' },
   { name: 'Python', icon: 'bi bi-terminal' },
-  { name: 'AWS Lambda', icon: 'bi bi-cloud' }
+  { name: 'AWS Lambda', icon: 'bi bi-cloud' },
+  { name: 'Git', icon: 'bi bi-git' }
 ])
+
 
 const projects = ref([
   {
