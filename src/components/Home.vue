@@ -21,22 +21,23 @@ const projects = ref([
   {
     title: 'Datte',
     desc: 'Datte - Your go-to backend',
-    img: 'https://images.unsplash.com/photo-1581091012184-5c1f1e04e2aa',
+    img: 'https://images.unsplash.com/photo-1593642634315-48f5414c3ad9?auto=format&fit=crop&w=800&q=80',
     link: 'https://github.com/byborh/task-queue'
   },
   {
     title: 'Micro-Sud',
     desc: 'Micro-Sud - Dynamic site | Front (Vue.js/Typescript) & Back (Node.js/Typescript) & DB (Redis) & Deployment (Docker).',
-    img: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085',
+    img: 'https://images.unsplash.com/photo-1581091215360-59b624b1a244?auto=format&fit=crop&w=800&q=80',
     link: 'https://github.com/byborh/micro-sud-back'
   },
   {
     title: 'Grenade',
     desc: 'Grenade - Express voting | Front (React.js/Typescript) & Back (Node.js/Typescript) & DB (DynamoDB) & Serverless (AWS Lambda) & CI/CD (Github Actions).',
-    img: 'https://images.unsplash.com/photo-1526378722484-cc6c3b1c65e6',
+    img: 'https://images.unsplash.com/photo-1612831455543-0ec6e66027f4?auto=format&fit=crop&w=800&q=80',
     link: 'https://github.com/byborh/grenade-backend'
   }
 ])
+
 </script>
 
 <template>
