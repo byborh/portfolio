@@ -1,34 +1,38 @@
 <script setup>
 import { ref } from 'vue'
 
-// Fake data (replace with API later if needed)
 const skills = ref([
-  { name: 'JavaScript', icon: 'bi bi-braces' },
+  { name: 'Typescript', icon: 'bi bi-braces' },
   { name: 'Vue.js', icon: 'bi bi-lightning' },
   { name: 'Node.js', icon: 'bi bi-server' },
   { name: 'Docker', icon: 'bi bi-box' },
   { name: 'Spring Boot', icon: 'bi bi-cpu' },
-  { name: 'Angular', icon: 'bi bi-diagram-3' }
+  { name: 'Angular', icon: 'bi bi-diagram-3' },
+  { name: 'CI/CD', icon: 'bi bi-git' },
+  { name: 'SQL', icon: 'bi bi-database' },
+  { name: 'Redis', icon: 'bi bi-lightning-charge' },
+  { name: 'Python', icon: 'bi bi-terminal' },
+  { name: 'AWS Lambda', icon: 'bi bi-cloud' }
 ])
 
 const projects = ref([
   {
-    title: 'Task Queue with Redis',
-    desc: 'Built a scalable task queue system using Redis, Node.js, and Docker.',
+    title: 'Datte',
+    desc: 'Datte - Your go-to backend',
     img: 'https://images.unsplash.com/photo-1581091012184-5c1f1e04e2aa',
-    link: 'https://github.com/yourgithub/task-queue'
+    link: 'https://github.com/byborh/task-queue'
   },
   {
-    title: 'QuickNest Cloud',
-    desc: 'SaaS platform to generate websites instantly, inspired by Shopify/WordPress.',
+    title: 'Micro-Sud',
+    desc: 'Micro-Sud - Dynamic site | Front (Vue.js/Typescript) & Back (Node.js/Typescript) & DB (Redis) & Deployment (Docker).',
     img: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085',
-    link: 'https://github.com/yourgithub/quicknest'
+    link: 'https://github.com/byborh/micro-sud-back'
   },
   {
-    title: 'Secret Voice Vault',
-    desc: 'Anonymous confession app transforming voice messages into encrypted art.',
+    title: 'Grenade',
+    desc: 'Grenade - Express voting | Front (React.js/Typescript) & Back (Node.js/Typescript) & DB (DynamoDB) & Serverless (AWS Lambda) & CI/CD (Github Actions).',
     img: 'https://images.unsplash.com/photo-1526378722484-cc6c3b1c65e6',
-    link: 'https://github.com/yourgithub/secret-voice-vault'
+    link: 'https://github.com/byborh/grenade-backend'
   }
 ])
 </script>
@@ -38,8 +42,8 @@ const projects = ref([
     <!-- Hero Section -->
     <section class="bg-dark text-white d-flex align-items-center" style="height:100vh;">
       <div class="container text-center">
-        <h1 class="display-3 fw-bold mb-3">Bruce Wayne</h1>
-        <h2 class="fw-light text-pink mb-4">Full Stack Developer | Innovator | Future Batman of Tech</h2>
+        <h1 class="display-3 fw-bold mb-3">Beibarys Rakhymberdi</h1>
+        <h2 class="fw-light text-pink mb-4">Full-Stack Developer - Platform & Services</h2>
         <p class="lead mb-5">Building impactful solutions with code, design and vision.</p>
         <div class="d-flex justify-content-center gap-3">
           <a href="#projects" class="btn btn-pink btn-lg px-4 py-3 rounded-pill">
@@ -110,7 +114,7 @@ const projects = ref([
         <p class="lead mb-4">Let’s connect and build something impactful together.</p>
         <div class="d-flex justify-content-center gap-4">
           <a href="mailto:yourmail@example.com" class="text-white fs-3"><i class="bi bi-envelope"></i></a>
-          <a href="https://github.com/yourgithub" target="_blank" class="text-white fs-3"><i class="bi bi-github"></i></a>
+          <a href="https://github.com/byborh" target="_blank" class="text-white fs-3"><i class="bi bi-github"></i></a>
           <a href="https://linkedin.com/in/yourlinkedin" target="_blank" class="text-white fs-3"><i class="bi bi-linkedin"></i></a>
         </div>
       </div>

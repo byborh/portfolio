@@ -8,15 +8,14 @@ const currentYear = new Date().getFullYear();
       <div class="row g-4">
         <!-- Colonne 1 - Présentation -->
         <div class="col-lg-4">
-          <h3 class="h4 mb-4 text-pink">Bruce Wayne</h3>
+          <h3 class="h4 mb-4 text-pink">Beibarys Rakhymberdi</h3>
           <p class="text-muted">
             Développeur Full Stack & Créateur d’expériences digitales.  
             Passionné par l’innovation, la cybersécurité et l’open source.
           </p>
           <div class="mt-4">
-            <a href="https://github.com/ton-profil" target="_blank" class="text-light me-3"><i class="bi bi-github fs-4"></i></a>
-            <a href="https://www.linkedin.com/in/ton-profil" target="_blank" class="text-light me-3"><i class="bi bi-linkedin fs-4"></i></a>
-            <a href="https://twitter.com/ton-profil" target="_blank" class="text-light"><i class="bi bi-twitter fs-4"></i></a>
+            <a href="https://github.com/byborh" target="_blank" class="text-light me-3"><i class="bi bi-github fs-4"></i></a>
+            <a href="https://www.linkedin.com/in/beibarys-rakhymberdi-660b482a8/" target="_blank" class="text-light me-3"><i class="bi bi-linkedin fs-4"></i></a>
           </div>
         </div>
 
@@ -25,9 +24,7 @@ const currentYear = new Date().getFullYear();
           <h5 class="h6 text-uppercase text-pink mb-4">Navigation</h5>
           <ul class="list-unstyled">
             <li class="mb-2"><RouterLink to="/" class="text-light text-decoration-none">Accueil</RouterLink></li>
-            <li class="mb-2"><RouterLink to="/about" class="text-light text-decoration-none">À propos</RouterLink></li>
             <li class="mb-2"><RouterLink to="/projects" class="text-light text-decoration-none">Projets</RouterLink></li>
-            <li class="mb-2"><RouterLink to="/skills" class="text-light text-decoration-none">Compétences</RouterLink></li>
             <li><RouterLink to="/contact" class="text-light text-decoration-none">Contact</RouterLink></li>
           </ul>
         </div>
@@ -36,19 +33,9 @@ const currentYear = new Date().getFullYear();
         <div class="col-lg-3 col-md-4">
           <h5 class="h6 text-uppercase text-pink mb-4">Contact</h5>
           <ul class="list-unstyled text-muted">
-            <li class="mb-3"><i class="bi bi-envelope-fill text-pink me-2"></i> bruce.wayne@email.com</li>
-            <li><i class="bi bi-geo-alt-fill text-pink me-2"></i> Gotham City</li>
+            <li class="mb-3"><i class="bi bi-envelope-fill text-pink me-2"></i> byborh@email.com</li>
+            <li><i class="bi bi-geo-alt-fill text-pink me-2"></i> Bordeaux</li>
           </ul>
-        </div>
-
-        <!-- Colonne 4 - Newsletter -->
-        <div class="col-lg-3 col-md-4">
-          <h5 class="h6 text-uppercase text-pink mb-4">Newsletter</h5>
-          <p class="text-muted small">Abonnez-vous pour recevoir mes dernières actualités.</p>
-          <div class="input-group mb-3">
-            <input type="email" class="form-control bg-secondary border-0 text-light" placeholder="Votre email">
-            <button class="btn btn-pink" type="button"><i class="bi bi-send"></i></button>
-          </div>
         </div>
       </div>
 
@@ -57,7 +44,7 @@ const currentYear = new Date().getFullYear();
         <div class="row align-items-center">
           <div class="col-md-6 text-center text-md-start">
             <p class="mb-0 small text-muted">
-              &copy; {{ currentYear }} Bruce Wayne. Tous droits réservés.
+              &copy; {{ currentYear }} Beibarys Rakhymberdi. Tous droits réservés.
             </p>
           </div>
           <div class="col-md-6 text-center text-md-end">
