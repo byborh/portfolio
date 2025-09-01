@@ -8,7 +8,7 @@ const currentYear = new Date().getFullYear();
       <div class="row g-4 justify-content-between">
         <!-- Colonne 1 - Présentation -->
         <div class="col-lg-5 col-md-12">
-          <h3 class="h4 mb-4 text-pink">PRENOM NOOM</h3>
+          <h3 class="h4 mb-4 text-pink">Beibarys Rakhymberdi</h3>
           <p class="text-muted">
             Développeur Full Stack & Créateur d’expériences digitales.  
             Passionné par l’innovation, la cybersécurité et l’open source.
@@ -17,7 +17,7 @@ const currentYear = new Date().getFullYear();
             <a href="https://github.com/byborh" target="_blank" class="text-light me-3">
               <i class="bi bi-github fs-4"></i>
             </a>
-            <a href="https://www.linkedin.com/in/PRENOM-NOOM-660b482a8/" target="_blank" class="text-light me-3">
+            <a href="https://www.linkedin.com/in/Beibarys-Rakhymberdi-660b482a8/" target="_blank" class="text-light me-3">
               <i class="bi bi-linkedin fs-4"></i>
             </a>
           </div>
@@ -58,7 +58,7 @@ const currentYear = new Date().getFullYear();
         <div class="row align-items-center">
           <div class="col-md-6 text-center text-md-start">
             <p class="mb-0 small text-muted">
-              &copy; {{ currentYear }} PRENOM NOOM. Tous droits réservés.
+              &copy; {{ currentYear }} Beibarys Rakhymberdi. Tous droits réservés.
             </p>
           </div>
           <div class="col-md-6 text-center text-md-end">
