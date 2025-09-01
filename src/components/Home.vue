@@ -115,9 +115,9 @@ const projects = ref([
         <h2 class="display-5 fw-bold text-pink mb-4">Contact</h2>
         <p class="lead mb-4">Let’s connect and build something impactful together.</p>
         <div class="d-flex justify-content-center gap-4">
-          <a href="mailto:yourmail@example.com" class="text-white fs-3"><i class="bi bi-envelope"></i></a>
+          <a href="mailto:byborh@example.com" class="text-white fs-3"><i class="bi bi-envelope"></i></a>
           <a href="https://github.com/byborh" target="_blank" class="text-white fs-3"><i class="bi bi-github"></i></a>
-          <a href="https://linkedin.com/in/yourlinkedin" target="_blank" class="text-white fs-3"><i class="bi bi-linkedin"></i></a>
+          <a href="https://linkedin.com/in/https://www.linkedin.com/in/beibarys-rakhymberdi-660b482a8/" target="_blank" class="text-white fs-3"><i class="bi bi-linkedin"></i></a>
         </div>
       </div>
     </section>
