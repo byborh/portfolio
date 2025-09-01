@@ -61,14 +61,6 @@ const currentYear = new Date().getFullYear();
               &copy; {{ currentYear }} Beibarys Rakhymberdi. Tous droits réservés.
             </p>
           </div>
-          <div class="col-md-6 text-center text-md-end">
-            <RouterLink to="/mentions-legales" class="small text-muted text-decoration-none me-3">
-              Mentions légales
-            </RouterLink>
-            <RouterLink to="/confidentialite" class="small text-muted text-decoration-none">
-              Confidentialité
-            </RouterLink>
-          </div>
         </div>
       </div>
     </div>
