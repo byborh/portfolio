@@ -27,17 +27,16 @@ const projects = ref([
   {
     title: 'Micro-Sud',
     desc: 'Micro-Sud - Dynamic site | Front (Vue.js/Typescript) & Back (Node.js/Typescript) & DB (Redis) & Deployment (Docker).',
-    img: 'https://images.unsplash.com/photo-1581091215360-59b624b1a244?auto=format&fit=crop&w=800&q=80',
+    img: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085',
     link: 'https://github.com/byborh/micro-sud-back'
   },
   {
     title: 'Grenade',
     desc: 'Grenade - Express voting | Front (React.js/Typescript) & Back (Node.js/Typescript) & DB (DynamoDB) & Serverless (AWS Lambda) & CI/CD (Github Actions).',
-    img: 'https://images.unsplash.com/photo-1612831455543-0ec6e66027f4?auto=format&fit=crop&w=800&q=80',
+    img: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Ftalks.freelancerepublik.com%2Ffreelancer-comment-developper-son-activite%2F&psig=AOvVaw2WCM79WfklIfNxZJJ9X5-k&ust=1756831846673000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCIjg2OKCuI8DFQAAAAAdAAAAABAE',
     link: 'https://github.com/byborh/grenade-backend'
   }
 ])
-
 </script>
 
 <template>
