@@ -32,11 +32,11 @@ const handleSubmit = (e) => {
           <form @submit="handleSubmit" class="card p-4 shadow-sm border-0 rounded-4">
             <div class="mb-3">
               <label for="name" class="form-label fw-semibold">Name</label>
-              <input v-model="name" type="text" class="form-control" id="name" placeholder="Beibarys Rakhymberdi" required>
+              <input v-model="name" type="text" class="form-control" id="name" placeholder="PRENOM NOOM" required>
             </div>
             <div class="mb-3">
               <label for="email" class="form-label fw-semibold">Email</label>
-              <input v-model="email" type="email" class="form-control" id="email" placeholder="Beibarys@Rakhymberdienterprises.com" required>
+              <input v-model="email" type="email" class="form-control" id="email" placeholder="PRENOM@NOOMenterprises.com" required>
             </div>
             <div class="mb-3">
               <label for="message" class="form-label fw-semibold">Message</label>
@@ -59,7 +59,7 @@ const handleSubmit = (e) => {
         <p class="fw-semibold mb-3">Or reach me directly:</p>
         <div class="d-flex justify-content-center gap-4">
           <a href="https://github.com/byborh" target="_blank" class="text-pink fs-4"><i class="bi bi-github"></i></a>
-          <a href="https://www.linkedin.com/in/beibarys-rakhymberdi-660b482a8/" target="_blank" class="text-pink fs-4"><i class="bi bi-linkedin"></i></a>
+          <a href="https://www.linkedin.com/in/PRENOM-NOOM-660b482a8/" target="_blank" class="text-pink fs-4"><i class="bi bi-linkedin"></i></a>
         </div>
       </div>
     </div>

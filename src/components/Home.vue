@@ -22,7 +22,7 @@ const projects = ref([
     title: 'Datte',
     desc: 'Datte - Your go-to backend',
     img: 'https://images.unsplash.com/photo-1593642634315-48f5414c3ad9?auto=format&fit=crop&w=800&q=80',
-    link: 'https://github.com/byborh/task-queue'
+    link: 'https://github.com/byborh/datte'
   },
   {
     title: 'Micro-Sud',
