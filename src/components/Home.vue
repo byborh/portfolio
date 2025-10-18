@@ -43,7 +43,7 @@ const projects = ref([
     <!-- Hero Section -->
     <section class="hero-section d-flex align-items-center justify-content-center text-center text-white">
       <div class="glass-box p-5 rounded-5">
-        <h1 class="display-3 fw-bold mb-3 neon-pink">Beibarys Rakhymberdi</h1>
+        <!-- <h1 class="display-3 fw-bold mb-3 neon-pink">Beibarys Rakhymberdi</h1> -->
         <h2 class="fw-light text-cyan mb-4">Fullstack Platform & Services Developer</h2>
         <p class="lead mb-5 text-light">Building impactful solutions with code, design, and vision.</p>
         <div class="d-flex justify-content-center gap-3">
