@@ -43,15 +43,12 @@ const projects = ref([
     <!-- Hero Section -->
     <section class="hero-section d-flex align-items-center justify-content-center text-center text-white">
       <div class="glass-box p-5 rounded-5">
-        <h1 class="display-3 fw-bold mb-3 neon-pink">Name Name</h1>
-        <h2 class="fw-light text-cyan mb-4">Full-Stack Developer</h2>
+        <h1 class="display-3 fw-bold mb-3 neon-pink">Beibarys Rakhymberdi</h1>
+        <h2 class="fw-light text-cyan mb-4">Fullstack Platform & Services Developer</h2>
         <p class="lead mb-5 text-light">Building impactful solutions with code, design, and vision.</p>
         <div class="d-flex justify-content-center gap-3">
           <a href="#projects" class="btn-glass px-4 py-3 rounded-pill">
             <i class="bi bi-code-slash me-2"></i> View Projects
-          </a>
-          <a href="#contact" class="btn-glass-outline px-4 py-3 rounded-pill">
-            <i class="bi bi-envelope me-2"></i> Contact Me
           </a>
         </div>
       </div>
@@ -73,51 +70,37 @@ const projects = ref([
     </section>
 
     <!-- Projects -->
-<section class="py-5 bg-transparent text-white" id="projects">
-  <div class="container">
-    <div class="text-center mb-5">
-      <h2 class="display-5 fw-bold neon-pink">Projects</h2>
-      <p class="lead text-light">A selection of my latest works</p>
-    </div>
+    <section class="py-5 bg-transparent text-white" id="projects">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="display-5 fw-bold neon-pink">Projects</h2>
+          <p class="lead text-light">A selection of my latest works</p>
+        </div>
 
-    <div class="row g-4">
-      <div
-        v-for="(project, index) in projects.slice(0, 3)"
-        :key="index"
-        class="col-md-6 col-lg-4"
-      >
-        <div class="project-card glass-box h-100 overflow-hidden">
-          <img :src="project.img" class="card-img-top" alt="Project image">
-          <div class="p-4">
-            <h3 class="h5 fw-bold text-cyan">{{ project.title }}</h3>
-            <p class="text-light">{{ project.desc }}</p>
-            <a :href="project.link" target="_blank" class="btn-glass-outline btn-sm">
-              <i class="bi bi-github me-1"></i> View Code
-            </a>
+        <div class="row g-4">
+          <div
+            v-for="(project, index) in projects.slice(0, 3)"
+            :key="index"
+            class="col-md-6 col-lg-4"
+          >
+            <div class="project-card glass-box h-100 overflow-hidden">
+              <img :src="project.img" class="card-img-top" alt="Project image">
+              <div class="p-4">
+                <h3 class="h5 fw-bold text-cyan">{{ project.title }}</h3>
+                <p class="text-light">{{ project.desc }}</p>
+                <a :href="project.link" target="_blank" class="btn-glass-outline btn-sm">
+                  <i class="bi bi-github me-1"></i> View Code
+                </a>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- 🔹 Bouton pour voir plus de projets -->
-    <div class="text-center mt-5">
-      <RouterLink to="/projects" class="btn-glass px-4 py-2 rounded-pill">
-        <i class="bi bi-collection me-2"></i> View All Projects
-      </RouterLink>
-    </div>
-  </div>
-</section>
-
-
-    <!-- Contact -->
-    <section class="py-5 text-white" id="contact">
-      <div class="container text-center">
-        <h2 class="display-5 fw-bold neon-pink mb-4">Contact</h2>
-        <p class="lead mb-4">Let’s connect and build something impactful together.</p>
-        <div class="d-flex justify-content-center gap-4 fs-3">
-          <a href="mailto:@example.com" class="text-cyan"><i class="bi bi-envelope"></i></a>
-          <a href="https://github.com/" target="_blank" class="text-cyan"><i class="bi bi-github"></i></a>
-          <a href="https://linkedin.com/in/https://www.linkedin.com/in/-660b482a8/" target="_blank" class="text-cyan"><i class="bi bi-linkedin"></i></a>
+        <!-- 🔹 Bouton pour voir plus de projets -->
+        <div class="text-center mt-5">
+          <RouterLink to="/projects" class="btn-glass px-4 py-2 rounded-pill">
+            <i class="bi bi-collection me-2"></i> View All Projects
+          </RouterLink>
         </div>
       </div>
     </section>

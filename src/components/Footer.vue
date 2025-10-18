@@ -8,16 +8,15 @@ const currentYear = new Date().getFullYear();
       <div class="row g-4 justify-content-between">
         <!-- Colonne 1 - Présentation -->
         <div class="col-lg-5 col-md-12">
-          <h3 class="h4 mb-4 text-pink">Name Name</h3>
+          <h3 class="h4 mb-4 text-pink">Beibarys Rakhymberdi</h3>
           <p class="text-muted">
-            Développeur Full Stack & Créateur d’expériences digitales.  
-            Passionné par l’innovation, la cybersécurité et l’open source.
+             Fullstack Platform & Services Developer. Strong focus on clean architecture, DevSecOps best practices, and cloud-native services (AWS IAM, EC2, Lambda), with a passion for algorithms and problem solving
           </p>
           <div class="mt-4">
-            <a href="https://github.com/mail" target="_blank" class="social-link me-3">
+            <a href="https://github.com/byborh" target="_blank" class="social-link me-3">
               <i class="bi bi-github fs-4"></i>
             </a>
-            <a href="https://www.linkedin.com/in/name-name-660b482a8/" target="_blank" class="social-link">
+            <a href="https://www.linkedin.com/in/rakhymberdi/" target="_blank" class="social-link">
               <i class="bi bi-linkedin fs-4"></i>
             </a>
           </div>
@@ -28,10 +27,10 @@ const currentYear = new Date().getFullYear();
           <h5 class="h6 text-uppercase text-pink mb-4">Navigation</h5>
           <ul class="list-unstyled">
             <li class="mb-2">
-              <RouterLink to="/" class="footer-link">Accueil</RouterLink>
+              <RouterLink to="/" class="footer-link">Home</RouterLink>
             </li>
             <li class="mb-2">
-              <RouterLink to="/projects" class="footer-link">Projets</RouterLink>
+              <RouterLink to="/projects" class="footer-link">Projects</RouterLink>
             </li>
             <li>
               <RouterLink to="/contact" class="footer-link">Contact</RouterLink>
@@ -44,7 +43,7 @@ const currentYear = new Date().getFullYear();
           <h5 class="h6 text-uppercase text-pink mb-4">Contact</h5>
           <ul class="list-unstyled text-muted">
             <li class="mb-3">
-              <i class="bi bi-envelope-fill text-pink me-2"></i> mail@email.com
+              <i class="bi bi-envelope-fill text-pink me-2"></i> byborh@email.com
             </li>
             <li>
               <i class="bi bi-geo-alt-fill text-pink me-2"></i> Bordeaux
@@ -56,7 +55,7 @@ const currentYear = new Date().getFullYear();
       <!-- Copyright -->
       <div class="border-top border-secondary mt-4 pt-4 text-center">
         <p class="mb-0 small text-muted">
-          &copy; {{ currentYear }} Name Name. Tous droits réservés.
+          &copy; {{ currentYear }} Beibarys Rakhymberdi. Tous droits réservés.
         </p>
       </div>
     </div>

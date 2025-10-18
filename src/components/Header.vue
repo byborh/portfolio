@@ -9,7 +9,7 @@ import { RouterLink } from 'vue-router'
       <!-- Logo + Name -->
       <RouterLink to="/" class="navbar-brand d-flex align-items-center">
         <i class="bi bi-code-slash fs-3 text-pink me-2"></i>
-        <span class="fs-4 fw-bold text-pink">Name Name</span>
+        <span class="fs-4 fw-bold text-pink">Beibarys Rakhymberdi</span>
       </RouterLink>
 
       <!-- Mobile button -->

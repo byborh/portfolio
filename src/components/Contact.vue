@@ -9,7 +9,7 @@ const success = ref(false)
 const handleSubmit = (e) => {
   e.preventDefault()
 
-  const mailtoLink = `mailto:ton.email@exemple.com?subject=Message de ${name.value} (${email.value})&body=${encodeURIComponent(message.value)}`
+  const mailtoLink = `mailto:ton.byborh@exemple.com?subject=Message de ${name.value} (${email.value})&body=${encodeURIComponent(message.value)}`
 
   window.location.href = mailtoLink
   success.value = true
@@ -83,8 +83,8 @@ const handleSubmit = (e) => {
       <div class="text-center mt-5">
         <p class="fw-semibold mb-3 text-light">Or reach me directly:</p>
         <div class="d-flex justify-content-center gap-4 fs-3">
-          <a href="https://github.com/" target="_blank" class="text-cyan"><i class="bi bi-github"></i></a>
-          <a href="https://www.linkedin.com/in/PRENOM-NOOM-660b482a8/" target="_blank" class="text-cyan"><i class="bi bi-linkedin"></i></a>
+          <a href="https://github.com/byborh" target="_blank" class="text-cyan"><i class="bi bi-github"></i></a>
+          <a href="https://www.linkedin.com/in/rakhymberdi/" target="_blank" class="text-cyan"><i class="bi bi-linkedin"></i></a>
         </div>
       </div>
     </div>
