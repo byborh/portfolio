@@ -55,7 +55,7 @@ const currentYear = new Date().getFullYear();
       <!-- Copyright -->
       <div class="border-top border-secondary mt-4 pt-4 text-center">
         <p class="mb-0 small text-muted">
-          &copy; {{ currentYear }} Beibarys Rakhymberdi. Tous droits réservés.
+          &copy; {{ currentYear }} Beibarys Rakhymberdi. All rights reserved.
         </p>
       </div>
     </div>
