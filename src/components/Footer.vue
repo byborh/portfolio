@@ -43,7 +43,7 @@ const currentYear = new Date().getFullYear();
           <h5 class="h6 text-uppercase text-pink mb-4">Contact</h5>
           <ul class="list-unstyled text-muted">
             <li class="mb-3">
-              <i class="bi bi-envelope-fill text-pink me-2"></i> byborh@email.com
+              <i class="bi bi-envelope-fill text-pink me-2"></i> byborh@gmail.com
             </li>
             <li>
               <i class="bi bi-geo-alt-fill text-pink me-2"></i> Bordeaux
