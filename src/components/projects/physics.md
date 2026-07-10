@@ -1,4 +1,4 @@
-github: https://github.com/byborh/datte
+github: https://github.com/byborh/physics
 
 # 🧠 Physics Explained — Learn Physics the Smart Way
 

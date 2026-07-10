@@ -1,168 +1,290 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+
+const EMAIL = 'byborh@gmail.com'
 
 const name = ref('')
 const email = ref('')
+const subject = ref('')
 const message = ref('')
-const success = ref(false)
+const copied = ref(false)
 
-const handleSubmit = (e) => {
-  e.preventDefault()
+const canSend = computed(() => name.value.trim() && message.value.trim())
 
-  const mailtoLink = `mailto:ton.byborh@exemple.com?subject=Message de ${name.value} (${email.value})&body=${encodeURIComponent(message.value)}`
-
-  window.location.href = mailtoLink
-  success.value = true
-
-  name.value = ''
-  email.value = ''
-  message.value = ''
+function send() {
+  if (!canSend.value) return
+  const subj = subject.value.trim() || `Portfolio — message from ${name.value}`
+  const body = `${message.value}\n\n— ${name.value}${email.value ? ` (${email.value})` : ''}`
+  window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`
 }
+
+async function copyEmail() {
+  try {
+    await navigator.clipboard.writeText(EMAIL)
+    copied.value = true
+    setTimeout(() => (copied.value = false), 1800)
+  } catch {
+    /* clipboard unavailable — ignore */
+  }
+}
+
+const channels = [
+  { icon: 'bi bi-github', label: 'GitHub', value: '@byborh', url: 'https://github.com/byborh' },
+  { icon: 'bi bi-linkedin', label: 'LinkedIn', value: 'in/rakhymberdi', url: 'https://www.linkedin.com/in/rakhymberdi/' },
+  { icon: 'bi bi-globe', label: 'Website', value: 'rakhymberdi.com', url: 'https://rakhymberdi.com/' },
+]
 </script>
 
 <template>
-  <section class="contact-page d-flex align-items-center justify-content-center text-white">
-    <div class="container text-center">
-      <h1 class="display-4 fw-bold neon-pink mb-3">Contact Me</h1>
-      <p class="text-light mb-5">Have a project in mind or just want to say hello? Let’s connect!</p>
+  <main class="contact-page">
+    <div class="container">
+      <header class="ct-head">
+        <p class="section-label" v-reveal>Contact</p>
+        <h1 class="ct-title" v-reveal>Let's talk.</h1>
+        <p class="section-lead" v-reveal>
+          Whether it's a role, a collaboration or just a good technical
+          conversation — my inbox is open. I usually reply within a day.
+        </p>
+      </header>
 
-      <div class="row justify-content-center">
-        <div class="col-md-8">
-          <!-- Contact Form -->
-          <form @submit="handleSubmit" class="glass-box p-5 rounded-5 shadow-lg">
-            <div class="mb-4 text-start">
-              <label for="name" class="form-label fw-semibold text-cyan">Name</label>
-              <input
-                v-model="name"
-                type="text"
-                class="form-control glass-input"
-                id="name"
-                placeholder="Bruce Wayne"
-                required
-              />
+      <div class="ct-grid">
+        <!-- Form -->
+        <form class="ct-form panel" @submit.prevent="send" v-reveal>
+          <div class="row">
+            <div class="field">
+              <label for="name">Name <span>*</span></label>
+              <input id="name" v-model="name" type="text" placeholder="Ada Lovelace" required />
             </div>
-            <div class="mb-4 text-start">
-              <label for="email" class="form-label fw-semibold text-cyan">Email</label>
-              <input
-                v-model="email"
-                type="email"
-                class="form-control glass-input"
-                id="email"
-                placeholder="bruce@wayneenterprises.com"
-                required
-              />
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" v-model="email" type="email" placeholder="ada@compute.io" />
             </div>
-            <div class="mb-4 text-start">
-              <label for="message" class="form-label fw-semibold text-cyan">Message</label>
-              <textarea
-                v-model="message"
-                class="form-control glass-input"
-                id="message"
-                rows="5"
-                placeholder="Write your message here..."
-                required
-              ></textarea>
-            </div>
-            <div class="text-center mt-4">
-              <button type="submit" class="btn-glass px-5 py-2 rounded-pill fw-bold">
-                <i class="bi bi-send me-2"></i> Send
-              </button>
-            </div>
-          </form>
+          </div>
+          <div class="field">
+            <label for="subject">Subject</label>
+            <input id="subject" v-model="subject" type="text" placeholder="A project idea…" />
+          </div>
+          <div class="field">
+            <label for="message">Message <span>*</span></label>
+            <textarea id="message" v-model="message" rows="6" placeholder="Tell me what you have in mind." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" :disabled="!canSend">
+            <i class="bi bi-send"></i> Compose email
+          </button>
+          <p class="ct-note mono">
+            <i class="bi bi-shield-lock"></i>
+            Opens your mail app — nothing is stored or sent through a server.
+          </p>
+        </form>
 
-          <!-- Success Message -->
-          <transition name="fade">
-            <div v-if="success" class="alert-glass mt-4 text-center">
-              ✅ Your message has been sent successfully!
-            </div>
-          </transition>
-        </div>
-      </div>
+        <!-- Direct channels -->
+        <aside class="ct-side">
+          <div class="ct-email panel" v-reveal>
+            <p class="ct-side-label mono">Direct email</p>
+            <p class="ct-email-value">{{ EMAIL }}</p>
+            <button class="btn btn-ghost ct-copy" @click="copyEmail">
+              <i :class="copied ? 'bi bi-check-lg' : 'bi bi-clipboard'"></i>
+              {{ copied ? 'Copied!' : 'Copy address' }}
+            </button>
+          </div>
 
-      <!-- Social Links -->
-      <div class="text-center mt-5">
-        <p class="fw-semibold mb-3 text-light">Or reach me directly:</p>
-        <div class="d-flex justify-content-center gap-4 fs-3">
-          <a href="https://github.com/byborh" target="_blank" class="text-cyan"><i class="bi bi-github"></i></a>
-          <a href="https://www.linkedin.com/in/rakhymberdi/" target="_blank" class="text-cyan"><i class="bi bi-linkedin"></i></a>
-        </div>
+          <div class="ct-channels" v-reveal>
+            <a
+              v-for="c in channels"
+              :key="c.label"
+              :href="c.url"
+              target="_blank"
+              rel="noopener"
+              class="ct-channel panel"
+            >
+              <i :class="c.icon"></i>
+              <div>
+                <span class="cc-label">{{ c.label }}</span>
+                <span class="cc-value mono">{{ c.value }}</span>
+              </div>
+              <i class="bi bi-arrow-up-right cc-arrow"></i>
+            </a>
+          </div>
+
+          <div class="ct-loc panel" v-reveal>
+            <i class="bi bi-geo-alt"></i>
+            <div>
+              <span class="cc-label">Based in</span>
+              <span class="cc-value mono">Bordeaux, France 🇫🇷</span>
+            </div>
+          </div>
+        </aside>
       </div>
     </div>
-  </section>
+  </main>
 </template>
 
 <style scoped>
-/* === BACKGROUND === */
 .contact-page {
+  padding-top: 130px;
   min-height: 100vh;
-  background: linear-gradient(135deg, rgba(10,10,20,0.9), rgba(0,0,0,0.95)),
-              url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1920&q=80') center/cover fixed;
-  backdrop-filter: blur(10px);
-  padding: 80px 0;
+}
+.ct-head {
+  max-width: 620px;
+  margin-bottom: 48px;
+}
+.ct-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.6rem, 7vw, 4.5rem);
+  letter-spacing: -0.03em;
+  margin-bottom: 18px;
 }
 
-/* === COLORS === */
-.neon-pink { color: #ff4da6; }
-.text-cyan { color: #00eaff; }
-
-/* === GLASS EFFECT === */
-.glass-box {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 0 20px rgba(255, 77, 166, 0.2);
-  transition: all 0.3s ease;
-}
-.glass-box:hover {
-  box-shadow: 0 0 25px rgba(0, 234, 255, 0.25);
-  transform: scale(1.02);
+.ct-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 24px;
+  align-items: start;
 }
 
-/* === INPUTS === */
-.glass-input {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: white;
-  border-radius: 1rem;
-  padding: 0.75rem 1rem;
-  transition: border-color 0.3s, box-shadow 0.3s;
+/* Form */
+.ct-form {
+  padding: 34px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
-.glass-input:focus {
-  border-color: #00eaff;
-  box-shadow: 0 0 10px rgba(0, 234, 255, 0.3);
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.field label {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.field label span {
+  color: var(--accent);
+}
+.field input,
+.field textarea {
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-sm);
+  padding: 13px 15px;
+  transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+  resize: vertical;
+}
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--text-faint);
+}
+.field input:focus,
+.field textarea:focus {
   outline: none;
+  border-color: var(--accent);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none;
+}
+.ct-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.76rem;
+  color: var(--text-faint);
 }
 
-/* === BUTTONS === */
-.btn-glass {
-  background: linear-gradient(90deg, #ff4da6, #00eaff);
-  color: #fff;
-  border: none;
-  transition: all 0.3s ease;
+/* Side */
+.ct-side {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
-.btn-glass:hover {
-  opacity: 0.9;
-  transform: translateY(-2px);
+.ct-email {
+  padding: 26px;
+}
+.ct-side-label {
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.ct-email-value {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  margin-bottom: 18px;
+  word-break: break-all;
+}
+.ct-copy {
+  padding: 10px 18px;
+  font-size: 0.88rem;
 }
 
-/* === SUCCESS MESSAGE === */
-.alert-glass {
-  background: rgba(0, 234, 255, 0.1);
-  border: 1px solid rgba(0, 234, 255, 0.3);
-  border-radius: 1rem;
-  color: #00eaff;
-  padding: 1rem;
-  backdrop-filter: blur(6px);
-  font-weight: 500;
+.ct-channels {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.ct-channel,
+.ct-loc {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 22px;
+}
+.ct-channel > i:first-child,
+.ct-loc > i:first-child {
+  font-size: 1.3rem;
+  color: var(--accent);
+}
+.ct-channel > div,
+.ct-loc > div {
+  display: flex;
+  flex-direction: column;
+}
+.cc-label {
+  font-size: 0.9rem;
+  color: var(--text);
+}
+.cc-value {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.cc-arrow {
+  margin-left: auto;
+  color: var(--text-faint);
+  transition: transform 0.3s var(--ease), color 0.3s;
+}
+.ct-channel:hover .cc-arrow {
+  color: var(--accent);
+  transform: translate(3px, -3px);
 }
 
-/* === ANIMATION === */
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.6s ease;
+@media (max-width: 860px) {
+  .ct-grid {
+    grid-template-columns: 1fr;
+  }
 }
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
+@media (max-width: 520px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
+  .ct-form {
+    padding: 24px;
+  }
 }
 </style>

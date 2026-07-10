@@ -1,95 +1,210 @@
 <script setup>
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { RouterLink } from 'vue-router'
+
+const scrolled = ref(false)
+const menuOpen = ref(false)
+
+function onScroll() {
+  scrolled.value = window.scrollY > 24
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', onScroll, { passive: true })
+  onScroll()
+})
+onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
+
+const links = [
+  { to: { path: '/' }, label: 'Home' },
+  { to: { path: '/', hash: '#about' }, label: 'About' },
+  { to: { path: '/', hash: '#work' }, label: 'Work' },
+  { to: { path: '/projects' }, label: 'All projects' },
+]
 </script>
 
 <template>
-  <!-- Navigation Bar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark-custom fixed-top">
-    <div class="container">
-      <!-- Logo + Name -->
-      <RouterLink to="/" class="navbar-brand d-flex align-items-center">
-        <i class="bi bi-code-slash fs-3 text-pink me-2"></i>
-        <span class="fs-4 fw-bold text-pink">Beibarys Rakhymberdi</span>
+  <header class="nav" :class="{ scrolled }">
+    <div class="nav-inner container">
+      <RouterLink to="/" class="brand" @click="menuOpen = false">
+        <span class="brand-mark">BR</span>
+        <span class="brand-name">Beibarys<span class="dot">.</span></span>
       </RouterLink>
 
-      <!-- Mobile button -->
-      <button
-        class="navbar-toggler border-0"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarContent"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      <nav class="links" :class="{ open: menuOpen }">
+        <RouterLink
+          v-for="l in links"
+          :key="l.label"
+          :to="l.to"
+          class="link"
+          @click="menuOpen = false"
+        >
+          {{ l.label }}
+        </RouterLink>
+        <RouterLink to="/contact" class="btn btn-primary nav-cta" @click="menuOpen = false">
+          <i class="bi bi-envelope"></i> Contact
+        </RouterLink>
+      </nav>
 
-      <!-- Navigation links -->
-      <div class="collapse navbar-collapse" id="navbarContent">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
-          <li class="nav-item mx-2">
-            <RouterLink to="/" class="nav-link" active-class="active">
-              <i class="bi bi-house-door me-1"></i> Home
-            </RouterLink>
-          </li>
-          <li class="nav-item mx-2">
-            <RouterLink to="/projects" class="nav-link" active-class="active">
-              <i class="bi bi-folder me-1"></i> Projects
-            </RouterLink>
-          </li>
-          <li class="nav-item mx-2">
-            <RouterLink to="/contact" class="btn btn-pink px-4 rounded-pill fw-semibold shadow-sm">
-              <i class="bi bi-envelope me-1"></i> Contact
-            </RouterLink>
-          </li>
-        </ul>
-      </div>
+      <button
+        class="burger"
+        :class="{ open: menuOpen }"
+        @click="menuOpen = !menuOpen"
+        aria-label="Toggle menu"
+      >
+        <span></span><span></span>
+      </button>
     </div>
-  </nav>
+  </header>
 </template>
 
 <style scoped>
-/* --- Background --- */
-.bg-dark-custom {
-  background: #0a0a0a; /* vrai noir */
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  transition: background 0.4s var(--ease), border-color 0.4s var(--ease),
+    backdrop-filter 0.4s;
+  border-bottom: 1px solid transparent;
+}
+.nav.scrolled {
+  background: rgba(8, 8, 11, 0.7);
+  backdrop-filter: blur(16px);
+  border-bottom-color: var(--stroke);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 74px;
 }
 
-/* --- Nav Links --- */
-.nav-link {
-  color: rgba(255, 255, 255, 0.8);
-  transition: all 0.3s ease;
-  border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
+/* Brand */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-display);
+}
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #0b0b0e;
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  box-shadow: 0 6px 20px -8px var(--accent-glow);
+}
+.brand-name {
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+.brand-name .dot {
+  color: var(--accent);
 }
 
-.nav-link:hover,
-.nav-link.active {
-  color: #ff4da6 !important;
-  background: rgba(255, 77, 166, 0.1);
-  text-shadow: 0 0 6px rgba(255, 77, 166, 0.5);
+/* Links */
+.links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.link {
+  font-size: 0.94rem;
+  color: var(--text-muted);
+  padding: 9px 15px;
+  border-radius: 10px;
+  position: relative;
+  transition: color 0.3s;
+}
+.link:hover {
+  color: var(--text);
+}
+.link::after {
+  content: '';
+  position: absolute;
+  left: 15px;
+  right: 15px;
+  bottom: 4px;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s var(--ease);
+}
+.link:hover::after {
+  transform: scaleX(1);
+}
+.nav-cta {
+  margin-left: 10px;
+  padding: 10px 20px;
+  font-size: 0.9rem;
 }
 
-/* --- Branding --- */
-.text-pink {
-  color: #ff4da6 !important;
-  text-shadow: 0 0 8px rgba(255, 77, 166, 0.4);
-}
-
-/* --- Button --- */
-.btn-pink {
-  background-color: #ff4da6;
+/* Burger */
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  background: none;
   border: none;
-  color: #fff;
-  transition: all 0.3s ease;
+  padding: 8px;
 }
-.btn-pink:hover {
-  background-color: #e63e92;
-  box-shadow: 0 0 12px rgba(255, 77, 166, 0.4);
+.burger span {
+  width: 26px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: transform 0.3s var(--ease), opacity 0.3s;
+}
+.burger.open span:first-child {
+  transform: translateY(4px) rotate(45deg);
+}
+.burger.open span:last-child {
+  transform: translateY(-4px) rotate(-45deg);
 }
 
-/* --- Navbar Toggle (mobile) --- */
-.navbar-toggler-icon {
-  filter: invert(1);
+@media (max-width: 820px) {
+  .burger {
+    display: flex;
+  }
+  .links {
+    position: fixed;
+    inset: 74px 0 auto 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    padding: 20px 24px 28px;
+    background: rgba(10, 10, 14, 0.96);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--stroke);
+    transform: translateY(-120%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.4s var(--ease), opacity 0.3s;
+  }
+  .links.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .link {
+    padding: 14px 12px;
+    font-size: 1.05rem;
+  }
+  .link::after {
+    display: none;
+  }
+  .nav-cta {
+    margin-left: 0;
+    margin-top: 8px;
+    justify-content: center;
+  }
 }
 </style>
