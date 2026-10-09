@@ -1,13 +1,8 @@
 <script setup>
 import { RouterLink } from 'vue-router'
+import { profile, socials } from '../data/profile.js'
 
 const year = new Date().getFullYear()
-
-const socials = [
-  { icon: 'bi bi-github', url: 'https://github.com/byborh', label: 'GitHub' },
-  { icon: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/rakhymberdi/', label: 'LinkedIn' },
-  { icon: 'bi bi-globe', url: 'https://rakhymberdi.com/', label: 'Website' },
-]
 </script>
 
 <template>
@@ -27,8 +22,8 @@ const socials = [
         <div class="footer-brand">
           <span class="brand-mark">BR</span>
           <div>
-            <p class="fb-name">Beibarys Rakhymberdi</p>
-            <p class="fb-role mono">Platform &amp; Service Developer</p>
+            <p class="fb-name">{{ profile.name }}</p>
+            <p class="fb-role mono">{{ profile.role }}</p>
           </div>
         </div>
 
@@ -54,7 +49,7 @@ const socials = [
       </div>
 
       <div class="footer-bottom">
-        <p class="mono">© {{ year }} Beibarys Rakhymberdi — Bordeaux, France</p>
+        <p class="mono">© {{ year }} {{ profile.name }} — {{ profile.location }}</p>
         <p class="mono">Built with Vue · Deployed with intent</p>
       </div>
     </div>

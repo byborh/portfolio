@@ -1,13 +1,19 @@
 <script setup>
 import { ref, computed } from 'vue'
+import { profile, socials } from '../data/profile.js'
 
-const EMAIL = 'beibarys.rakhymberdi@student.junia.com'
+const EMAIL = profile.email
 
 const name = ref('')
 const email = ref('')
 const subject = ref('')
 const message = ref('')
-const copied = ref(false)
+const copyButton = {
+  idle: { icon: 'bi bi-clipboard', text: 'Copy address' },
+  copied: { icon: 'bi bi-check-lg', text: 'Copied!' },
+  failed: { icon: 'bi bi-x-lg', text: 'Copy failed — select it' },
+}
+const copyStatus = ref('idle')
 
 const canSend = computed(() => name.value.trim() && message.value.trim())
 
@@ -21,18 +27,14 @@ function send() {
 async function copyEmail() {
   try {
     await navigator.clipboard.writeText(EMAIL)
-    copied.value = true
-    setTimeout(() => (copied.value = false), 1800)
-  } catch {
-    /* clipboard unavailable — ignore */
+    copyStatus.value = 'copied'
+  } catch (err) {
+    // Clipboard API needs a secure context and user permission: tell the user to copy by hand.
+    console.warn('Clipboard write failed', err)
+    copyStatus.value = 'failed'
   }
+  setTimeout(() => (copyStatus.value = 'idle'), 1800)
 }
-
-const channels = [
-  { icon: 'bi bi-github', label: 'GitHub', value: '@byborh', url: 'https://github.com/byborh' },
-  { icon: 'bi bi-linkedin', label: 'LinkedIn', value: 'in/rakhymberdi', url: 'https://www.linkedin.com/in/rakhymberdi/' },
-  { icon: 'bi bi-globe', label: 'Website', value: 'rakhymberdi.com', url: 'https://rakhymberdi.com/' },
-]
 </script>
 
 <template>
@@ -83,14 +85,14 @@ const channels = [
             <p class="ct-side-label mono">Direct email</p>
             <p class="ct-email-value">{{ EMAIL }}</p>
             <button class="btn btn-ghost ct-copy" @click="copyEmail">
-              <i :class="copied ? 'bi bi-check-lg' : 'bi bi-clipboard'"></i>
-              {{ copied ? 'Copied!' : 'Copy address' }}
+              <i :class="copyButton[copyStatus].icon"></i>
+              {{ copyButton[copyStatus].text }}
             </button>
           </div>
 
           <div class="ct-channels" v-reveal>
             <a
-              v-for="c in channels"
+              v-for="c in socials"
               :key="c.label"
               :href="c.url"
               target="_blank"
@@ -100,7 +102,7 @@ const channels = [
               <i :class="c.icon"></i>
               <div>
                 <span class="cc-label">{{ c.label }}</span>
-                <span class="cc-value mono">{{ c.value }}</span>
+                <span class="cc-value mono">{{ c.handle }}</span>
               </div>
               <i class="bi bi-arrow-up-right cc-arrow"></i>
             </a>
@@ -110,7 +112,7 @@ const channels = [
             <i class="bi bi-geo-alt"></i>
             <div>
               <span class="cc-label">Based in</span>
-              <span class="cc-value mono">Bordeaux, France 🇫🇷</span>
+              <span class="cc-value mono">{{ profile.location }} 🇫🇷</span>
             </div>
           </div>
         </aside>

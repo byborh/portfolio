@@ -1,5 +1,5 @@
 {
-  "name": "micro-sud-front-admin",
+  "name": "portfolio",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -9,7 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emailjs/browser": "^4.4.1",
     "marked": "^16.4.1",
     "vue": "^3.5.13",
     "vue-router": "^4.5.1"
