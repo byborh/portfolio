@@ -1,41 +1,30 @@
 /* =========================================================================
-   Beibarys Rakhymberdi — Portfolio design system
+   Beibarys Rakhymberdi — portfolio
+   Paper, ink, one serif. The media carries the colour.
    ========================================================================= */
 
 :root {
-  /* --- Base surfaces --- */
-  --bg: #08080b;
-  --bg-2: #0c0c11;
-  --surface: rgba(255, 255, 255, 0.025);
-  --surface-hover: rgba(255, 255, 255, 0.05);
-  --stroke: rgba(255, 255, 255, 0.08);
-  --stroke-strong: rgba(255, 255, 255, 0.16);
+  --paper: #f3f1ec;
+  --ink: #141413;
+  --muted: #6e6c66;
+  --line: #d8d4cb;
+  --wash: #e7e3da;
 
-  /* --- Text --- */
-  --text: #ececef;
-  --text-muted: #9a9aa6;
-  --text-faint: #63636e;
+  --serif: 'Instrument Serif', 'Times New Roman', serif;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
-  /* --- Accent (warm amber / terracotta) --- */
-  --accent: #f0975c;
-  --accent-strong: #e8783f;
-  --accent-soft: rgba(240, 151, 92, 0.14);
-  --accent-glow: rgba(232, 120, 63, 0.35);
-
-  /* --- Secondary (cool electric) --- */
-  --cool: #7aa2ff;
-  --cool-soft: rgba(122, 162, 255, 0.12);
-
-  /* --- Type --- */
-  --font-display: 'Space Grotesk', 'Segoe UI', sans-serif;
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
-
-  /* --- Layout --- */
-  --maxw: 1180px;
-  --radius: 18px;
-  --radius-sm: 12px;
+  --gutter: clamp(16px, 4vw, 48px);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #0f0f0e;
+    --ink: #ecebe6;
+    --muted: #8d8b84;
+    --line: #2a2926;
+    --wash: #1a1918;
+  }
 }
 
 *,
@@ -53,26 +42,19 @@ html {
 
 body {
   min-height: 100vh;
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.6;
-  font-weight: 400;
-  text-rendering: optimizeLegibility;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
-#app {
-  position: relative;
-  z-index: 1;
-}
-
 ::selection {
-  background: var(--accent);
-  color: #08080b;
+  background: var(--ink);
+  color: var(--paper);
 }
 
 a {
@@ -80,199 +62,57 @@ a {
   text-decoration: none;
 }
 
-img {
+img,
+video {
   max-width: 100%;
   display: block;
 }
 
-/* --- Scrollbar --- */
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg);
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.12);
-  border-radius: 10px;
-  border: 2px solid var(--bg);
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-strong);
+.wrap {
+  padding-inline: var(--gutter);
 }
 
-/* =========================================================================
-   Layout helpers
-   ========================================================================= */
-.container {
-  width: 100%;
-  max-width: var(--maxw);
-  margin-inline: auto;
-  padding-inline: 24px;
+.serif {
+  font-family: var(--serif);
+  font-weight: 400;
+  letter-spacing: -0.01em;
 }
 
-.section {
-  padding-block: clamp(72px, 12vh, 140px);
-  position: relative;
+.muted {
+  color: var(--muted);
 }
 
-.section-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.14em;
+/* Small uppercase heading used once per block. */
+.kicker {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 18px;
-}
-.section-label::before {
-  content: '';
-  width: 26px;
-  height: 1px;
-  background: var(--accent);
-  opacity: 0.6;
+  color: var(--muted);
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 28px;
 }
 
-.section-title {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: clamp(1.9rem, 4.5vw, 3rem);
-  line-height: 1.08;
-  letter-spacing: -0.02em;
-  color: var(--text);
-  margin-bottom: 20px;
+/* Underline that draws itself on hover. */
+.ulink {
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  transition: background-size 0.45s var(--ease);
+}
+.ulink:hover {
+  background-size: 100% 1px;
 }
 
-.section-lead {
-  color: var(--text-muted);
-  max-width: 60ch;
-  font-size: 1.05rem;
-}
-
-.text-accent {
-  color: var(--accent);
-}
-.mono {
-  font-family: var(--font-mono);
-}
-
-/* =========================================================================
-   Buttons
-   ========================================================================= */
-.btn {
-  --_bg: var(--accent);
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 0.95rem;
-  padding: 13px 26px;
-  border-radius: 999px;
-  border: 1px solid transparent;
-  cursor: pointer;
-  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease),
-    background 0.3s, color 0.3s, border-color 0.3s;
-  white-space: nowrap;
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-  color: #0b0b0e;
-  box-shadow: 0 8px 30px -8px var(--accent-glow);
-}
-.btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 16px 40px -10px var(--accent-glow);
-}
-
-.btn-ghost {
-  background: var(--surface);
-  border-color: var(--stroke);
-  color: var(--text);
-  backdrop-filter: blur(8px);
-}
-.btn-ghost:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  transform: translateY(-3px);
-}
-
-/* =========================================================================
-   Cards / glass panels
-   ========================================================================= */
-.panel {
-  background: var(--surface);
-  border: 1px solid var(--stroke);
-  border-radius: var(--radius);
-  backdrop-filter: blur(12px);
-  transition: border-color 0.4s var(--ease), transform 0.4s var(--ease),
-    background 0.4s;
-}
-.panel:hover {
-  border-color: var(--stroke-strong);
-  background: var(--surface-hover);
-}
-
-/* Chip / tag */
-.chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
-  letter-spacing: 0.03em;
-  color: var(--text-muted);
-  padding: 5px 11px;
-  border: 1px solid var(--stroke);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.02);
-  transition: all 0.3s var(--ease);
-}
-.chip:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-/* =========================================================================
-   Scroll reveal (v-reveal directive)
-   ========================================================================= */
+/* Scroll reveal (v-reveal directive in main.js) */
 [data-reveal] {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
-  will-change: opacity, transform;
+  transform: translateY(18px);
+  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
 }
 [data-reveal].is-visible {
   opacity: 1;
   transform: none;
-}
-
-/* =========================================================================
-   Utility
-   ========================================================================= */
-/* Drawing-sheet grid: the page reads like a technical drawing, without motion. */
-.blueprint {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 30%, transparent 100%);
-}
-.grain {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 2;
-  opacity: 0.035;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 @media (prefers-reduced-motion: reduce) {
