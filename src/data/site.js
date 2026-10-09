@@ -114,19 +114,76 @@ export const offHours = {
   chess: {
     elo: 1100,
     opening: 'Kádas Opening',
-    // [from, to, SAN] in algebraic squares. 1. h4, then the rook lift Rh3 that h4 makes possible.
-    // No captures, so the loop can replay from the start.
-    moves: [
-      ['h2', 'h4', '1. h4'],
-      ['d7', 'd5', '1… d5'],
-      ['d2', 'd4', '2. d4'],
-      ['c7', 'c5', '2… c5'],
-      ['e2', 'e3', '3. e3'],
-      ['b8', 'c6', '3… Nc6'],
-      ['h1', 'h3', '4. Rh3'],
-      ['g8', 'f6', '4… Nf6'],
-      ['c2', 'c3', '5. c3'],
-      ['e7', 'e6', '5… e6'],
+    // Lines from published theory (Wikipedia "Desprez Opening", Wikibooks "1. h4").
+    // Notes are short teaching comments. src/lib/chess.js replays every move and throws on a bad one.
+    lines: [
+      {
+        name: 'Bronstein’s setup',
+        tag: '1… e5',
+        moves: [
+          { san: 'h4', from: 'h2', to: 'h4', note: 'The Kádas. The h-pawn takes two squares. It opens a path for the h1 rook and gains space on the king side, but it does nothing for the centre.' },
+          { san: 'e5', from: 'e7', to: 'e5', note: 'Black takes the centre at once and opens lines for the queen and the f8 bishop.' },
+          { san: 'g3', from: 'g2', to: 'g3', note: 'White prepares Bg2: the bishop will aim down the long diagonal.' },
+          { san: 'd5', from: 'd7', to: 'd5', note: 'A second centre pawn. Black has the ideal duo e5–d5.' },
+          { san: 'd4', from: 'd2', to: 'd4', note: 'White strikes back in the centre before Black builds more.' },
+          { san: 'exd4', from: 'e5', to: 'd4', note: 'Black trades the e-pawn. The centre opens.' },
+          { san: 'Qxd4', from: 'd1', to: 'd4', note: 'The queen recaptures. Active, but exposed in the middle of the board.' },
+          { san: 'Nc6', from: 'b8', to: 'c6', note: 'Development with tempo: the knight attacks the queen.' },
+          { san: 'Qd1', from: 'd4', to: 'd1', note: 'The queen goes home. White loses time, but keeps a healthy structure.' },
+          { san: 'Nf6', from: 'g8', to: 'f6', note: 'Natural development. The knight guards d5 and eyes e4.' },
+          { san: 'Nh3', mark: '!', from: 'g1', to: 'h3', note: 'The point of h4: the knight uses h3 on its way to f4. The h-pawn no longer stands in its way.' },
+          { san: 'Be7', from: 'f8', to: 'e7', note: 'Black prepares to castle.' },
+          { san: 'Nf4', from: 'h3', to: 'f4', note: 'The knight hits d5 and watches e6 and g6.' },
+          { san: 'O-O', from: 'e8', to: 'g8', rook: ['h8', 'f8'], note: 'Black castles. The king is safe and Black is well developed.' },
+          { san: 'Bg2', from: 'f1', to: 'g2', note: 'The bishop joins the pressure on d5. Bronstein gave this as a good setup for White.' },
+        ],
+      },
+      {
+        name: 'The trap to avoid',
+        tag: '2. Rh3??',
+        moves: [
+          { san: 'h4', from: 'h2', to: 'h4', note: 'The Kádas. The rook on h1 can now move up the h-file.' },
+          { san: 'd5', from: 'd7', to: 'd5', note: 'Black takes the centre. Look at the c8 bishop: the whole diagonal c8–h3 is now open.' },
+          { san: 'Rh3', mark: '??', from: 'h1', to: 'h3', note: 'The classic mistake. The rook looks active, but h3 sits on the bishop’s diagonal.' },
+          { san: 'Bxh3', from: 'c8', to: 'h3', note: 'The bishop takes the rook.' },
+          { san: 'Nxh3', from: 'g1', to: 'h3', note: 'White gets the bishop back but has lost the exchange: a rook for a bishop. Keep the rook home early on.' },
+        ],
+      },
+      {
+        name: 'Myers Variation',
+        tag: '1… d5 2. d4 c5 3. e4',
+        moves: [
+          { san: 'h4', from: 'h2', to: 'h4', note: 'The Kádas. Space on the king side, nothing yet in the centre.' },
+          { san: 'd5', from: 'd7', to: 'd5', note: 'Black takes the centre. Remember: from now on, Rh3 loses the rook to Bxh3.' },
+          { san: 'd4', from: 'd2', to: 'd4', note: 'White puts a pawn in the centre too.' },
+          { san: 'c5', from: 'c7', to: 'c5', note: 'Black attacks d4 at once.' },
+          { san: 'e4', from: 'e2', to: 'e4', note: 'The Myers Variation. White offers the e-pawn to open the centre fast. Both captures are possible: 3… dxe4 or 3… cxd4.' },
+        ],
+      },
+      {
+        name: 'Kádas Gambit',
+        tag: '1… c5 2. b4',
+        moves: [
+          { san: 'h4', from: 'h2', to: 'h4', note: 'The Kádas, one more time.' },
+          { san: 'c5', from: 'c7', to: 'c5', note: 'Black answers on the other wing: the c-pawn controls d4.' },
+          { san: 'b4', from: 'b2', to: 'b4', note: 'The Kádas Gambit. White gives the b-pawn to pull Black’s c-pawn away from the centre.' },
+          { san: 'cxb4', from: 'c5', to: 'b4', note: 'Black accepts. In return, White gets open lines: b2 is free for the bishop on the long diagonal.' },
+        ],
+      },
+      {
+        name: 'Against the fianchetto',
+        tag: '1… g6 2. h5',
+        moves: [
+          { san: 'h4', from: 'h2', to: 'h4', note: 'The Kádas. Watch the h-pawn: here it has a real target.' },
+          { san: 'g6', from: 'g7', to: 'g6', note: 'Black prepares Bg7. This is rare against h4, and the next move shows why.' },
+          { san: 'h5', from: 'h4', to: 'h5', note: 'The h-pawn hits g6 at once, before Black castles.' },
+          { san: 'Bg7', from: 'f8', to: 'g7', note: 'Black completes the fianchetto anyway.' },
+          { san: 'hxg6', from: 'h5', to: 'g6', note: 'White trades on g6 to open the h-file.' },
+          { san: 'hxg6', from: 'h7', to: 'g6', note: 'Black recaptures. The h-file is now fully open.' },
+          { san: 'Rxh8', from: 'h1', to: 'h8', note: 'The h1 rook, freed by 1. h4, uses the open file and trades itself for Black’s rook.' },
+          { san: 'Bxh8', from: 'g7', to: 'h8', note: 'The rooks are off. Black’s bishop sits in the corner and g6 has lost its partner on h7.' },
+        ],
+      },
     ],
   },
   // Photos of your own paintings: { src, alt }. The gallery shows only when this list has items.
@@ -163,10 +220,18 @@ export const camera = {
       format: 'tall',
     },
   ],
-  // Frames from the films, until the photo series is ready. Frames with identifiable people are left out.
-  // The Casablanca frame is not here: it is already the poster of the featured film.
-  stills: [
-    { src: '/media/stills/seafront.jpg', alt: 'Silhouettes walking between palm trees by the sea', caption: 'Morocco' },
-    { src: '/media/stills/cat.jpg', alt: 'A black cat passing under bougainvillea leaves', caption: 'Morocco' },
-  ],
 }
+
+// Photography. Own frames come from the films; placeholders are Unsplash photos (via picsum.photos)
+// shown with their credit until the real series replaces them. Frames with identifiable people are left out.
+// span: columns out of 12, ratio: aspect ratio of the frame.
+export const stills = [
+  { src: '/media/stills/placeholder-860.webp', alt: 'Brooklyn Bridge seen from the walkway, cables converging', place: 'New York', credit: 'Skyler Smith', placeholder: true, span: 8, ratio: '3 / 2' },
+  { src: '/media/stills/seafront.jpg', alt: 'Silhouettes walking between palm trees by the sea', place: 'Morocco', credit: 'Film still', span: 4, ratio: '4 / 5' },
+  { src: '/media/stills/placeholder-739.webp', alt: 'A Ferris wheel against a white sky', place: 'Ferris wheel', credit: 'Siyan Ren', placeholder: true, span: 4, ratio: '4 / 3' },
+  { src: '/media/stills/cat.jpg', alt: 'A black cat passing under bougainvillea leaves', place: 'Morocco', credit: 'Film still', span: 4, ratio: '4 / 3' },
+  { src: '/media/stills/placeholder-204.webp', alt: 'Railway tracks running towards green mountains', place: 'Railway', credit: 'Tiago Gerken', placeholder: true, span: 4, ratio: '4 / 3' },
+  { src: '/media/stills/placeholder-826.webp', alt: 'A narrow canal between old brick buildings at dusk', place: 'Canal', credit: 'Nick Scheerbart', placeholder: true, span: 5, ratio: '4 / 5' },
+  { src: '/media/stills/placeholder-374.webp', alt: 'A long beach and green hills seen from above', place: 'Coast', credit: 'Ma. Alejandra', placeholder: true, span: 7, ratio: '3 / 2' },
+  { src: '/media/stills/placeholder-994.webp', alt: 'A calm sea horizon at dusk', place: 'Horizon', credit: 'Jonathan Bean', placeholder: true, span: 12, ratio: '21 / 9' },
+]

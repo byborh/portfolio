@@ -1,6 +1,6 @@
 <script setup>
 import TriathlonRace from '../off/TriathlonRace.vue'
-import ChessLoop from '../off/ChessLoop.vue'
+import ChessLesson from '../off/ChessLesson.vue'
 import PaintPad from '../off/PaintPad.vue'
 import { offHours } from '../../data/site.js'
 </script>
@@ -17,12 +17,12 @@ import { offHours } from '../../data/site.js'
       <TriathlonRace :legs="offHours.triathlon" />
     </div>
 
-    <div class="off-part chess-part">
-      <ChessLoop :moves="offHours.chess.moves" />
-      <div class="elo">
-        <p class="elo-num serif">{{ offHours.chess.elo }}</p>
-        <p class="muted">Elo · {{ offHours.chess.opening }}, on loop.</p>
+    <div class="off-part">
+      <div class="off-head chess-head">
+        <h2 class="off-title serif">{{ offHours.chess.opening }}</h2>
+        <p class="elo"><span class="elo-num serif">{{ offHours.chess.elo }}</span> <span class="muted">Elo</span></p>
       </div>
+      <ChessLesson :lines="offHours.chess.lines" />
     </div>
 
     <div class="off-part">
@@ -57,20 +57,17 @@ import { offHours } from '../../data/site.js'
   letter-spacing: -0.03em;
 }
 
-.chess-part {
-  display: grid;
-  grid-template-columns: minmax(0, 440px) 1fr;
-  gap: 56px;
-  align-items: end;
+.chess-head {
+  align-items: flex-end;
+  margin-bottom: 36px;
+}
+.elo {
+  white-space: nowrap;
 }
 .elo-num {
-  font-size: clamp(96px, 18vw, 280px);
-  line-height: 0.82;
+  font-size: clamp(56px, 9vw, 140px);
+  line-height: 0.85;
   letter-spacing: -0.04em;
-}
-.elo p:last-child {
-  margin-top: 14px;
-  font-size: 14px;
 }
 
 .paintings {
@@ -86,9 +83,10 @@ import { offHours } from '../../data/site.js'
 }
 
 @media (max-width: 760px) {
-  .chess-part {
-    grid-template-columns: 1fr;
-    gap: 28px;
+  .chess-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
   }
 }
 </style>

@@ -43,15 +43,6 @@ const [featured, vlog, short] = camera.films
       </blockquote>
     </div>
 
-    <h3 class="stills-title serif">Stills</h3>
-    <div class="stills">
-      <figure v-for="s in camera.stills" :key="s.src" class="still" v-reveal>
-        <div class="still-frame">
-          <img :src="s.src" :alt="s.alt" loading="lazy" decoding="async" width="1280" height="720" />
-        </div>
-        <figcaption class="cam-cap serif">{{ s.caption }}</figcaption>
-      </figure>
-    </div>
   </section>
 </template>
 
@@ -111,37 +102,6 @@ const [featured, vlog, short] = camera.films
   padding-left: 8%;
 }
 
-.stills-title {
-  font-size: clamp(48px, 7vw, 104px);
-  line-height: 0.9;
-  margin: 120px 0 32px;
-}
-.stills {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 24px;
-  align-items: end;
-}
-.still-frame {
-  overflow: hidden;
-  background: var(--well);
-}
-.still:first-child .still-frame {
-  aspect-ratio: 4 / 3;
-}
-.still-frame img {
-  width: 100%;
-  height: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  transition: transform 1.4s var(--ease);
-}
-.still:first-child .still-frame img {
-  aspect-ratio: 4 / 3;
-}
-.still:hover img {
-  transform: scale(1.04);
-}
 
 @media (max-width: 760px) {
   .cam-head {
@@ -149,8 +109,7 @@ const [featured, vlog, short] = camera.films
     gap: 16px;
   }
   .cam-row.first,
-  .cam-row.second,
-  .stills {
+  .cam-row.second {
     grid-template-columns: 1fr;
   }
   .cam-row.first figure:last-child {

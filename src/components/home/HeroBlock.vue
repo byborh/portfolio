@@ -2,7 +2,7 @@
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import Media from '../Media.vue'
 import { profile } from '../../data/profile.js'
-import { work, camera } from '../../data/site.js'
+import { work, stills } from '../../data/site.js'
 
 const clock = ref('')
 let timer
@@ -21,9 +21,10 @@ onMounted(() => {
 })
 onBeforeUnmount(() => clearInterval(timer))
 
-// Work screenshots and film stills alternate: code and camera, side by side.
-const stills = camera.stills.map((s) => ({ type: 'image', src: s.src, alt: s.alt }))
-const mixed = work.flatMap((w, i) => (stills[i] ? [w.media, stills[i]] : [w.media]))
+// Work screenshots and own film frames alternate: code and camera, side by side.
+// Placeholders stay out: here they would have no credit next to them.
+const frames = stills.filter((s) => !s.placeholder).map((s) => ({ type: 'image', src: s.src, alt: s.alt }))
+const mixed = work.flatMap((w, i) => (frames[i] ? [w.media, frames[i]] : [w.media]))
 // The strip is duplicated so the marquee loops without a visible seam.
 const strip = [...mixed, ...mixed]
 </script>
