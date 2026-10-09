@@ -13,6 +13,11 @@ const routes = [
     name: 'contact',
     component: () => import('../components/Contact.vue'),
   },
+  {
+    path: '/preview',
+    name: 'preview',
+    component: () => import('../components/Preview.vue'),
+  },
   { path: '/:pathMatch(.*)*', redirect: '/' },
 ]
 

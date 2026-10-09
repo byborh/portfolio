@@ -1,7 +1,13 @@
 export const profile = {
   name: 'Beibarys Rakhymberdi',
   role: 'Platform & Services Developer',
+  company: 'Mango3D',
+  school: 'Junia ISEN · Engineering degree, 2025–2028',
   location: 'Bordeaux, France',
+  // Unconfirmed wording (Kazakh or Kazakh/Kyrgyz): see the ⚠️ in COPY.md.
+  roots: 'Kazakh',
+  languages: ['French', 'Kazakh', 'Russian', 'English'],
+  photo: '/img/image-me.jpg',
   email: 'beibarys.rakhymberdi@student.junia.com',
 }
 
