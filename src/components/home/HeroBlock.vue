@@ -40,7 +40,7 @@ const strip = [...mixed, ...mixed]
       Beibarys<br /><em>Rakhymberdi</em>
     </h1>
 
-    <p class="hero-line wrap muted">Before code, I measured aerospace parts.</p>
+    <p class="hero-line wrap muted">Software Engineer Student - Master of None</p>
 
     <div class="strip" aria-hidden="true">
       <div class="strip-track">

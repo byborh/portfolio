@@ -22,8 +22,8 @@ export const work = [
     title: 'Lychee Slicer',
     year: '2025 —',
     line: 'Resin 3D-printing slicer, 530,000+ users. Pre-release QA, Stripe flows.',
-    url: 'https://lychee.co/resin-sla-msla-3d-printers',
-    media: { type: 'image', src: '/media/lychee-slicer.webp', alt: 'Lychee Slicer product page with a T-rex model' },
+    url: 'https://lychee.co/',
+    media: { type: 'image', src: '/media/lychee.webp', alt: 'Lychee Slicer product page with a T-rex model' },
     size: 'half',
   },
   {
@@ -235,3 +235,25 @@ export const stills = [
   { src: '/media/stills/placeholder-374.webp', alt: 'A long beach and green hills seen from above', place: 'Coast', credit: 'Ma. Alejandra', placeholder: true, span: 7, ratio: '3 / 2' },
   { src: '/media/stills/placeholder-994.webp', alt: 'A calm sea horizon at dusk', place: 'Horizon', credit: 'Jonathan Bean', placeholder: true, span: 12, ratio: '21 / 9' },
 ]
+
+// Countries visited, by Natural Earth ADM0_A3 code (see src/data/map.js). Test list for now.
+export const travel = {
+  visited: [
+    { id: 'FRA', name: 'France' },
+    { id: 'ESP', name: 'Spain' },
+    { id: 'AND', name: 'Andorra' },
+    { id: 'MCO', name: 'Monaco' },
+    { id: 'ITA', name: 'Italy' },
+    { id: 'CHE', name: 'Switzerland' },
+    { id: 'DEU', name: 'Germany' },
+    { id: 'LUX', name: 'Luxembourg' },
+    { id: 'BEL', name: 'Belgium' },
+    { id: 'NLD', name: 'Netherlands' },
+    { id: 'GRC', name: 'Greece' },
+    { id: 'TUR', name: 'Türkiye' },
+    { id: 'RUS', name: 'Russia' },
+    { id: 'MAR', name: 'Morocco' },
+  ],
+  // Too small to see as a shape at this scale: drawn as a dot as well.
+  markers: ['AND', 'MCO', 'LUX'],
+}

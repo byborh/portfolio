@@ -89,6 +89,12 @@ body {
   background: var(--red);
   color: var(--yellow);
 }
+/* On the red block a red highlight disappears: select in navy there. */
+.tone-red ::selection,
+.tone-red::selection {
+  background: var(--navy);
+  color: var(--yellow);
+}
 
 a {
   color: inherit;
