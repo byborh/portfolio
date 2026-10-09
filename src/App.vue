@@ -1,14 +1,11 @@
 <script setup>
 import { RouterView } from 'vue-router'
-import AnimatedBackground from './components/AnimatedBackground.vue'
-import CustomCursor from './components/CustomCursor.vue'
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
 </script>
 
 <template>
-  <AnimatedBackground />
-  <CustomCursor />
+  <div class="blueprint" aria-hidden="true"></div>
   <div class="grain"></div>
 
   <Header />

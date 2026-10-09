@@ -27,7 +27,7 @@ const sheet = [
         <p class="hero-lead" v-reveal>{{ hero.lead }}</p>
 
         <div class="hero-actions" v-reveal>
-          <a href="#work" class="btn btn-primary">See the work <i class="bi bi-arrow-down"></i></a>
+          <a href="#now" class="btn btn-primary">See the work <i class="bi bi-arrow-down"></i></a>
           <RouterLink to="/contact" class="btn btn-ghost">
             <i class="bi bi-send"></i> Get in touch
           </RouterLink>

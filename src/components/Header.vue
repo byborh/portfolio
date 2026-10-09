@@ -16,10 +16,9 @@ onMounted(() => {
 onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
 
 const links = [
-  { to: { path: '/' }, label: 'Home' },
-  { to: { path: '/', hash: '#about' }, label: 'About' },
-  { to: { path: '/', hash: '#work' }, label: 'Work' },
-  { to: { path: '/projects' }, label: 'All projects' },
+  { to: { path: '/', hash: '#precision' }, label: 'Story' },
+  { to: { path: '/', hash: '#now' }, label: 'Mango3D' },
+  { to: { path: '/projects' }, label: 'Case studies' },
 ]
 </script>
 

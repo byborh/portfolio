@@ -4,7 +4,7 @@ export const profile = {
   company: 'Mango3D',
   school: 'Junia ISEN · Engineering degree, 2025–2028',
   location: 'Bordeaux, France',
-  // Unconfirmed wording (Kazakh or Kazakh/Kyrgyz): see the ⚠️ in COPY.md.
+  // Unconfirmed wording (Kazakh or Kazakh/Kyrgyz): see TODO.md, "Points à confirmer".
   roots: 'Kazakh',
   languages: ['French', 'Kazakh', 'Russian', 'English'],
   photo: '/img/image-me.jpg',

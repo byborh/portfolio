@@ -13,11 +13,6 @@ const routes = [
     name: 'contact',
     component: () => import('../components/Contact.vue'),
   },
-  {
-    path: '/preview',
-    name: 'preview',
-    component: () => import('../components/Preview.vue'),
-  },
   { path: '/:pathMatch(.*)*', redirect: '/' },
 ]
 
@@ -26,7 +21,10 @@ const router = createRouter({
   routes,
   scrollBehavior(to, from, savedPosition) {
     if (to.hash) {
-      return { el: to.hash, top: 90, behavior: 'smooth' }
+      const target = { el: to.hash, top: 90, behavior: 'smooth' }
+      if (to.path === from.path) return target
+      // The out-in page transition (App.vue, 0.35s) mounts the new page late: wait for the anchor to exist.
+      return new Promise((resolve) => setTimeout(() => resolve(target), 400))
     }
     if (savedPosition) return savedPosition
     return { top: 0, behavior: 'smooth' }

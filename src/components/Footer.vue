@@ -29,7 +29,7 @@ const year = new Date().getFullYear()
 
         <nav class="footer-nav">
           <RouterLink to="/" class="fn-link">Home</RouterLink>
-          <RouterLink to="/projects" class="fn-link">Projects</RouterLink>
+          <RouterLink to="/projects" class="fn-link">Case studies</RouterLink>
           <RouterLink to="/contact" class="fn-link">Contact</RouterLink>
         </nav>
 

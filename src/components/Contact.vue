@@ -44,8 +44,8 @@ async function copyEmail() {
         <p class="section-label" v-reveal>Contact</p>
         <h1 class="ct-title" v-reveal>Let's talk.</h1>
         <p class="section-lead" v-reveal>
-          Whether it's a role, a collaboration or just a good technical
-          conversation — my inbox is open. I usually reply within a day.
+          I am looking for a 12+ week engineering internship abroad, as part of my
+          Junia degree. I am also open to freelance projects. I reply within a day.
         </p>
       </header>
 

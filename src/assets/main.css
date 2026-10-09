@@ -85,14 +85,6 @@ img {
   display: block;
 }
 
-/* Custom cursor: hide native on capable pointers */
-@media (hover: hover) and (pointer: fine) {
-  body.has-custom-cursor,
-  body.has-custom-cursor * {
-    cursor: none;
-  }
-}
-
 /* --- Scrollbar --- */
 ::-webkit-scrollbar {
   width: 10px;
@@ -261,6 +253,18 @@ img {
 /* =========================================================================
    Utility
    ========================================================================= */
+/* Drawing-sheet grid: the page reads like a technical drawing, without motion. */
+.blueprint {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 30%, transparent 100%);
+}
 .grain {
   position: fixed;
   inset: 0;
