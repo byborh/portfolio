@@ -53,7 +53,7 @@ export const more = [
 // Oldest first: the list reads as the path itself.
 export const path = [
   { year: '2021', what: 'Metrology inspector', where: 'Micro-Sud, Bordeaux' },
-  { year: '2023', what: '“I\'m learning Python”', where: 'First chess game', quote: true },
+  { year: '2021', what: '“I\'m learning Python”', where: 'First chess game', quote: true },
   { year: '2023', what: 'High School Diploma, machining', where: 'Vocational high school' },
   { year: '2023', what: 'Associate Degree, computer science', where: 'Lycée Gustave Eiffel, Bordeaux' },
   { year: '2024', what: 'Web developer', where: 'Snapp’, Bordeaux' },
