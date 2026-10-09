@@ -52,10 +52,10 @@ export const more = [
 
 // Oldest first: the list reads as the path itself.
 export const path = [
-  { year: '2021', what: 'Metrology inspector', where: 'Micro-Sud, Mérignac' },
-  { year: '2023', what: 'Bac Pro, machining', where: 'Vocational high school' },
-  { year: '2023', what: '“I’m learning a git”', where: 'First repository, 17 December', quote: true },
-  { year: '2023', what: 'BTS SIO', where: 'Lycée Gustave Eiffel, Bordeaux' },
+  { year: '2021', what: 'Metrology inspector', where: 'Micro-Sud, Bordeaux' },
+  { year: '2023', what: '“I\'m learning Python”', where: 'First chess game', quote: true },
+  { year: '2023', what: 'High School Diploma, machining', where: 'Vocational high school' },
+  { year: '2023', what: 'Associate Degree, computer science', where: 'Lycée Gustave Eiffel, Bordeaux' },
   { year: '2024', what: 'Web developer', where: 'Snapp’, Bordeaux' },
   { year: '2024', what: 'Volunteer', where: 'Paris 2024 Olympic Games' },
   {
@@ -64,8 +64,10 @@ export const path = [
     where: 'Built three times',
     media: { type: 'image', src: '/media/micro-sud.webp', alt: 'Micro-Sud website' },
   },
+  
   { year: '2025', what: 'Global Game Jam', where: '48 hours, Godot, team of six' },
-  { year: '2025', what: 'Co-founder', where: 'Benomads' },
+  { year: '2025', what: '24 heures d\'innovation', where: 'University of Bordeaux for Keolis' },
+  { year: '2025', what: 'Co-founder & Fullstack Lead Developer', where: 'Benomads & Datte' },
   {
     year: '2025',
     what: 'Platform & Services Developer',
