@@ -4,7 +4,7 @@ import { RouterLink } from 'vue-router'
 
 /* ---- Rotating role in hero ------------------------------------------- */
 const roles = [
-  'Platform & Service Developer',
+  'Platform & Services Developer',
   'Backend & API architect',
   'Cloud-native · AWS',
   'DevSecOps advocate',
@@ -146,7 +146,7 @@ const projects = [
 const timeline = [
   {
     when: '2025 — now',
-    role: 'Platform & Service Developer',
+    role: 'Platform & Services Developer',
     org: 'Mango3D',
     desc: 'Building platform services within the software team — reliable backends, tooling and cloud infrastructure.',
     live: true,

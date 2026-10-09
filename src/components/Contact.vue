@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 
-const EMAIL = 'byborh@gmail.com'
+const EMAIL = 'beibarys.rakhymberdi@student.junia.com'
 
 const name = ref('')
 const email = ref('')
