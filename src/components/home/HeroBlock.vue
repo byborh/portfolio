@@ -21,9 +21,8 @@ onMounted(() => {
 })
 onBeforeUnmount(() => clearInterval(timer))
 
-// Work screenshots and own film frames alternate: code and camera, side by side.
-// Placeholders stay out: here they would have no credit next to them.
-const frames = stills.filter((s) => !s.placeholder).map((s) => ({ type: 'image', src: s.src, alt: s.alt }))
+// Work screenshots and own photos alternate: code and camera, side by side.
+const frames = stills.map((s) => ({ type: 'image', src: s.src, alt: s.alt }))
 const mixed = work.flatMap((w, i) => (frames[i] ? [w.media, frames[i]] : [w.media]))
 // The strip is duplicated so the marquee loops without a visible seam.
 const strip = [...mixed, ...mixed]

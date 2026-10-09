@@ -33,3 +33,6 @@ coverage
 .env
 .env.*
 !.env.example
+
+# Original photos: full size with EXIF/GPS. Resized copies live in public/media/photos.
+photos-original/

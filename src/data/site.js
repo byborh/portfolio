@@ -91,7 +91,7 @@ export const path = [
     year: '2026',
     what: 'Ten minutes in Morocco',
     where: 'Film, no music',
-    media: { type: 'image', src: '/media/stills/casablanca-pier.jpg', alt: 'Fishermen on the Casablanca seafront' },
+    media: { type: 'image', src: '/media/photos/casablanca-mosque.webp', alt: 'The Hassan II Mosque in Casablanca at night' },
   },
 ]
 
@@ -224,18 +224,19 @@ export const camera = {
   ],
 }
 
-// Photography. Own frames come from the films; placeholders are Unsplash photos (via picsum.photos)
-// shown with their credit until the real series replaces them. Frames with identifiable people are left out.
-// span: columns out of 12, ratio: aspect ratio of the frame.
+// Photography: own photos only (resized to WebP, metadata removed; originals in photos-original/, not deployed).
+// Photos with identifiable people are left out.
+// Captions name only what the photo shows for sure — edit `place` where you know more.
+// ratio: aspect ratio of the frame. The wall layout lives in StillsBlock.vue.
 export const stills = [
-  { src: '/media/stills/placeholder-860.webp', alt: 'Brooklyn Bridge seen from the walkway, cables converging', place: 'New York', credit: 'Skyler Smith', placeholder: true, span: 8, ratio: '3 / 2' },
-  { src: '/media/stills/seafront.jpg', alt: 'Silhouettes walking between palm trees by the sea', place: 'Morocco', credit: 'Film still', span: 4, ratio: '4 / 5' },
-  { src: '/media/stills/placeholder-739.webp', alt: 'A Ferris wheel against a white sky', place: 'Ferris wheel', credit: 'Siyan Ren', placeholder: true, span: 4, ratio: '4 / 3' },
-  { src: '/media/stills/cat.jpg', alt: 'A black cat passing under bougainvillea leaves', place: 'Morocco', credit: 'Film still', span: 4, ratio: '4 / 3' },
-  { src: '/media/stills/placeholder-204.webp', alt: 'Railway tracks running towards green mountains', place: 'Railway', credit: 'Tiago Gerken', placeholder: true, span: 4, ratio: '4 / 3' },
-  { src: '/media/stills/placeholder-826.webp', alt: 'A narrow canal between old brick buildings at dusk', place: 'Canal', credit: 'Nick Scheerbart', placeholder: true, span: 5, ratio: '4 / 5' },
-  { src: '/media/stills/placeholder-374.webp', alt: 'A long beach and green hills seen from above', place: 'Coast', credit: 'Ma. Alejandra', placeholder: true, span: 7, ratio: '3 / 2' },
-  { src: '/media/stills/placeholder-994.webp', alt: 'A calm sea horizon at dusk', place: 'Horizon', credit: 'Jonathan Bean', placeholder: true, span: 12, ratio: '21 / 9' },
+  { src: '/media/photos/casablanca-mosque.webp', alt: 'The minaret and carved gate of the Hassan II Mosque at night', place: 'Casablanca', ratio: '3 / 4' },
+  { src: '/media/photos/giraffe.webp', alt: 'A giraffe’s head and neck against a blue sky with small clouds', place: 'Giraffe', ratio: '3 / 4' },
+  { src: '/media/photos/pool.webp', alt: 'An indoor swimming pool with lane ropes under a white roof frame', place: 'Lane four', ratio: '3 / 4' },
+  { src: '/media/photos/pool-sunset.webp', alt: 'An outdoor pool at sunset beside a glass building', place: 'Last light', ratio: '3 / 4' },
+  { src: '/media/photos/geneva.webp', alt: 'Lake Geneva with the Jet d’Eau, a paddle steamer and a Swiss flag', place: 'Geneva', ratio: '3 / 4' },
+  { src: '/media/photos/shore-sunset.webp', alt: 'Sunset over a rocky shore at low tide under heavy clouds', place: 'Low tide', ratio: '3 / 4' },
+  { src: '/media/photos/facades.webp', alt: 'Stone façades and columns of a grand street under a pale sky', place: 'Façades', ratio: '3 / 4' },
+  { src: '/media/photos/ramen.webp', alt: 'Two bowls of ramen, gyoza and fried chicken on a wooden table, seen from above', place: 'Ramen', ratio: '3 / 4' },
 ]
 
 // Countries visited, by Natural Earth ADM0_A3 code (see src/data/map.js). Test list for now.

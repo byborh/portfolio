@@ -2,6 +2,23 @@
 import { ref, computed, watch, onBeforeUnmount } from 'vue'
 import { stills } from '../../data/site.js'
 
+// Hung by hand like prints on a wall: columns on a 12-column grid, vertical offset in px
+// (negative overlaps the row above), tilt in degrees, stacking order. A 9th photo restarts the pattern.
+const LAYOUT = [
+  { col: '1 / 5', y: 40, rot: -2.5, z: 2 },
+  { col: '6 / 9', y: 0, rot: 3, z: 1 },
+  { col: '9 / 13', y: 150, rot: -1.5, z: 3 },
+  { col: '2 / 6', y: -40, rot: 2, z: 4 },
+  { col: '7 / 12', y: 40, rot: -3, z: 2 },
+  { col: '1 / 4', y: -20, rot: -4, z: 5 },
+  { col: '5 / 9', y: 80, rot: 1.5, z: 3 },
+  { col: '9 / 13', y: -90, rot: -2, z: 4 },
+]
+const hang = (i) => {
+  const l = LAYOUT[i % LAYOUT.length]
+  return { gridColumn: l.col, marginTop: `${l.y}px`, '--rot': `${l.rot}deg`, '--z': l.z }
+}
+
 const open = ref(-1)
 const current = computed(() => stills[open.value])
 let lastFocus = null
@@ -42,21 +59,15 @@ onBeforeUnmount(() => {
   <section id="stills" class="stills wrap block tone-yellow" data-tone="yellow">
     <p class="kicker"><span>Stills</span><span>{{ String(stills.length).padStart(2, '0') }} frames</span></p>
 
-    <div class="grid">
-      <figure
-        v-for="(s, i) in stills"
-        :key="s.src"
-        class="frame"
-        :style="{ gridColumn: `span ${s.span}` }"
-        v-reveal
-      >
-        <button class="frame-open" :aria-label="`Open: ${s.alt}`" @click="show(i)">
-          <img :src="s.src" :alt="s.alt" :style="{ aspectRatio: s.ratio }" loading="lazy" decoding="async" />
-        </button>
-        <figcaption class="frame-cap">
-          <span class="serif">{{ s.place }}</span>
-          <span class="muted">{{ s.placeholder ? `Unsplash · ${s.credit}` : s.credit }}</span>
-        </figcaption>
+    <div class="wall">
+      <!-- v-reveal moves the figure; the tilt lives on .print so the reveal does not erase it. -->
+      <figure v-for="(s, i) in stills" :key="s.src" class="frame" :style="hang(i)" v-reveal>
+        <div class="print">
+          <button class="frame-open" :aria-label="`Open: ${s.alt}`" @click="show(i)">
+            <img :src="s.src" :alt="s.alt" :style="{ aspectRatio: s.ratio }" loading="lazy" decoding="async" />
+          </button>
+          <figcaption class="frame-cap serif">{{ s.place }}</figcaption>
+        </div>
       </figure>
     </div>
 
@@ -66,7 +77,6 @@ onBeforeUnmount(() => {
           <img :src="current.src" :alt="current.alt" class="viewer-img" />
           <p class="viewer-cap">
             <span class="serif">{{ current.place }}</span>
-            <span>{{ current.placeholder ? `Unsplash · ${current.credit}` : current.credit }}</span>
             <span>{{ open + 1 }} / {{ stills.length }}</span>
           </p>
           <button class="viewer-btn prev" aria-label="Previous photo" @click="step(-1)">←</button>
@@ -80,11 +90,30 @@ onBeforeUnmount(() => {
 
 
 <style scoped>
-.grid {
+.wall {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: 48px 24px;
+  column-gap: 24px;
+  row-gap: 0;
   align-items: start;
+  padding-bottom: 80px;
+}
+.frame {
+  position: relative;
+  z-index: var(--z);
+}
+.frame:hover,
+.frame:focus-within {
+  z-index: 20;
+}
+.print {
+  transform: rotate(var(--rot));
+  transition: transform 0.7s var(--ease);
+}
+/* Hover straightens the print and lifts it off the wall. */
+.frame:hover .print,
+.frame:focus-within .print {
+  transform: rotate(0deg) scale(1.04);
 }
 
 .frame-open {
@@ -95,6 +124,11 @@ onBeforeUnmount(() => {
   background: var(--well);
   overflow: hidden;
   cursor: zoom-in;
+  box-shadow: 0 26px 50px -26px rgba(0, 29, 61, 0.55);
+  transition: box-shadow 0.7s var(--ease);
+}
+.frame:hover .frame-open {
+  box-shadow: 0 40px 70px -30px rgba(0, 29, 61, 0.6);
 }
 .frame-open img {
   width: 100%;
@@ -102,24 +136,15 @@ onBeforeUnmount(() => {
   object-fit: cover;
   transition: transform 1.4s var(--ease), filter 0.6s;
 }
-.frame-open:hover img {
-  transform: scale(1.03);
-}
 .frame-open:focus-visible {
   outline: 3px solid var(--red);
   outline-offset: 4px;
 }
 
 .frame-cap {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 16px;
-  margin-top: 12px;
-  font-size: 13px;
-}
-.frame-cap .serif {
+  margin-top: 10px;
   font-size: 24px;
+  font-style: italic;
   line-height: 1.1;
 }
 
@@ -196,12 +221,21 @@ onBeforeUnmount(() => {
 }
 
 @media (max-width: 760px) {
-  .grid {
+  /* Phones: one column, prints alternate left and right. No overlap: it would hide the captions. */
+  .wall {
     grid-template-columns: 1fr;
-    gap: 36px;
+    padding-bottom: 24px;
   }
   .frame {
-    grid-column: auto !important;
+    grid-column: 1 !important;
+    width: 80%;
+    margin-top: 20px !important;
+  }
+  .frame:first-child {
+    margin-top: 0 !important;
+  }
+  .frame:nth-child(even) {
+    margin-left: auto;
   }
   .viewer {
     padding: 64px 12px 110px;
