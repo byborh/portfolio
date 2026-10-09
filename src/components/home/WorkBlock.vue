@@ -6,7 +6,7 @@ const count = String(work.length).padStart(2, '0')
 </script>
 
 <template>
-  <section id="work" class="work wrap">
+  <section id="work" class="work wrap block tone-navy" data-tone="navy">
     <p class="kicker"><span>Selected work</span><span>({{ count }})</span></p>
 
     <div class="grid">
@@ -44,9 +44,6 @@ const count = String(work.length).padStart(2, '0')
 </template>
 
 <style scoped>
-.work {
-  padding-top: 120px;
-}
 
 .grid {
   display: grid;
@@ -60,7 +57,7 @@ const count = String(work.length).padStart(2, '0')
 .item-media {
   aspect-ratio: 16 / 10;
   overflow: hidden;
-  background: var(--wash);
+  background: var(--well);
 }
 .item.full .item-media {
   aspect-ratio: 16 / 8;
@@ -83,6 +80,12 @@ const count = String(work.length).padStart(2, '0')
 .item-title {
   font-size: clamp(24px, 2.4vw, 34px);
   line-height: 1.1;
+  /* Red text on navy is under 3:1, so red shows as the hover underline instead. */
+  background: linear-gradient(var(--red), var(--red)) 0 100% / 0 3px no-repeat;
+  transition: background-size 0.5s var(--ease);
+}
+.item:hover .item-title {
+  background-size: 100% 3px;
 }
 .item-line {
   font-size: 14px;
@@ -93,7 +96,7 @@ const count = String(work.length).padStart(2, '0')
 .more {
   list-style: none;
   margin-top: 80px;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--rule);
 }
 .more-row {
   display: grid;
@@ -101,7 +104,7 @@ const count = String(work.length).padStart(2, '0')
   gap: 24px;
   align-items: baseline;
   padding: 18px 0;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--rule);
   font-size: 14px;
   transition: padding 0.5s var(--ease);
 }

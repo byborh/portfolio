@@ -4,7 +4,7 @@ import { about } from '../../data/site.js'
 </script>
 
 <template>
-  <section id="about" class="about wrap">
+  <section id="about" class="about wrap block tone-yellow" data-tone="yellow">
     <p class="kicker"><span>About</span><span>{{ profile.languages.join(' · ') }}</span></p>
 
     <div class="about-grid">
@@ -23,7 +23,7 @@ import { about } from '../../data/site.js'
     </div>
 
     <div class="contact">
-      <a :href="`mailto:${profile.email}`" class="hello serif">Say hello <span>↗</span></a>
+      <a :href="`mailto:${profile.email}`" class="hello serif">Say hello <span class="hello-arrow">↗</span></a>
       <div class="contact-links">
         <a :href="`mailto:${profile.email}`" class="ulink">{{ profile.email }}</a>
         <a v-for="s in socials" :key="s.label" :href="s.url" target="_blank" rel="noopener" class="ulink">
@@ -35,9 +35,6 @@ import { about } from '../../data/site.js'
 </template>
 
 <style scoped>
-.about {
-  padding-top: 160px;
-}
 
 .about-grid {
   display: grid;
@@ -47,9 +44,13 @@ import { about } from '../../data/site.js'
 }
 .about-photo {
   width: 100%;
+  /* The height attribute would win over aspect-ratio and stretch the photo on narrow screens. */
+  height: auto;
   aspect-ratio: 1;
   object-fit: cover;
-  filter: grayscale(1);
+  /* Grayscale multiplied on yellow gives a duotone portrait in the palette. */
+  filter: grayscale(1) contrast(1.1);
+  mix-blend-mode: multiply;
 }
 .about-line {
   font-size: clamp(26px, 3.4vw, 48px);
@@ -71,11 +72,12 @@ import { about } from '../../data/site.js'
   line-height: 0.9;
   letter-spacing: -0.03em;
 }
-.hello span {
+.hello-arrow {
   display: inline-block;
+  color: var(--red);
   transition: transform 0.6s var(--ease);
 }
-.hello:hover span {
+.hello:hover .hello-arrow {
   transform: translate(8px, -8px);
 }
 .contact-links {

@@ -1,14 +1,14 @@
 /* =========================================================================
    Beibarys Rakhymberdi — portfolio
-   Paper, ink, one serif. The media carries the colour.
+   Palette "Sunset Splash". Yellow leads, navy grounds, red marks.
    ========================================================================= */
 
 :root {
-  --paper: #f3f1ec;
-  --ink: #141413;
-  --muted: #6e6c66;
-  --line: #d8d4cb;
-  --wash: #e7e3da;
+  --red: #d00000;
+  --navy: #001d3d;
+  --blue: #003566;
+  --gold: #ffc300;
+  --yellow: #ffd60a;
 
   --serif: 'Instrument Serif', 'Times New Roman', serif;
   --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -17,14 +17,47 @@
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --paper: #0f0f0e;
-    --ink: #ecebe6;
-    --muted: #8d8b84;
-    --line: #2a2926;
-    --wash: #1a1918;
-  }
+/* Each section picks a tone. Components only read --bg / --fg / --dim / --rule / --well.
+   --dim opacities keep small text at 4.5:1 or more on its background. */
+.tone-yellow {
+  --accent: var(--red);
+  --bg: var(--yellow);
+  --fg: var(--navy);
+  --dim: rgba(0, 29, 61, 0.72);
+  --rule: rgba(0, 29, 61, 0.2);
+  --well: var(--gold);
+}
+.tone-navy {
+  --accent: var(--red);
+  --bg: var(--navy);
+  --fg: var(--yellow);
+  --dim: rgba(255, 214, 10, 0.66);
+  --rule: rgba(255, 214, 10, 0.18);
+  --well: var(--blue);
+}
+.tone-blue {
+  --accent: var(--red);
+  --bg: var(--blue);
+  --fg: var(--yellow);
+  --dim: rgba(255, 214, 10, 0.74);
+  --rule: rgba(255, 214, 10, 0.22);
+  --well: var(--navy);
+}
+/* Red holds yellow at 4.0:1: enough for large type only. The red block uses no small text. */
+.tone-red {
+  --accent: var(--yellow);
+  --bg: var(--red);
+  --fg: var(--yellow);
+  --dim: var(--yellow);
+  --rule: rgba(255, 214, 10, 0.35);
+  --well: var(--navy);
+}
+.tone-yellow,
+.tone-navy,
+.tone-blue,
+.tone-red {
+  background: var(--bg);
+  color: var(--fg);
 }
 
 *,
@@ -42,8 +75,8 @@ html {
 
 body {
   min-height: 100vh;
-  background: var(--paper);
-  color: var(--ink);
+  background: var(--navy);
+  color: var(--yellow);
   font-family: var(--sans);
   font-size: 15px;
   line-height: 1.55;
@@ -53,8 +86,8 @@ body {
 }
 
 ::selection {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--red);
+  color: var(--yellow);
 }
 
 a {
@@ -72,6 +105,10 @@ video {
   padding-inline: var(--gutter);
 }
 
+.block {
+  padding-block: 140px;
+}
+
 .serif {
   font-family: var(--serif);
   font-weight: 400;
@@ -79,20 +116,31 @@ video {
 }
 
 .muted {
-  color: var(--muted);
+  color: var(--dim);
 }
 
 /* Small uppercase heading used once per block. */
 .kicker {
   display: flex;
   justify-content: space-between;
+  gap: 16px;
   font-size: 12px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--dim);
   padding-bottom: 14px;
-  border-bottom: 1px solid var(--line);
-  margin-bottom: 28px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 36px;
+}
+/* A red tick opens every block: the accent runs through the page. */
+.kicker > :first-child::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 10px;
+  background: var(--accent);
+  vertical-align: 1px;
 }
 
 /* Underline that draws itself on hover. */
@@ -113,6 +161,12 @@ video {
 [data-reveal].is-visible {
   opacity: 1;
   transform: none;
+}
+
+@media (max-width: 760px) {
+  .block {
+    padding-block: 96px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

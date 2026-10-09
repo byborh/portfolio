@@ -2,7 +2,7 @@
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import Media from '../Media.vue'
 import { profile } from '../../data/profile.js'
-import { work } from '../../data/site.js'
+import { work, camera } from '../../data/site.js'
 
 const clock = ref('')
 let timer
@@ -21,12 +21,15 @@ onMounted(() => {
 })
 onBeforeUnmount(() => clearInterval(timer))
 
+// Work screenshots and film stills alternate: code and camera, side by side.
+const stills = camera.stills.map((s) => ({ type: 'image', src: s.src, alt: s.alt }))
+const mixed = work.flatMap((w, i) => (stills[i] ? [w.media, stills[i]] : [w.media]))
 // The strip is duplicated so the marquee loops without a visible seam.
-const strip = [...work, ...work]
+const strip = [...mixed, ...mixed]
 </script>
 
 <template>
-  <section id="top" class="hero">
+  <section id="top" class="hero tone-yellow" data-tone="yellow">
     <div class="hero-meta wrap">
       <span>{{ profile.role }}, {{ profile.company }}</span>
       <span class="muted">{{ profile.location }} · {{ clock }}</span>
@@ -40,8 +43,8 @@ const strip = [...work, ...work]
 
     <div class="strip" aria-hidden="true">
       <div class="strip-track">
-        <div v-for="(w, i) in strip" :key="i" class="strip-item">
-          <Media :media="w.media" eager />
+        <div v-for="(m, i) in strip" :key="i" class="strip-item">
+          <Media :media="m" eager />
         </div>
       </div>
     </div>
@@ -99,7 +102,7 @@ const strip = [...work, ...work]
   height: 100%;
   aspect-ratio: 16 / 10;
   overflow: hidden;
-  background: var(--wash);
+  background: var(--well);
 }
 @keyframes slide {
   to {

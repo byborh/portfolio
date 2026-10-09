@@ -5,7 +5,7 @@ const year = new Date().getFullYear()
 </script>
 
 <template>
-  <footer class="foot wrap muted">
+  <footer class="foot wrap tone-navy" data-tone="navy">
     <span>© {{ year }} {{ profile.name }}</span>
     <a href="#top" class="ulink">Back to top ↑</a>
   </footer>
@@ -17,7 +17,6 @@ const year = new Date().getFullYear()
   justify-content: space-between;
   font-size: 13px;
   padding-block: 28px;
-  border-top: 1px solid var(--line);
-  margin-top: 40px;
+  color: var(--dim);
 }
 </style>

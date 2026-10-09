@@ -22,7 +22,7 @@ function move(e) {
 </script>
 
 <template>
-  <section id="path" class="path wrap">
+  <section id="path" class="path wrap block tone-yellow" data-tone="yellow">
     <p class="kicker"><span>Path</span><span>2021 — now</span></p>
 
     <ol class="steps" @mousemove="move" @mouseleave="preview = null">
@@ -44,7 +44,7 @@ function move(e) {
       v-if="canHover"
       class="preview"
       :class="{ on: preview }"
-      :style="{ transform: `translate(${pos.x + 24}px, ${pos.y - 90}px)` }"
+      :style="{ transform: `translate(${pos.x + 48}px, ${pos.y - 94}px)` }"
       aria-hidden="true"
     >
       <Media v-if="preview" :media="preview" />
@@ -53,9 +53,6 @@ function move(e) {
 </template>
 
 <style scoped>
-.path {
-  padding-top: 160px;
-}
 
 .steps {
   list-style: none;
@@ -66,7 +63,7 @@ function move(e) {
   gap: 24px;
   align-items: baseline;
   padding: 14px 0;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--rule);
 }
 .step-year {
   font-size: 13px;
@@ -75,7 +72,7 @@ function move(e) {
 .step-what {
   font-size: clamp(24px, 3vw, 40px);
   line-height: 1.1;
-  transition: transform 0.6s var(--ease);
+  transition: transform 0.6s var(--ease), color 0.3s;
 }
 .step-what.quote {
   font-style: italic;
@@ -86,6 +83,8 @@ function move(e) {
 }
 .step.has-media:hover .step-what {
   transform: translateX(10px);
+  /* Red on yellow is 4.0:1: fine at this size (large text needs 3:1). */
+  color: var(--red);
 }
 
 .preview {
