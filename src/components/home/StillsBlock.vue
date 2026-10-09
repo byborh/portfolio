@@ -60,15 +60,15 @@ onBeforeUnmount(() => {
     <p class="kicker"><span>Stills</span><span>{{ String(stills.length).padStart(2, '0') }} frames</span></p>
 
     <div class="wall">
-      <!-- v-reveal moves the figure; the tilt lives on .print so the reveal does not erase it. -->
-      <figure v-for="(s, i) in stills" :key="s.src" class="frame" :style="hang(i)" v-reveal>
-        <div class="print">
+      <!-- v-reveal moves the outer div; the tilt lives on the figure so the reveal does not erase it. -->
+      <div v-for="(s, i) in stills" :key="s.src" class="frame" :style="hang(i)" v-reveal>
+        <figure class="print">
           <button class="frame-open" :aria-label="`Open: ${s.alt}`" @click="show(i)">
             <img :src="s.src" :alt="s.alt" :style="{ aspectRatio: s.ratio }" loading="lazy" decoding="async" />
           </button>
           <figcaption class="frame-cap serif">{{ s.place }}</figcaption>
-        </div>
-      </figure>
+        </figure>
+      </div>
     </div>
 
     <Teleport to="body">
