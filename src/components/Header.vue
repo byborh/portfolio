@@ -1,16 +1,17 @@
 <script setup>
-import { ref, nextTick, onMounted, onBeforeUnmount } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, nextTick, watch, onMounted, onBeforeUnmount } from 'vue'
+import { RouterLink, useRoute, useRouter } from 'vue-router'
 import { profile } from '../data/profile.js'
 
-// Same order as the page.
+// Home sections in page order, then the two separate pages. Router links work from any page.
 const links = [
-  { href: '#about', label: 'About' },
-  { href: '#work', label: 'Work' },
-  { href: '#path', label: 'Path' },
-  { href: '#films', label: 'Films' },
-  { href: '#travel', label: 'Travel' },
-  { href: '#off', label: 'Off hours' },
+  { to: { path: '/', hash: '#about' }, label: 'About' },
+  { to: { path: '/', hash: '#work' }, label: 'Work' },
+  { to: { path: '/', hash: '#path' }, label: 'Path' },
+  { to: { path: '/', hash: '#films' }, label: 'Films' },
+  { to: { path: '/', hash: '#travel' }, label: 'Travel' },
+  { to: '/photos', label: 'Photos' },
+  { to: '/chess', label: 'Chess' },
 ]
 
 // The bar takes the tone of the section under it, so it stays readable on every colour.
@@ -19,6 +20,7 @@ const links = [
 const BAR_MIDDLE = 30
 const tone = ref('yellow')
 const router = useRouter()
+const route = useRoute()
 let sections = []
 let frame = 0
 
@@ -33,15 +35,26 @@ function update() {
 function onScroll() {
   if (!frame) frame = requestAnimationFrame(update)
 }
+function scan() {
+  sections = [...document.querySelectorAll('[data-tone]')]
+  update()
+}
 
 onMounted(async () => {
   // The page renders after the first navigation resolves: wait for it, or only the footer exists yet.
   await router.isReady()
   await nextTick()
-  sections = [...document.querySelectorAll('[data-tone]')]
+  scan()
   window.addEventListener('scroll', onScroll, { passive: true })
-  update()
 })
+// Each page has its own sections: read them again after a page change.
+watch(
+  () => route.path,
+  async () => {
+    await nextTick()
+    scan()
+  }
+)
 onBeforeUnmount(() => {
   window.removeEventListener('scroll', onScroll)
   cancelAnimationFrame(frame)
@@ -50,9 +63,9 @@ onBeforeUnmount(() => {
 
 <template>
   <header class="nav wrap" :class="`tone-${tone}`">
-    <a href="#top" class="nav-name">{{ profile.name }}</a>
+    <RouterLink to="/" class="nav-name">{{ profile.name }}</RouterLink>
     <nav class="nav-links" aria-label="Main">
-      <a v-for="l in links" :key="l.href" :href="l.href" class="ulink">{{ l.label }}</a>
+      <RouterLink v-for="l in links" :key="l.label" :to="l.to" class="ulink">{{ l.label }}</RouterLink>
       <a :href="`mailto:${profile.email}`" class="ulink">Email</a>
     </nav>
   </header>
@@ -92,10 +105,11 @@ onBeforeUnmount(() => {
     gap: 12px;
     font-size: 14px;
   }
-  /* Keep About, Work, Films and Email on phones. */
+  /* Keep About, Work, Photos and Email on phones. */
   .nav-links a:nth-child(3),
+  .nav-links a:nth-child(4),
   .nav-links a:nth-child(5),
-  .nav-links a:nth-child(6) {
+  .nav-links a:nth-child(7) {
     display: none;
   }
 }

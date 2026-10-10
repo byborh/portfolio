@@ -1,7 +1,8 @@
 <script setup>
 import { ref, computed, watch, onBeforeUnmount } from 'vue'
 import { useVisible, prefersReducedMotion } from '../../composables/useVisible.js'
-import { replay, moveLabel, FILES } from '../../lib/chess.js'
+import { replay, moveLabel } from '../../lib/chess.js'
+import ChessBoard from './ChessBoard.vue'
 
 const props = defineProps({
   // [{ name, tag, moves: [{ san, mark?, from, to, rook?, note }] }]
@@ -11,17 +12,10 @@ const props = defineProps({
 const STEP_MS = 3400 // time to read one note
 const LINE_PAUSE_MS = 2600
 
-// U+FE0E forces the text glyph: without it, Windows draws the pawn as a colour emoji.
-const GLYPH = { k: '♚︎', q: '♛︎', r: '♜︎', b: '♝︎', n: '♞︎', p: '♟︎' }
 
 // Every line is replayed once, up front: a wrong move in the data fails here, loudly.
 const positions = props.lines.map((line) => replay(line.moves))
 
-const squares = Array.from({ length: 64 }, (_, i) => {
-  const file = i % 8
-  const rank = 8 - Math.floor(i / 8)
-  return { name: `${FILES[file]}${rank}`, light: (file + rank) % 2 === 0 }
-})
 
 const root = ref(null)
 const visible = useVisible(root)
@@ -34,24 +28,6 @@ const pieces = computed(() => positions[lineIndex.value][ply.value])
 const move = computed(() => (ply.value ? line.value.moves[ply.value - 1] : null))
 const label = (i, m) => moveLabel(i, m.san) + (m.mark ?? '')
 
-function center(sq) {
-  return { x: FILES.indexOf(sq[0]) + 0.5, y: 8 - Number(sq[1]) + 0.5 }
-}
-const arrow = computed(() => {
-  if (!move.value) return null
-  const a = center(move.value.from)
-  const b = center(move.value.to)
-  // Stop short of the target centre so the head does not cover the piece.
-  const len = Math.hypot(b.x - a.x, b.y - a.y)
-  const k = (len - 0.32) / len
-  return { x1: a.x, y1: a.y, x2: a.x + (b.x - a.x) * k, y2: a.y + (b.y - a.y) * k }
-})
-
-function place(sq) {
-  const x = FILES.indexOf(sq[0])
-  const y = 8 - Number(sq[1])
-  return { transform: `translate(${x * 100}%, ${y * 100}%)` }
-}
 
 // ---- Navigation ----
 function go(n) {
@@ -114,32 +90,11 @@ function togglePlay() {
     </div>
 
     <div class="lesson-grid">
-      <div class="board-wrap">
-        <div class="board" role="img" :aria-label="`Position after ${move ? label(ply - 1, move) : 'the start'}`">
-          <span
-            v-for="s in squares"
-            :key="s.name"
-            class="square"
-            :class="{ light: s.light, hit: move && (move.from === s.name || move.to === s.name) }"
-          ></span>
-          <span
-            v-for="p in pieces"
-            :key="p.id"
-            class="piece"
-            :class="p.side === 'w' ? 'white' : 'black'"
-            :style="place(p.sq)"
-            aria-hidden="true"
-          >{{ GLYPH[p.type] }}</span>
-          <svg v-if="arrow" class="arrow" viewBox="0 0 8 8" aria-hidden="true">
-            <defs>
-              <marker id="lesson-head" viewBox="0 0 4 4" refX="2" refY="2" markerWidth="3" markerHeight="3" orient="auto">
-                <path d="M0 0 L4 2 L0 4 Z" />
-              </marker>
-            </defs>
-            <line :x1="arrow.x1" :y1="arrow.y1" :x2="arrow.x2" :y2="arrow.y2" marker-end="url(#lesson-head)" />
-          </svg>
-        </div>
-      </div>
+      <ChessBoard
+        :pieces="pieces"
+        :move="move"
+        :label="`Position after ${move ? label(ply - 1, move) : 'the start'}`"
+      />
 
       <div class="panel">
         <p class="panel-move serif" aria-live="polite">
@@ -210,63 +165,11 @@ function togglePlay() {
   opacity: 0.8;
 }
 
-/* ---- Board ---- */
 .lesson-grid {
   display: grid;
   grid-template-columns: minmax(0, 480px) 1fr;
   gap: 48px;
   align-items: start;
-}
-.board {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  aspect-ratio: 1;
-  width: 100%;
-}
-.square {
-  background: var(--gold);
-}
-.square.light {
-  background: var(--yellow);
-}
-.square.hit {
-  box-shadow: inset 0 0 0 999px rgba(208, 0, 0, 0.2);
-}
-.piece {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 12.5%;
-  height: 12.5%;
-  display: grid;
-  place-items: center;
-  font-size: clamp(22px, 4.4vw, 42px);
-  line-height: 1;
-  font-family: 'Segoe UI Symbol', 'Noto Sans Symbols 2', 'DejaVu Sans', serif;
-  transition: transform 0.6s var(--ease);
-}
-.piece.white {
-  color: var(--navy);
-}
-.piece.black {
-  color: var(--red);
-}
-.arrow {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-.arrow line {
-  stroke: var(--red);
-  stroke-width: 0.14;
-  stroke-linecap: round;
-  opacity: 0.85;
-}
-.arrow path {
-  fill: var(--red);
 }
 
 /* ---- Panel ---- */

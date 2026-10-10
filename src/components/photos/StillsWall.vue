@@ -1,6 +1,16 @@
 <script setup>
 import { ref, computed, watch, onBeforeUnmount } from 'vue'
+import { RouterLink } from 'vue-router'
 import { stills } from '../../data/site.js'
+
+const props = defineProps({
+  // How many photos to hang: the home page shows a few, /photos shows all.
+  count: { type: Number, default: stills.length },
+  // Big page title, shown on /photos only.
+  heading: { type: String, default: '' },
+})
+const shown = computed(() => stills.slice(0, props.count))
+const hasMore = computed(() => props.count < stills.length)
 
 // Hung by hand like prints on a wall: columns on a 12-column grid, vertical offset in px
 // (negative overlaps the row above), tilt in degrees, stacking order. A 9th photo restarts the pattern.
@@ -20,7 +30,7 @@ const hang = (i) => {
 }
 
 const open = ref(-1)
-const current = computed(() => stills[open.value])
+const current = computed(() => shown.value[open.value])
 let lastFocus = null
 // Moves focus into the viewer when it opens, so the keyboard lands on Close.
 const vFocus = { mounted: (el) => el.focus() }
@@ -34,7 +44,7 @@ function close() {
   lastFocus?.focus()
 }
 function step(d) {
-  open.value = (open.value + d + stills.length) % stills.length
+  open.value = (open.value + d + shown.value.length) % shown.value.length
 }
 function onKey(e) {
   if (open.value < 0) return
@@ -56,12 +66,13 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <section id="stills" class="stills wrap block tone-yellow" data-tone="yellow">
-    <p class="kicker"><span>Stills</span><span>{{ String(stills.length).padStart(2, '0') }} frames</span></p>
+  <section id="photos" class="stills wrap block tone-yellow" data-tone="yellow">
+    <p class="kicker"><span>Photos</span><span>{{ String(stills.length).padStart(2, '0') }} frames</span></p>
+    <h1 v-if="heading" class="stills-heading serif">{{ heading }}</h1>
 
     <div class="wall">
       <!-- v-reveal moves the outer div; the tilt lives on the figure so the reveal does not erase it. -->
-      <div v-for="(s, i) in stills" :key="s.src" class="frame" :style="hang(i)" v-reveal>
+      <div v-for="(s, i) in shown" :key="s.src" class="frame" :style="hang(i)" v-reveal>
         <figure class="print">
           <button class="frame-open" :aria-label="`Open: ${s.alt}`" @click="show(i)">
             <img :src="s.src" :alt="s.alt" :style="{ aspectRatio: s.ratio }" loading="lazy" decoding="async" />
@@ -71,13 +82,17 @@ onBeforeUnmount(() => {
       </div>
     </div>
 
+    <RouterLink v-if="hasMore" to="/photos" class="stills-more serif">
+      See all {{ stills.length }} photos <span aria-hidden="true">→</span>
+    </RouterLink>
+
     <Teleport to="body">
       <transition name="viewer">
         <div v-if="current" class="viewer" role="dialog" aria-modal="true" :aria-label="current.alt" @click.self="close">
           <img :src="current.src" :alt="current.alt" class="viewer-img" />
           <p class="viewer-cap">
             <span class="serif">{{ current.place }}</span>
-            <span>{{ open + 1 }} / {{ stills.length }}</span>
+            <span>{{ open + 1 }} / {{ shown.length }}</span>
           </p>
           <button class="viewer-btn prev" aria-label="Previous photo" @click="step(-1)">←</button>
           <button class="viewer-btn next" aria-label="Next photo" @click="step(1)">→</button>
@@ -90,6 +105,27 @@ onBeforeUnmount(() => {
 
 
 <style scoped>
+.stills-heading {
+  font-size: clamp(64px, 12vw, 200px);
+  line-height: 0.86;
+  letter-spacing: -0.035em;
+  margin-bottom: 48px;
+}
+.stills-more {
+  display: inline-flex;
+  gap: 14px;
+  align-items: baseline;
+  font-size: clamp(32px, 4vw, 56px);
+  margin-top: 8px;
+  border-bottom: 3px solid var(--red);
+}
+.stills-more span {
+  color: var(--red);
+  transition: transform 0.5s var(--ease);
+}
+.stills-more:hover span {
+  transform: translateX(8px);
+}
 .wall {
   display: grid;
   grid-template-columns: repeat(12, 1fr);

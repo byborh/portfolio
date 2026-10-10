@@ -72,7 +72,7 @@ export const work = [
 ]
 
 export const more = [
-  { title: 'Datte', line: 'One backend core, any database', year: '2025', url: 'https://github.com/byborh/datte' },
+  { title: 'Datte', line: 'One backend core, any database · French Tech Tremplin 2025', year: '2025', url: 'https://github.com/byborh/datte' },
   { title: 'careerLauncher', line: '129 sourced hiring emails, open data', year: '2025', url: 'https://github.com/byborh/careerLauncher' },
   { title: 'Grenade', line: 'Serverless GraphQL voting, built in four days', year: '2025', url: 'https://github.com/byborh/grenade-backend' },
 ]
@@ -93,6 +93,7 @@ export const path = {
       media: { type: 'image', src: '/media/micro-sud.webp', alt: 'Micro-Sud website' },
     },
     { year: '2025', what: 'Co-founder & lead developer', where: 'Benomads', detail: 'Built a service that deploys a complete web app — front end, back end, database and domain — in under 7 seconds.' },
+    { year: '2025', what: 'French Tech Tremplin', where: 'With Datte', detail: 'Datte, my open-source backend core, was selected for the French Tech Tremplin 2025 programme.' },
     {
       year: '2025 —',
       what: 'Platform & Services Developer',
@@ -103,6 +104,7 @@ export const path = {
     { year: '2025 — 2028', what: 'Engineering degree', where: 'Junia ISEN, Bordeaux', detail: 'Computer software engineering, with 60% of the time in the company and 12+ weeks abroad.' },
   ],
   life: [
+    { year: '2021', what: '“I’m learning a Python"', where: 'Youtube, 21 August', detail: 'My first calculator on python.', quote: true },
     { year: '2023', what: '“I’m learning a git”', where: 'GitHub, 17 December', detail: 'My first repository. The start of the switch from machining to code.', quote: true },
     { year: '2024', what: 'Olympic volunteer', where: 'Paris 2024', detail: 'Two months with the organising committee of the Olympic and Paralympic Games.' },
     { year: '2025', what: 'Global Game Jam', where: 'Bordeaux', detail: 'A game in 48 hours with Godot, in a team of six. We worked in English: two teammates were Korean.' },
