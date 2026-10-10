@@ -22,7 +22,7 @@ onMounted(() => {
 onBeforeUnmount(() => clearInterval(timer))
 
 // Work screenshots and own photos alternate: code and camera, side by side.
-const frames = stills.map((s) => ({ type: 'image', src: s.src, alt: s.alt }))
+const frames = stills.map((s) => ({ type: 'image', src: s.src, alt: s.alt, ratio: s.ratio }))
 const mixed = work.flatMap((w, i) => (frames[i] ? [w.media, frames[i]] : [w.media]))
 // The strip is duplicated so the marquee loops without a visible seam.
 const strip = [...mixed, ...mixed]
@@ -41,7 +41,8 @@ const strip = [...mixed, ...mixed]
 
     <div class="strip" aria-hidden="true">
       <div class="strip-track">
-        <div v-for="(m, i) in strip" :key="i" class="strip-item">
+        <!-- Each frame keeps its file's shape: a portrait photo stays portrait, nothing is cropped. -->
+        <div v-for="(m, i) in strip" :key="i" class="strip-item" :style="{ aspectRatio: m.ratio }">
           <Media :media="m" eager />
         </div>
       </div>
@@ -98,7 +99,6 @@ const strip = [...mixed, ...mixed]
 }
 .strip-item {
   height: 100%;
-  aspect-ratio: 16 / 10;
   overflow: hidden;
   background: var(--well);
 }

@@ -196,8 +196,12 @@ onBeforeUnmount(() => {
   color: var(--yellow);
 }
 .viewer-img {
-  max-width: 100%;
-  max-height: 100%;
+  /* Bound by the viewport, not by the grid cell: a % height of an auto row does not apply,
+     and a 1600px photo would overflow and be cut at the top and bottom. */
+  max-width: calc(100vw - 144px);
+  max-height: calc(100dvh - 160px);
+  width: auto;
+  height: auto;
   object-fit: contain;
 }
 .viewer-cap {
@@ -275,6 +279,10 @@ onBeforeUnmount(() => {
   }
   .viewer {
     padding: 64px 12px 110px;
+  }
+  .viewer-img {
+    max-width: calc(100vw - 24px);
+    max-height: calc(100dvh - 190px);
   }
   .viewer-cap {
     left: 12px;

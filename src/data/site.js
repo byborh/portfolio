@@ -1,5 +1,6 @@
 // Facts come from RESEARCH.md and the LinkedIn profile. Keep each line short: the media tells the rest.
-// A media entry is { type: 'image' | 'video', src, alt, poster? }. Videos autoplay muted in a loop.
+// A media entry is { type: 'image' | 'video', src, alt, ratio, poster? }. ratio is the file's own shape:
+// every frame takes it, so nothing gets cropped. Videos autoplay muted in a loop.
 
 // Each project says who I was on it, what I did, and with what. Two short sentences, not one word.
 export const work = [
@@ -13,7 +14,7 @@ export const work = [
     ],
     stack: ['Next.js', 'TypeScript', 'Node.js'],
     url: 'https://lychee-studio.ai/',
-    media: { type: 'image', src: '/media/lychee-studio.webp', alt: 'Lychee Studio home page with a 3D samurai helmet' },
+    media: { type: 'image', src: '/media/lychee-studio.webp', alt: 'Lychee Studio home page with a 3D samurai helmet', ratio: '16 / 10' },
     size: 'full',
   },
   {
@@ -26,7 +27,7 @@ export const work = [
     ],
     stack: ['Google Analytics 4', 'Stripe', 'TypeScript'],
     url: 'https://3dgen.lychee.co/',
-    media: { type: 'image', src: '/media/lychee-gen.webp', alt: 'Lychee Gen home page with generated dragon models' },
+    media: { type: 'image', src: '/media/lychee-gen.webp', alt: 'Lychee Gen home page with generated dragon models', ratio: '16 / 10' },
     size: 'half',
   },
   {
@@ -40,7 +41,7 @@ export const work = [
     ],
     stack: ['Postman', 'Stripe'],
     url: 'https://lychee.co/resin-sla-msla-3d-printers',
-    media: { type: 'image', src: '/media/lychee.webp', alt: 'Lychee home page: the world’s number one 3D slicer, one million users' },
+    media: { type: 'image', src: '/media/lychee.webp', alt: 'Lychee home page: the world’s number one 3D slicer, one million users', ratio: '1898 / 938' },
     size: 'half',
   },
   {
@@ -53,7 +54,7 @@ export const work = [
     ],
     stack: ['Next.js 15', 'Drizzle', 'Neon', 'Vercel Blob'],
     url: 'https://micro-sud.vercel.app',
-    media: { type: 'image', src: '/media/micro-sud.webp', alt: 'Micro-Sud website: precision machining for aerospace and industry' },
+    media: { type: 'image', src: '/media/micro-sud.webp', alt: 'Micro-Sud website: precision machining for aerospace and industry', ratio: '16 / 10' },
     size: 'half',
   },
   {
@@ -66,7 +67,7 @@ export const work = [
     ],
     stack: ['Next.js 16', 'Drizzle', 'Turso', 'Claude API'],
     url: 'https://akjol-bay.vercel.app',
-    media: { type: 'image', src: '/media/akjol.webp', alt: 'AkJol home page: from your diploma to your options, everywhere' },
+    media: { type: 'image', src: '/media/akjol.webp', alt: 'AkJol home page: from your diploma to your options, everywhere', ratio: '16 / 10' },
     size: 'half',
   },
 ]
@@ -90,7 +91,7 @@ export const path = {
       what: 'Micro-Sud website',
       where: 'Freelance',
       detail: 'The site and back office of my former workshop, rebuilt until it shipped.',
-      media: { type: 'image', src: '/media/micro-sud.webp', alt: 'Micro-Sud website' },
+      media: { type: 'image', src: '/media/micro-sud.webp', alt: 'Micro-Sud website', ratio: '16 / 10' },
     },
     { year: '2025', what: 'Co-founder & lead developer', where: 'Benomads', detail: 'Built a service that deploys a complete web app — front end, back end, database and domain — in under 7 seconds.' },
     { year: '2025', what: 'French Tech Tremplin', where: 'With Datte', detail: 'Datte, my open-source backend core, was selected for the French Tech Tremplin 2025 programme.' },
@@ -99,35 +100,41 @@ export const path = {
       what: 'Platform & Services Developer',
       where: 'Mango3D, Bordeaux',
       detail: 'Apprenticeship. Full-stack features, analytics and payments for the Lychee products.',
-      media: { type: 'image', src: '/media/lychee-studio.webp', alt: 'Lychee Studio' },
+      media: { type: 'image', src: '/media/lychee-studio.webp', alt: 'Lychee Studio', ratio: '16 / 10' },
     },
     { year: '2025 — 2028', what: 'Engineering degree', where: 'Junia ISEN, Bordeaux', detail: 'Computer software engineering, with 60% of the time in the company and 12+ weeks abroad.' },
   ],
   life: [
     { year: '2021', what: '“I’m learning a Python"', where: 'Youtube, 21 August', detail: 'My first calculator on python.', quote: true },
     { year: '2023', what: '“I’m learning a git”', where: 'GitHub, 17 December', detail: 'My first repository. The start of the switch from machining to code.', quote: true },
-    { year: '2024', what: 'Olympic volunteer', where: 'Paris 2024', detail: 'Two months with the organising committee of the Olympic and Paralympic Games.' },
+    {
+      year: '2024',
+      what: 'Olympic volunteer',
+      where: 'Paris 2024',
+      detail: 'Two months with the organising committee of the Olympic and Paralympic Games.',
+      media: { type: 'image', src: '/media/photos/jo2024.jpg', alt: 'Paris 2024 volunteers around the Phryge mascot', ratio: '4 / 3' },
+    },
     { year: '2025', what: 'Global Game Jam', where: 'Bordeaux', detail: 'A game in 48 hours with Godot, in a team of six. We worked in English: two teammates were Korean.' },
     {
       year: '2025',
       what: 'First film',
       where: 'YouTube',
       detail: 'A month in the life of an engineering student in France.',
-      media: { type: 'image', src: '/media/films/vlog.jpg', alt: 'Thumbnail of the vlog' },
+      media: { type: 'image', src: '/media/films/vlog.jpg', alt: 'Thumbnail of the vlog', ratio: '16 / 9' },
     },
     {
       year: '2026',
       what: 'AkJol',
       where: 'Side project',
       detail: 'The study-path map I wish I had when I looked for a school.',
-      media: { type: 'image', src: '/media/akjol.webp', alt: 'AkJol' },
+      media: { type: 'image', src: '/media/akjol.webp', alt: 'AkJol', ratio: '16 / 10' },
     },
     {
       year: '2026',
       what: 'Ten minutes in Morocco',
       where: 'Film',
       detail: 'Marrakech and Casablanca. Pure image, no music.',
-      media: { type: 'image', src: '/media/photos/casablanca-mosque.webp', alt: 'The Hassan II Mosque in Casablanca at night' },
+      media: { type: 'image', src: '/media/photos/casablanca-mosque.webp', alt: 'The Hassan II Mosque in Casablanca at night', ratio: '3 / 4' },
     },
   ],
 }
@@ -271,12 +278,12 @@ export const camera = {
 }
 
 // Photography: own photos only (resized to WebP, metadata removed; originals in photos-original/, not deployed).
-// Photos with identifiable people are left out.
+// Photos with identifiable people are left out, except the Paris 2024 volunteers' group photo (the owner's choice).
 // Captions name only what the photo shows for sure — edit `place` where you know more.
 // ratio: aspect ratio of the frame. The wall layout lives in StillsBlock.vue.
 export const stills = [
   { src: '/media/photos/casablanca-mosque.webp', alt: 'The minaret and carved gate of the Hassan II Mosque at night', place: 'Casablanca', ratio: '3 / 4' },
-  { src: '/media/photos/giraffe.webp', alt: 'A giraffe’s head and neck against a blue sky with small clouds', place: 'Giraffe', ratio: '3 / 4' },
+  { src: '/media/photos/jo2024.jpg', alt: 'Paris 2024 volunteers in green uniforms posing around the Phryge mascot', place: 'Paris 2024', ratio: '4 / 3' },
   { src: '/media/photos/pool.webp', alt: 'An indoor swimming pool with lane ropes under a white roof frame', place: 'Lane four', ratio: '3 / 4' },
   { src: '/media/photos/pool-sunset.webp', alt: 'An outdoor pool at sunset beside a glass building', place: 'Last light', ratio: '3 / 4' },
   { src: '/media/photos/geneva.webp', alt: 'Lake Geneva with the Jet d’Eau, a paddle steamer and a Swiss flag', place: 'Geneva', ratio: '3 / 4' },

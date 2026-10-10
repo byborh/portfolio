@@ -57,7 +57,7 @@ function move(e) {
       v-if="canHover"
       class="preview"
       :class="{ on: preview }"
-      :style="{ transform: `translate(${pos.x + 48}px, ${pos.y - 94}px)` }"
+      :style="{ transform: `translate(${pos.x + 48}px, ${pos.y - 94}px)`, aspectRatio: preview ? preview.ratio : null }"
       aria-hidden="true"
     >
       <Media v-if="preview" :media="preview" />
@@ -128,8 +128,8 @@ function move(e) {
   top: 0;
   left: 0;
   z-index: 5;
-  width: 300px;
-  aspect-ratio: 16 / 10;
+  /* Width follows the shape: 300px wide for screenshots, narrower for portrait photos. */
+  height: 190px;
   overflow: hidden;
   pointer-events: none;
   opacity: 0;
