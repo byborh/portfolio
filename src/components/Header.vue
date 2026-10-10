@@ -3,19 +3,20 @@ import { ref, nextTick, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router'
 import { profile } from '../data/profile.js'
 
+// Same order as the page.
 const links = [
+  { href: '#about', label: 'About' },
   { href: '#work', label: 'Work' },
   { href: '#path', label: 'Path' },
   { href: '#films', label: 'Films' },
   { href: '#travel', label: 'Travel' },
   { href: '#off', label: 'Off hours' },
-  { href: '#about', label: 'About' },
 ]
 
 // The bar takes the tone of the section under it, so it stays readable on every colour.
 // It reads the section under the bar's middle line on each scroll frame: exact even after a long jump,
 // where an IntersectionObserver can report two sections at once and pick the wrong one.
-const BAR_MIDDLE = 28
+const BAR_MIDDLE = 30
 const tone = ref('yellow')
 const router = useRouter()
 let sections = []
@@ -65,11 +66,14 @@ onBeforeUnmount(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 56px;
-  font-size: 14px;
-  /* Transparent bar: only the text colour follows the tone. */
-  background: transparent;
-  transition: color 0.4s var(--ease);
+  height: 60px;
+  font-size: 15px;
+  /* Tinted glass: the section colour shows through, blurred, so the links stay readable over photos. */
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+  backdrop-filter: blur(14px) saturate(1.3);
+  -webkit-backdrop-filter: blur(14px) saturate(1.3);
+  border-bottom: 1px solid var(--rule);
+  transition: color 0.4s var(--ease), background-color 0.4s var(--ease);
 }
 .nav-name {
   font-weight: 500;
@@ -86,12 +90,12 @@ onBeforeUnmount(() => {
   }
   .nav-links {
     gap: 12px;
-    font-size: 13px;
+    font-size: 14px;
   }
-  /* Keep Work, Films, About and Email on phones. */
-  .nav-links a:nth-child(2),
-  .nav-links a:nth-child(4),
-  .nav-links a:nth-child(5) {
+  /* Keep About, Work, Films and Email on phones. */
+  .nav-links a:nth-child(3),
+  .nav-links a:nth-child(5),
+  .nav-links a:nth-child(6) {
     display: none;
   }
 }

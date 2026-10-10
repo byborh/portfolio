@@ -173,7 +173,7 @@ onBeforeUnmount(() => {
   justify-content: space-between;
   align-items: baseline;
   gap: 16px;
-  font-size: 14px;
+  font-size: 16px;
 }
 .viewer-cap .serif {
   font-size: 28px;

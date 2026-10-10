@@ -27,6 +27,14 @@
   --rule: rgba(0, 29, 61, 0.2);
   --well: var(--gold);
 }
+.tone-gold {
+  --accent: var(--red);
+  --bg: var(--gold);
+  --fg: var(--navy);
+  --dim: rgba(0, 29, 61, 0.76);
+  --rule: rgba(0, 29, 61, 0.22);
+  --well: var(--yellow);
+}
 .tone-navy {
   --accent: var(--red);
   --bg: var(--navy);
@@ -53,6 +61,7 @@
   --well: var(--navy);
 }
 .tone-yellow,
+.tone-gold,
 .tone-navy,
 .tone-blue,
 .tone-red {
@@ -78,8 +87,8 @@ body {
   background: var(--navy);
   color: var(--yellow);
   font-family: var(--sans);
-  font-size: 15px;
-  line-height: 1.55;
+  font-size: 16px;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -130,8 +139,8 @@ video {
   display: flex;
   justify-content: space-between;
   gap: 16px;
-  font-size: 12px;
-  letter-spacing: 0.04em;
+  font-size: 13px;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--dim);
   padding-bottom: 14px;

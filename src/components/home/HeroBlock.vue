@@ -31,15 +31,13 @@ const strip = [...mixed, ...mixed]
 <template>
   <section id="top" class="hero tone-yellow" data-tone="yellow">
     <div class="hero-meta wrap">
-      <span>{{ profile.role }}, {{ profile.company }}</span>
+      <span>Software Engineer Student - {{ profile.role }}, {{ profile.company }}</span>
       <span class="muted">{{ profile.location }} · {{ clock }}</span>
     </div>
 
     <h1 class="hero-name serif wrap">
       Beibarys<br /><em>Rakhymberdi</em>
     </h1>
-
-    <p class="hero-line wrap muted">Software Engineer Student - Master of None</p>
 
     <div class="strip" aria-hidden="true">
       <div class="strip-track">
@@ -64,7 +62,7 @@ const strip = [...mixed, ...mixed]
   display: flex;
   justify-content: space-between;
   gap: 16px;
-  font-size: 14px;
+  font-size: 16px;
 }
 .hero-meta span:last-child {
   white-space: nowrap;

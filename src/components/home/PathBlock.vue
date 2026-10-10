@@ -3,6 +3,11 @@ import { ref, onMounted } from 'vue'
 import Media from '../Media.vue'
 import { path } from '../../data/site.js'
 
+const tracks = [
+  { key: 'pro', title: 'Work & study', steps: path.pro },
+  { key: 'life', title: 'Life', steps: path.life },
+]
+
 // The preview follows the cursor, so it only makes sense on devices that hover.
 const canHover = ref(false)
 const preview = ref(null)
@@ -22,23 +27,31 @@ function move(e) {
 </script>
 
 <template>
-  <section id="path" class="path wrap block tone-yellow" data-tone="yellow">
+  <section id="path" class="path wrap block tone-gold" data-tone="gold">
     <p class="kicker"><span>Path</span><span>2021 — now</span></p>
 
-    <ol class="steps" @mousemove="move" @mouseleave="preview = null">
-      <li
-        v-for="(s, i) in path"
-        :key="i"
-        class="step"
-        :class="{ 'has-media': s.media }"
-        @mouseenter="show(s)"
-        v-reveal
-      >
-        <span class="step-year muted">{{ s.year }}</span>
-        <span class="step-what serif" :class="{ quote: s.quote }">{{ s.what }}</span>
-        <span class="step-where muted">{{ s.where }}</span>
-      </li>
-    </ol>
+    <div class="tracks" @mousemove="move" @mouseleave="preview = null">
+      <div v-for="t in tracks" :key="t.key" class="track">
+        <h3 class="track-title serif">{{ t.title }}</h3>
+        <ol class="steps">
+          <li
+            v-for="(s, i) in t.steps"
+            :key="i"
+            class="step"
+            :class="{ 'has-media': s.media }"
+            @mouseenter="show(s)"
+            v-reveal
+          >
+            <span class="step-year">{{ s.year }}</span>
+            <div class="step-body">
+              <p class="step-what serif" :class="{ quote: s.quote }">{{ s.what }}</p>
+              <p class="step-where">{{ s.where }}</p>
+              <p class="step-detail">{{ s.detail }}</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
 
     <div
       v-if="canHover"
@@ -53,24 +66,38 @@ function move(e) {
 </template>
 
 <style scoped>
+.tracks {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.track-title {
+  font-size: clamp(36px, 4.4vw, 64px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  padding-bottom: 18px;
+  border-bottom: 2px solid var(--fg);
+}
 
 .steps {
   list-style: none;
 }
 .step {
   display: grid;
-  grid-template-columns: 90px 1fr 1fr;
-  gap: 24px;
-  align-items: baseline;
-  padding: 14px 0;
+  grid-template-columns: 104px 1fr;
+  gap: 20px;
+  padding: 22px 0;
   border-bottom: 1px solid var(--rule);
 }
 .step-year {
-  font-size: 13px;
+  font-size: 15px;
   font-variant-numeric: tabular-nums;
+  color: var(--dim);
+  padding-top: 8px;
 }
 .step-what {
-  font-size: clamp(24px, 3vw, 40px);
+  font-size: clamp(26px, 2.6vw, 36px);
   line-height: 1.1;
   transition: transform 0.6s var(--ease), color 0.3s;
 }
@@ -78,12 +105,21 @@ function move(e) {
   font-style: italic;
 }
 .step-where {
-  font-size: 14px;
-  text-align: right;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-top: 6px;
+}
+.step-detail {
+  font-size: 17px;
+  line-height: 1.55;
+  margin-top: 10px;
+  max-width: 52ch;
 }
 .step.has-media:hover .step-what {
-  transform: translateX(10px);
-  /* Red on yellow is 4.0:1: fine at this size (large text needs 3:1). */
+  transform: translateX(8px);
+  /* Red on gold is 3.5:1: fine at this size (large text needs 3:1). */
   color: var(--red);
 }
 
@@ -98,19 +134,25 @@ function move(e) {
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.3s;
+  box-shadow: 0 24px 50px -20px rgba(0, 29, 61, 0.5);
 }
 .preview.on {
   opacity: 1;
 }
 
-@media (max-width: 760px) {
-  .step {
-    grid-template-columns: 52px 1fr;
-    gap: 2px 14px;
+@media (max-width: 960px) {
+  .tracks {
+    grid-template-columns: 1fr;
+    gap: 72px;
   }
-  .step-where {
-    grid-column: 2;
-    text-align: left;
+}
+@media (max-width: 520px) {
+  .step {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .step-year {
+    padding-top: 0;
   }
 }
 </style>

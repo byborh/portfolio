@@ -7,10 +7,10 @@ import { readFileSync, writeFileSync } from 'node:fs'
 const input = process.argv[2]
 if (!input) throw new Error('Usage: node scripts/build-map.mjs <countries.geojson>')
 
-// Europe and the Mediterranean: from Morocco to western Russia.
-const BOX = { west: -12, east: 46, south: 27, north: 63 }
+// From Morocco to the whole of Kazakhstan (46°E–87°E): Europe, the Mediterranean and Central Asia.
+const BOX = { west: -12, east: 90, south: 25, north: 63 }
 const UNITS_PER_DEGREE = 10
-const MIN_STEP = 0.4 // in map units
+const MIN_STEP = 0.6 // in map units: about 1 px on a full-width map
 // Shrink longitudes by cos(45°) so mid-latitude Europe keeps its usual shape.
 const LON_SCALE = Math.cos((45 * Math.PI) / 180)
 
@@ -51,13 +51,21 @@ function cutAt(a, b, axis, value) {
   return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t]
 }
 
-function ringPath(ring) {
-  const pts = []
-  for (const p of clip(ring).map(project)) {
-    const last = pts[pts.length - 1]
-    // Drop points closer than MIN_STEP to the previous one: invisible at this size, about a sixth off the file.
-    if (!last || Math.hypot(last[0] - p[0], last[1] - p[1]) >= MIN_STEP) pts.push(p)
+function thin(points, minStep) {
+  const out = []
+  for (const p of points) {
+    const last = out[out.length - 1]
+    if (!last || Math.hypot(last[0] - p[0], last[1] - p[1]) >= minStep) out.push(p)
   }
+  return out
+}
+
+function ringPath(ring) {
+  const projected = clip(ring).map(project)
+  // Drop points closer than MIN_STEP to the previous one: invisible at this size, and a much lighter file.
+  let pts = thin(projected, MIN_STEP)
+  // Microstates (Monaco) are smaller than MIN_STEP: keep their full outline instead of losing them.
+  if (pts.length < 3) pts = thin(projected, 0.01)
   if (pts.length < 3) return ''
   return `M${pts.map((p) => p.join(' ')).join('L')}Z`
 }

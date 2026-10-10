@@ -1,43 +1,70 @@
 // Facts come from RESEARCH.md and the LinkedIn profile. Keep each line short: the media tells the rest.
 // A media entry is { type: 'image' | 'video', src, alt, poster? }. Videos autoplay muted in a loop.
 
+// Each project says who I was on it, what I did, and with what. Two short sentences, not one word.
 export const work = [
   {
     title: 'Lychee Studio',
+    role: 'Full-stack developer · Mango3D',
     year: '2025 —',
-    line: 'AI 3D creation on one canvas. I build full-stack features in Next.js.',
+    did: [
+      'AI 3D creation on one shared canvas: images, 3D models and video from a prompt.',
+      'I build features across the front end and the back end of one Next.js app, and ship them in Scrum sprints.',
+    ],
+    stack: ['Next.js', 'TypeScript', 'Node.js'],
     url: 'https://lychee-studio.ai/',
     media: { type: 'image', src: '/media/lychee-studio.webp', alt: 'Lychee Studio home page with a 3D samurai helmet' },
     size: 'full',
   },
   {
     title: 'Lychee Gen',
+    role: 'Analytics & checkout · Mango3D',
     year: '2025 —',
-    line: 'From a prompt to a printable 3D model. I instrumented the checkout funnel.',
+    did: [
+      'Turns a prompt into a printable 3D model, for people with no modeling skills.',
+      'I instrumented the interface and the whole checkout funnel with GA4: the first reliable conversion rate.',
+    ],
+    stack: ['Google Analytics 4', 'Stripe', 'TypeScript'],
     url: 'https://3dgen.lychee.co/',
     media: { type: 'image', src: '/media/lychee-gen.webp', alt: 'Lychee Gen home page with generated dragon models' },
     size: 'half',
   },
   {
     title: 'Lychee Slicer',
+    role: 'QA & payments · Mango3D',
     year: '2025 —',
-    line: 'Resin 3D-printing slicer, 530,000+ users. Pre-release QA, Stripe flows.',
-    url: 'https://lychee.co/',
-    media: { type: 'image', src: '/media/lychee.webp', alt: 'Lychee Slicer product page with a T-rex model' },
+    did: [
+      // Figure from lychee.co (October 2026); LinkedIn still says 530,000+.
+      'The 3D-printing slicer, used by more than a million people.',
+      'I run the pre-release QA with Postman and validated the Stripe payment flows.',
+    ],
+    stack: ['Postman', 'Stripe'],
+    url: 'https://lychee.co/resin-sla-msla-3d-printers',
+    media: { type: 'image', src: '/media/lychee.webp', alt: 'Lychee home page: the world’s number one 3D slicer, one million users' },
     size: 'half',
   },
   {
     title: 'Micro-Sud',
+    role: 'Freelance · website & back office',
     year: '2024 — 2026',
-    line: 'Website and back office for the workshop where I used to measure parts.',
+    did: [
+      'Public site and admin panel for the precision-machining workshop where I worked as a metrology inspector.',
+      'Built three times — NestJS, then Express + Vue, then one Next.js app. The third one shipped.',
+    ],
+    stack: ['Next.js 15', 'Drizzle', 'Neon', 'Vercel Blob'],
     url: 'https://micro-sud.vercel.app',
     media: { type: 'image', src: '/media/micro-sud.webp', alt: 'Micro-Sud website: precision machining for aerospace and industry' },
     size: 'half',
   },
   {
     title: 'AkJol',
+    role: 'Personal project · education router',
     year: '2026',
-    line: '“White path” in Kazakh. It shows which study paths are open to you.',
+    did: [
+      '“White path” in Kazakh. Enter your diploma, languages and budget: see which study paths are open to you.',
+      'A rules engine for language levels and diploma equivalences, official French data, AI suggestions checked by a human.',
+    ],
+    stack: ['Next.js 16', 'Drizzle', 'Turso', 'Claude API'],
     url: 'https://akjol-bay.vercel.app',
     media: { type: 'image', src: '/media/akjol.webp', alt: 'AkJol home page: from your diploma to your options, everywhere' },
     size: 'half',
@@ -50,58 +77,77 @@ export const more = [
   { title: 'Grenade', line: 'Serverless GraphQL voting, built in four days', year: '2025', url: 'https://github.com/byborh/grenade-backend' },
 ]
 
-// Oldest first: the list reads as the path itself.
-export const path = [
-  { year: '2021', what: 'Metrology inspector', where: 'Micro-Sud, Bordeaux' },
-  { year: '2021', what: '“I\'m learning Python”', where: 'First chess game', quote: true },
-  { year: '2023', what: 'High School Diploma, machining', where: 'Vocational high school' },
-  { year: '2023', what: 'Associate Degree, computer science', where: 'Lycée Gustave Eiffel, Bordeaux' },
-  { year: '2024', what: 'Web developer', where: 'Snapp’, Bordeaux' },
-  { year: '2024', what: 'Volunteer', where: 'Paris 2024 Olympic Games' },
-  {
-    year: '2024',
-    what: 'Micro-Sud website',
-    where: 'Built three times',
-    media: { type: 'image', src: '/media/micro-sud.webp', alt: 'Micro-Sud website' },
-  },
-  
-  { year: '2025', what: 'Global Game Jam', where: '48 hours, Godot, team of six' },
-  { year: '2025', what: '24 heures d\'innovation', where: 'University of Bordeaux for Keolis' },
-  { year: '2025', what: 'Co-founder & Fullstack Lead Developer', where: 'Benomads & Datte' },
-  {
-    year: '2025',
-    what: 'Platform & Services Developer',
-    where: 'Mango3D, Bordeaux',
-    media: { type: 'image', src: '/media/lychee-studio.webp', alt: 'Lychee Studio' },
-  },
-  { year: '2025', what: 'Engineering student', where: 'Junia ISEN, Bordeaux' },
-  {
-    year: '2025',
-    what: 'First film',
-    where: 'A month as an engineering student',
-    media: { type: 'image', src: '/media/films/vlog.jpg', alt: 'Thumbnail of the vlog' },
-  },
-  {
-    year: '2026',
-    what: 'AkJol',
-    where: 'Study paths, open to all',
-    media: { type: 'image', src: '/media/akjol.webp', alt: 'AkJol' },
-  },
-  {
-    year: '2026',
-    what: 'Ten minutes in Morocco',
-    where: 'Film, no music',
-    media: { type: 'image', src: '/media/photos/casablanca-mosque.webp', alt: 'The Hassan II Mosque in Casablanca at night' },
-  },
-]
+// Two tracks, oldest first: what I studied and worked on, and what I lived on the side.
+// detail: one or two sentences. media: optional preview shown on hover.
+export const path = {
+  pro: [
+    { year: '2021 — 2024', what: 'Metrology inspector', where: 'Micro-Sud, Mérignac', detail: 'Inspected critical machined parts for aerospace clients with micrometers, calipers and coordinate measuring machines — during school holidays and internships.' },
+    { year: '2023', what: 'Bac Pro, machining', where: 'Vocational high school', detail: 'Trained as a machining technician: reading technical drawings, tolerances, production.' },
+    { year: '2023 — 2025', what: 'BTS SIO', where: 'Lycée Gustave Eiffel, Bordeaux', detail: 'Two-year degree in application development: algorithms, databases, web projects.' },
+    { year: '2024', what: 'Web developer', where: 'Snapp’, Bordeaux', detail: 'Five-week internship, then a contract: a responsive Vue.js and TypeScript front end for the Butterfly Packaging platform.' },
+    {
+      year: '2024 — 2026',
+      what: 'Micro-Sud website',
+      where: 'Freelance',
+      detail: 'The site and back office of my former workshop, rebuilt until it shipped.',
+      media: { type: 'image', src: '/media/micro-sud.webp', alt: 'Micro-Sud website' },
+    },
+    { year: '2025', what: 'Co-founder & lead developer', where: 'Benomads', detail: 'Built a service that deploys a complete web app — front end, back end, database and domain — in under 7 seconds.' },
+    {
+      year: '2025 —',
+      what: 'Platform & Services Developer',
+      where: 'Mango3D, Bordeaux',
+      detail: 'Apprenticeship. Full-stack features, analytics and payments for the Lychee products.',
+      media: { type: 'image', src: '/media/lychee-studio.webp', alt: 'Lychee Studio' },
+    },
+    { year: '2025 — 2028', what: 'Engineering degree', where: 'Junia ISEN, Bordeaux', detail: 'Computer software engineering, with 60% of the time in the company and 12+ weeks abroad.' },
+  ],
+  life: [
+    { year: '2023', what: '“I’m learning a git”', where: 'GitHub, 17 December', detail: 'My first repository. The start of the switch from machining to code.', quote: true },
+    { year: '2024', what: 'Olympic volunteer', where: 'Paris 2024', detail: 'Two months with the organising committee of the Olympic and Paralympic Games.' },
+    { year: '2025', what: 'Global Game Jam', where: 'Bordeaux', detail: 'A game in 48 hours with Godot, in a team of six. We worked in English: two teammates were Korean.' },
+    {
+      year: '2025',
+      what: 'First film',
+      where: 'YouTube',
+      detail: 'A month in the life of an engineering student in France.',
+      media: { type: 'image', src: '/media/films/vlog.jpg', alt: 'Thumbnail of the vlog' },
+    },
+    {
+      year: '2026',
+      what: 'AkJol',
+      where: 'Side project',
+      detail: 'The study-path map I wish I had when I looked for a school.',
+      media: { type: 'image', src: '/media/akjol.webp', alt: 'AkJol' },
+    },
+    {
+      year: '2026',
+      what: 'Ten minutes in Morocco',
+      where: 'Film',
+      detail: 'Marrakech and Casablanca. Pure image, no music.',
+      media: { type: 'image', src: '/media/photos/casablanca-mosque.webp', alt: 'The Hassan II Mosque in Casablanca at night' },
+    },
+  ],
+}
 
 export const about = {
+  intro: 'I’m Beibarys — a full-stack developer and engineering student in Bordeaux.',
   lines: [
     'I spent almost three years measuring aerospace parts at Micro-Sud. Then I learned to code.',
-    'Today I build Lychee at Mango3D and study engineering at Junia ISEN.',
+    'Today I build the Lychee 3D products at Mango3D, and I study software engineering at Junia ISEN.',
   ],
   open: 'Open to a 12-week engineering internship abroad, and to freelance work.',
 }
+
+// What I build with, by area.
+export const skills = [
+  { area: 'Languages', items: ['TypeScript', 'JavaScript', 'Python', 'Java', 'C', 'PHP', 'SQL'] },
+  { area: 'Front end', items: ['Vue.js', 'Next.js', 'React'] },
+  { area: 'Back end', items: ['Node.js', 'NestJS', 'Express', 'GraphQL', 'REST'] },
+  { area: 'Data', items: ['PostgreSQL', 'MySQL', 'Redis', 'SQLite / Turso', 'DynamoDB', 'Drizzle', 'TypeORM'] },
+  { area: 'Delivery', items: ['Docker', 'GitHub Actions', 'GitLab CI', 'Vercel', 'AWS Lambda'] },
+  { area: 'Product', items: ['Google Analytics 4', 'Stripe', 'Postman', 'Scrum'] },
+]
 
 // Off hours: shown as small experiences, not described.
 export const offHours = {
@@ -188,8 +234,6 @@ export const offHours = {
       },
     ],
   },
-  // Photos of your own paintings: { src, alt }. The gallery shows only when this list has items.
-  paintings: [],
 }
 
 // YouTube channel @kazakh_rh. Thumbnails are stored locally; the player loads only on click.
@@ -239,7 +283,7 @@ export const stills = [
   { src: '/media/photos/ramen.webp', alt: 'Two bowls of ramen, gyoza and fried chicken on a wooden table, seen from above', place: 'Ramen', ratio: '3 / 4' },
 ]
 
-// Countries visited, by Natural Earth ADM0_A3 code (see src/data/map.js). Test list for now.
+// Countries visited, by Natural Earth ADM0_A3 code (see src/data/map.js).
 export const travel = {
   visited: [
     { id: 'FRA', name: 'France' },
@@ -256,6 +300,7 @@ export const travel = {
     { id: 'TUR', name: 'Türkiye' },
     { id: 'RUS', name: 'Russia' },
     { id: 'MAR', name: 'Morocco' },
+    { id: 'KAZ', name: 'Kazakhstan' },
   ],
   // Too small to see as a shape at this scale: drawn as a dot as well.
   markers: ['AND', 'MCO', 'LUX'],

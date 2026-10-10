@@ -107,7 +107,7 @@ onBeforeUnmount(stop)
   justify-content: flex-end;
   align-items: baseline;
   gap: 8px;
-  font-size: 13px;
+  font-size: 15px;
   margin-bottom: 10px;
 }
 .race-time {
@@ -149,7 +149,7 @@ onBeforeUnmount(stop)
 .leg-pace {
   grid-area: pace;
   text-align: right;
-  font-size: 13px;
+  font-size: 15px;
   margin-top: 6px;
 }
 

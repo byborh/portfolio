@@ -1,11 +1,11 @@
 <script setup>
-import { profile, socials } from '../../data/profile.js'
-import { about } from '../../data/site.js'
+import { profile } from '../../data/profile.js'
+import { about, skills } from '../../data/site.js'
 </script>
 
 <template>
-  <section id="about" class="about wrap block tone-yellow" data-tone="yellow">
-    <p class="kicker"><span>About</span><span>{{ profile.languages.join(' · ') }}</span></p>
+  <section id="about" class="about wrap block tone-navy" data-tone="navy">
+    <p class="kicker"><span>About</span><span>{{ profile.location }}, France</span></p>
 
     <div class="about-grid">
       <img
@@ -17,29 +17,37 @@ import { about } from '../../data/site.js'
         loading="lazy"
       />
       <div>
-        <p v-for="l in about.lines" :key="l" class="about-line serif" v-reveal>{{ l }}</p>
-        <p class="about-open muted" v-reveal>{{ about.open }}</p>
+        <h2 class="about-intro serif" v-reveal>{{ about.intro }}</h2>
+        <p v-for="l in about.lines" :key="l" class="about-line" v-reveal>{{ l }}</p>
+        <p class="about-open" v-reveal><span class="dot" aria-hidden="true"></span>{{ about.open }}</p>
       </div>
     </div>
 
-    <div class="contact">
-      <a :href="`mailto:${profile.email}`" class="hello serif">Say hello <span class="hello-arrow">↗</span></a>
-      <div class="contact-links">
-        <a :href="`mailto:${profile.email}`" class="ulink">{{ profile.email }}</a>
-        <a v-for="s in socials" :key="s.label" :href="s.url" target="_blank" rel="noopener" class="ulink">
-          {{ s.label }}
-        </a>
-      </div>
+    <div class="skills">
+      <h3 class="skills-title serif">What I work with</h3>
+      <dl class="skills-grid">
+        <div v-for="g in skills" :key="g.area" class="skill" v-reveal>
+          <dt class="skill-area">{{ g.area }}</dt>
+          <dd class="skill-items">
+            <span v-for="item in g.items" :key="item" class="chip">{{ item }}</span>
+          </dd>
+        </div>
+        <div class="skill" v-reveal>
+          <dt class="skill-area">Speaks</dt>
+          <dd class="skill-items">
+            <span v-for="l in profile.languages" :key="l" class="chip">{{ l }}</span>
+          </dd>
+        </div>
+      </dl>
     </div>
   </section>
 </template>
 
 <style scoped>
-
 .about-grid {
   display: grid;
   grid-template-columns: 200px 1fr;
-  gap: 40px;
+  gap: 48px;
   align-items: start;
 }
 .about-photo {
@@ -48,53 +56,90 @@ import { about } from '../../data/site.js'
   height: auto;
   aspect-ratio: 1;
   object-fit: cover;
-  /* Grayscale multiplied on yellow gives a duotone portrait in the palette. */
-  filter: grayscale(1) contrast(1.1);
-  mix-blend-mode: multiply;
+  filter: grayscale(1) contrast(1.05);
+  border: 3px solid var(--yellow);
+}
+.about-intro {
+  font-size: clamp(34px, 4.6vw, 64px);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  max-width: 20ch;
+  margin-bottom: 28px;
 }
 .about-line {
-  font-size: clamp(26px, 3.4vw, 48px);
-  line-height: 1.12;
-  max-width: 24ch;
-  margin-bottom: 18px;
+  font-size: clamp(18px, 1.6vw, 21px);
+  line-height: 1.55;
+  max-width: 52ch;
+  margin-bottom: 12px;
 }
 .about-open {
-  font-size: 14px;
-  margin-top: 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  font-size: 16px;
+  color: var(--dim);
+}
+.dot {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--red);
+  box-shadow: 0 0 0 3px rgba(208, 0, 0, 0.25);
 }
 
-.contact {
-  margin-top: 140px;
+/* ---- Skills ---- */
+.skills {
+  margin-top: 96px;
 }
-.hello {
-  display: inline-block;
-  font-size: clamp(56px, 12vw, 200px);
-  line-height: 0.9;
-  letter-spacing: -0.03em;
+.skills-title {
+  font-size: clamp(30px, 3.4vw, 46px);
+  line-height: 1;
+  margin-bottom: 28px;
 }
-.hello-arrow {
-  display: inline-block;
-  color: var(--red);
-  transition: transform 0.6s var(--ease);
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 28px 40px;
 }
-.hello:hover .hello-arrow {
-  transform: translate(8px, -8px);
+.skill {
+  border-top: 1px solid var(--rule);
+  padding-top: 14px;
 }
-.contact-links {
+.skill-area {
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 12px;
+}
+.skill-items {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px 28px;
-  margin-top: 28px;
-  font-size: 14px;
+  gap: 8px;
+}
+.chip {
+  display: inline-block;
+  padding: 6px 12px;
+  border: 1px solid var(--rule);
+  font-size: 15px;
+  line-height: 1.2;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+}
+.chip:hover {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: var(--navy);
 }
 
 @media (max-width: 760px) {
   .about-grid {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 28px;
   }
   .about-photo {
-    width: 120px;
+    width: 140px;
   }
 }
 </style>

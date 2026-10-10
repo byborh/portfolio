@@ -6,7 +6,7 @@ const count = String(work.length).padStart(2, '0')
 </script>
 
 <template>
-  <section id="work" class="work wrap block tone-navy" data-tone="navy">
+  <section id="work" class="work wrap block tone-blue" data-tone="blue">
     <p class="kicker"><span>Selected work</span><span>({{ count }})</span></p>
 
     <div class="grid">
@@ -27,7 +27,9 @@ const count = String(work.length).padStart(2, '0')
           <h3 class="item-title serif">{{ w.title }}</h3>
           <span class="muted">{{ w.year }}</span>
         </div>
-        <p class="item-line muted">{{ w.line }}</p>
+        <p class="item-role">{{ w.role }}</p>
+        <p v-for="d in w.did" :key="d" class="item-line">{{ d }}</p>
+        <p class="item-stack muted">{{ w.stack.join(' · ') }}</p>
       </a>
     </div>
 
@@ -74,23 +76,35 @@ const count = String(work.length).padStart(2, '0')
   justify-content: space-between;
   align-items: baseline;
   gap: 16px;
-  margin-top: 16px;
-  font-size: 14px;
+  margin-top: 18px;
+  font-size: 16px;
 }
 .item-title {
-  font-size: clamp(24px, 2.4vw, 34px);
-  line-height: 1.1;
-  /* Red text on navy is under 3:1, so red shows as the hover underline instead. */
+  font-size: clamp(30px, 3vw, 44px);
+  line-height: 1.05;
+  /* Red text on blue is under 3:1, so red shows as the hover underline instead. */
   background: linear-gradient(var(--red), var(--red)) 0 100% / 0 3px no-repeat;
   transition: background-size 0.5s var(--ease);
 }
 .item:hover .item-title {
   background-size: 100% 3px;
 }
+.item-role {
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin: 6px 0 12px;
+}
 .item-line {
-  font-size: 14px;
-  margin-top: 4px;
-  max-width: 52ch;
+  font-size: 17px;
+  line-height: 1.55;
+  margin-top: 6px;
+  max-width: 58ch;
+}
+.item-stack {
+  font-size: 15px;
+  margin-top: 14px;
 }
 
 .more {
@@ -105,14 +119,14 @@ const count = String(work.length).padStart(2, '0')
   align-items: baseline;
   padding: 18px 0;
   border-bottom: 1px solid var(--rule);
-  font-size: 14px;
+  font-size: 16px;
   transition: padding 0.5s var(--ease);
 }
 .more-row:hover {
   padding-left: 10px;
 }
 .more-title {
-  font-size: 24px;
+  font-size: 28px;
 }
 
 @media (max-width: 760px) {

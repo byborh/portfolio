@@ -2,7 +2,7 @@
 import { ref, defineAsyncComponent } from 'vue'
 import { travel } from '../../data/site.js'
 
-// The map data (≈ 50 KB gzipped) loads in its own chunk, after the first screen.
+// The map data (≈ 70 KB gzipped) loads in its own chunk, after the first screen.
 const TravelMap = defineAsyncComponent(() => import('../travel/TravelMap.vue'))
 
 const active = ref('')
@@ -10,27 +10,25 @@ const active = ref('')
 
 <template>
   <section id="travel" class="travel wrap block tone-navy" data-tone="navy">
-    <p class="kicker"><span>Travel</span><span>Europe & around</span></p>
+    <p class="kicker"><span>Travel</span><span>From Morocco to Kazakhstan</span></p>
+
+    <div class="travel-map">
+      <TravelMap :visited="travel.visited" :markers="travel.markers" :active="active" @hover="active = $event" />
+    </div>
 
     <div class="travel-grid">
-      <div class="travel-side">
-        <p class="count serif">
-          {{ travel.visited.length }}<span class="count-unit">countries</span>
-        </p>
-        <ul class="countries" @mouseleave="active = ''">
-          <li
-            v-for="c in travel.visited"
-            :key="c.id"
-            class="country serif"
-            :class="{ on: active === c.id }"
-            @mouseenter="active = c.id"
-          >{{ c.name }}</li>
-        </ul>
-      </div>
-
-      <div class="travel-map">
-        <TravelMap :visited="travel.visited" :markers="travel.markers" :active="active" @hover="active = $event" />
-      </div>
+      <p class="count serif">
+        {{ travel.visited.length }}<span class="count-unit">countries</span>
+      </p>
+      <ul class="countries" @mouseleave="active = ''">
+        <li
+          v-for="c in travel.visited"
+          :key="c.id"
+          class="country serif"
+          :class="{ on: active === c.id }"
+          @mouseenter="active = c.id"
+        >{{ c.name }}</li>
+      </ul>
     </div>
   </section>
 </template>
@@ -38,9 +36,10 @@ const active = ref('')
 <style scoped>
 .travel-grid {
   display: grid;
-  grid-template-columns: minmax(240px, 1fr) 2.2fr;
+  grid-template-columns: minmax(200px, 1fr) 3fr;
   gap: 56px;
   align-items: start;
+  margin-top: 48px;
 }
 
 .count {
@@ -59,9 +58,8 @@ const active = ref('')
 
 .countries {
   list-style: none;
-  columns: 2;
-  column-gap: 24px;
-  margin-top: 40px;
+  columns: 3;
+  column-gap: 32px;
 }
 .country {
   font-size: 24px;
@@ -79,10 +77,10 @@ const active = ref('')
 @media (max-width: 860px) {
   .travel-grid {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 28px;
   }
-  .travel-map {
-    order: -1;
+  .countries {
+    columns: 2;
   }
 }
 </style>

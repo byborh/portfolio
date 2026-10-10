@@ -193,7 +193,7 @@ function togglePlay() {
   background: transparent;
   color: var(--fg);
   font: inherit;
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer;
   transition: background 0.3s, color 0.3s, border-color 0.3s;
 }
@@ -206,7 +206,7 @@ function togglePlay() {
   color: var(--navy);
 }
 .line-tag {
-  font-size: 12px;
+  font-size: 13px;
   opacity: 0.8;
 }
 
@@ -296,7 +296,7 @@ function togglePlay() {
   background: transparent;
   color: var(--dim);
   font: inherit;
-  font-size: 14px;
+  font-size: 15px;
   font-variant-numeric: tabular-nums;
   cursor: pointer;
 }
@@ -344,7 +344,7 @@ function togglePlay() {
 }
 .counter {
   margin-left: 8px;
-  font-size: 13px;
+  font-size: 15px;
   font-variant-numeric: tabular-nums;
 }
 

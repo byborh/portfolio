@@ -15,7 +15,7 @@ const year = new Date().getFullYear()
 .foot {
   display: flex;
   justify-content: space-between;
-  font-size: 13px;
+  font-size: 15px;
   padding-block: 28px;
   color: var(--dim);
 }
