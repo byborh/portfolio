@@ -72,10 +72,30 @@ export const work = [
   },
 ]
 
+// Projects without a picture: same story as the others — role, what I did, stack.
 export const more = [
-  { title: 'Datte', line: 'One backend core, any database · French Tech Tremplin 2025', year: '2025', url: 'https://github.com/byborh/datte' },
-  { title: 'careerLauncher', line: '129 sourced hiring emails, open data', year: '2025', url: 'https://github.com/byborh/careerLauncher' },
-  { title: 'Grenade', line: 'Serverless GraphQL voting, built in four days', year: '2025', url: 'https://github.com/byborh/grenade-backend' },
+  {
+    title: 'Datte',
+    role: 'Open source · backend core',
+    year: '2025',
+    did: [
+      'Every new project starts with the same backend: users, roles, auth, database. Datte writes it once, and one environment variable picks the database — MySQL, PostgreSQL, MariaDB, SQLite, MSSQL, Redis or MongoDB.',
+      'ES256 JWT auth, PBKDF2 password hashing, one Docker Compose file per engine. Selected for the French Tech Tremplin 2025 programme.',
+    ],
+    stack: ['TypeScript', 'Express', 'TypeORM', 'Redis', 'MongoDB', 'Docker'],
+    url: 'https://github.com/byborh/datte',
+  },
+  {
+    title: 'careerLauncher',
+    role: 'Open source · open data',
+    year: '2025 — 2026',
+    did: [
+      'Students pay for contact lists or guess addresses. careerLauncher is a free list of 129 public hiring emails at tech companies, each with its source and a verification date.',
+      'A local-first web app tracks applications and fills email templates. It cannot send bulk email, by design.',
+    ],
+    stack: ['JavaScript', 'PWA', 'Firebase', 'GitHub Actions'],
+    url: 'https://github.com/byborh/careerLauncher',
+  },
 ]
 
 // Two tracks, oldest first: what I studied and worked on, and what I lived on the side.
@@ -83,7 +103,7 @@ export const more = [
 export const path = {
   pro: [
     { year: '2021 — 2024', what: 'Metrology inspector', where: 'Micro-Sud, Mérignac', detail: 'Inspected critical machined parts for aerospace clients with micrometers, calipers and coordinate measuring machines — during school holidays and internships.' },
-    { year: '2023', what: 'Bac Pro, machining', where: 'Vocational high school', detail: 'Trained as a machining technician: reading technical drawings, tolerances, production.' },
+    { year: '2020 — 2023', what: 'Bac Pro, machining', where: 'Vocational high school', detail: 'Trained as a machining technician: reading technical drawings, tolerances, production.' },
     { year: '2023 — 2025', what: 'BTS SIO', where: 'Lycée Gustave Eiffel, Bordeaux', detail: 'Two-year degree in application development: algorithms, databases, web projects.' },
     { year: '2024', what: 'Web developer', where: 'Snapp’, Bordeaux', detail: 'Five-week internship, then a contract: a responsive Vue.js and TypeScript front end for the Butterfly Packaging platform.' },
     {
@@ -146,6 +166,17 @@ export const about = {
     'Today I build the Lychee 3D products at Mango3D, and I study software engineering at Junia ISEN.',
   ],
   open: 'Open to a 12-week engineering internship abroad, and to freelance work.',
+}
+
+// /about-me: the person behind the work. Facts only: roots, languages, what fills the free time.
+export const aboutMe = {
+  title: 'About me',
+  lines: [
+    'Kazakh roots, Bordeaux life. I speak French, Kazakh, Russian and English.',
+    'Outside work I swim, bike and run, I play chess, and I film and photograph what I see.',
+  ],
+  // The red band on the home page that leads here.
+  teaser: ['Films', 'Travel', 'Photos', 'Triathlon', 'Chess'],
 }
 
 // What I build with, by area.

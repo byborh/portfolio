@@ -3,8 +3,10 @@ import Home from '../components/Home.vue'
 
 const routes = [
   { path: '/', name: 'home', component: Home },
-  { path: '/photos', name: 'photos', component: () => import('../pages/PhotosPage.vue') },
+  { path: '/about-me', name: 'about-me', component: () => import('../pages/AboutMePage.vue') },
   { path: '/chess', name: 'chess', component: () => import('../pages/ChessPage.vue') },
+  // The photos moved into /about-me.
+  { path: '/photos', redirect: { path: '/about-me', hash: '#photos' } },
   // Old /projects and /contact links land on the home page.
   { path: '/:pathMatch(.*)*', redirect: '/' },
 ]

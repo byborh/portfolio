@@ -1,28 +1,23 @@
 <script setup>
 import HeroBlock from './home/HeroBlock.vue'
-import AboutBlock from './home/AboutBlock.vue'
+import ProfileBlock from './home/ProfileBlock.vue'
 import WorkBlock from './home/WorkBlock.vue'
 import PathBlock from './home/PathBlock.vue'
-import CameraBlock from './home/CameraBlock.vue'
-import TravelBlock from './home/TravelBlock.vue'
-import StillsWall from './photos/StillsWall.vue'
-import OffHoursBlock from './home/OffHoursBlock.vue'
+import BeyondTeaser from './home/BeyondTeaser.vue'
 import ContactBlock from './home/ContactBlock.vue'
+import { path } from '../data/site.js'
 </script>
 
-<!-- Tones alternate so no two neighbours share a colour:
-     yellow · navy · blue · gold · red · navy · yellow · blue · yellow · (footer) navy
-     Photos and chess show a teaser here; the full versions live on /photos and /chess. -->
+<!-- Professional only. The personal side lives on /about-me; the red band leads there.
+     Tones alternate so no two neighbours share a colour:
+     yellow · navy · blue · gold · red · yellow · (footer) navy -->
 <template>
   <main>
     <HeroBlock />
-    <AboutBlock />
+    <ProfileBlock />
     <WorkBlock />
-    <PathBlock />
-    <CameraBlock />
-    <TravelBlock />
-    <StillsWall :count="3" />
-    <OffHoursBlock />
+    <PathBlock id="path" kicker="Path" title="Work & study" tone="gold" :steps="path.pro" />
+    <BeyondTeaser />
     <ContactBlock />
   </main>
 </template>

@@ -4,8 +4,8 @@ import { about, skills } from '../../data/site.js'
 </script>
 
 <template>
-  <section id="about" class="about wrap block tone-navy" data-tone="navy">
-    <p class="kicker"><span>About</span><span>{{ profile.location }}, France</span></p>
+  <section id="profile" class="profile wrap block tone-navy" data-tone="navy">
+    <p class="kicker"><span>Profile</span><span>{{ profile.location }}, France</span></p>
 
     <div class="about-grid">
       <img

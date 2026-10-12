@@ -3,15 +3,13 @@ import { ref, nextTick, watch, onMounted, onBeforeUnmount } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import { profile } from '../data/profile.js'
 
-// Home sections in page order, then the two separate pages. Router links work from any page.
+// Professional sections of the home page, then the personal page. Router links work from any page.
 const links = [
-  { to: { path: '/', hash: '#about' }, label: 'About' },
+  { to: { path: '/', hash: '#profile' }, label: 'Profile' },
   { to: { path: '/', hash: '#work' }, label: 'Work' },
   { to: { path: '/', hash: '#path' }, label: 'Path' },
-  { to: { path: '/', hash: '#films' }, label: 'Films' },
-  { to: { path: '/', hash: '#travel' }, label: 'Travel' },
-  { to: '/photos', label: 'Photos' },
-  { to: '/chess', label: 'Chess' },
+  { to: { path: '/', hash: '#contact' }, label: 'Contact' },
+  { to: '/about-me', label: 'About me', page: true },
 ]
 
 // The bar takes the tone of the section under it, so it stays readable on every colour.
@@ -65,7 +63,7 @@ onBeforeUnmount(() => {
   <header class="nav wrap" :class="`tone-${tone}`">
     <RouterLink to="/" class="nav-name">{{ profile.name }}</RouterLink>
     <nav class="nav-links" aria-label="Main">
-      <RouterLink v-for="l in links" :key="l.label" :to="l.to" class="ulink">{{ l.label }}</RouterLink>
+      <RouterLink v-for="l in links" :key="l.label" :to="l.to" class="ulink" :class="{ page: l.page }">{{ l.label }}</RouterLink>
       <a :href="`mailto:${profile.email}`" class="ulink">Email</a>
     </nav>
   </header>
@@ -91,6 +89,10 @@ onBeforeUnmount(() => {
 .nav-name {
   font-weight: 500;
 }
+.page {
+  padding-left: 22px;
+  border-left: 1px solid var(--rule);
+}
 .nav-links {
   display: flex;
   gap: 22px;
@@ -105,11 +107,10 @@ onBeforeUnmount(() => {
     gap: 12px;
     font-size: 14px;
   }
-  /* Keep About, Work, Photos and Email on phones. */
+  /* Keep Work, About me and Email on phones. */
+  .nav-links a:nth-child(1),
   .nav-links a:nth-child(3),
-  .nav-links a:nth-child(4),
-  .nav-links a:nth-child(5),
-  .nav-links a:nth-child(7) {
+  .nav-links a:nth-child(4) {
     display: none;
   }
 }

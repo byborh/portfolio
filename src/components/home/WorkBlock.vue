@@ -33,15 +33,27 @@ const count = String(work.length).padStart(2, '0')
       </a>
     </div>
 
-    <ul class="more">
-      <li v-for="m in more" :key="m.title" v-reveal>
-        <a :href="m.url" target="_blank" rel="noopener" class="more-row">
-          <span class="more-title serif">{{ m.title }}</span>
-          <span class="more-line muted">{{ m.line }}</span>
-          <span class="muted">{{ m.year }} ↗</span>
-        </a>
-      </li>
-    </ul>
+    <!-- Same reading as the cards above; a thick rule stands in for the picture. -->
+    <div class="grid more">
+      <a
+        v-for="m in more"
+        :key="m.title"
+        :href="m.url"
+        target="_blank"
+        rel="noopener"
+        class="item text-item"
+        v-reveal
+      >
+        <p class="item-source">GitHub <span aria-hidden="true">↗</span></p>
+        <div class="item-meta">
+          <h3 class="item-title serif">{{ m.title }}</h3>
+          <span class="muted">{{ m.year }}</span>
+        </div>
+        <p class="item-role">{{ m.role }}</p>
+        <p v-for="d in m.did" :key="d" class="item-line">{{ d }}</p>
+        <p class="item-stack muted">{{ m.stack.join(' · ') }}</p>
+      </a>
+    </div>
   </section>
 </template>
 
@@ -108,25 +120,18 @@ const count = String(work.length).padStart(2, '0')
 }
 
 .more {
-  list-style: none;
   margin-top: 80px;
-  border-top: 1px solid var(--rule);
 }
-.more-row {
-  display: grid;
-  grid-template-columns: 1fr 2fr auto;
-  gap: 24px;
-  align-items: baseline;
-  padding: 18px 0;
-  border-bottom: 1px solid var(--rule);
-  font-size: 16px;
-  transition: padding 0.5s var(--ease);
+.item-source {
+  padding-top: 14px;
+  border-top: 6px solid var(--fg);
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--dim);
 }
-.more-row:hover {
-  padding-left: 10px;
-}
-.more-title {
-  font-size: 28px;
+.text-item:hover .item-source {
+  border-top-color: var(--red);
 }
 
 @media (max-width: 760px) {
@@ -136,14 +141,6 @@ const count = String(work.length).padStart(2, '0')
   }
   .item.full .item-media {
     aspect-ratio: 16 / 10;
-  }
-  .more-row {
-    grid-template-columns: 1fr auto;
-    gap: 4px 16px;
-  }
-  .more-line {
-    grid-column: 1 / -1;
-    grid-row: 2;
   }
 }
 </style>

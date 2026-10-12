@@ -2,7 +2,7 @@
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import Media from '../Media.vue'
 import { profile } from '../../data/profile.js'
-import { work, stills } from '../../data/site.js'
+import { work } from '../../data/site.js'
 
 const clock = ref('')
 let timer
@@ -21,11 +21,9 @@ onMounted(() => {
 })
 onBeforeUnmount(() => clearInterval(timer))
 
-// Work screenshots and own photos alternate: code and camera, side by side.
-const frames = stills.map((s) => ({ type: 'image', src: s.src, alt: s.alt, ratio: s.ratio }))
-const mixed = work.flatMap((w, i) => (frames[i] ? [w.media, frames[i]] : [w.media]))
+// The home page is professional: the strip shows the work only. Photos live on /about-me.
 // The strip is duplicated so the marquee loops without a visible seam.
-const strip = [...mixed, ...mixed]
+const strip = [...work.map((w) => w.media), ...work.map((w) => w.media)]
 </script>
 
 <template>

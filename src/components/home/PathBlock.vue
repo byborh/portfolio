@@ -1,12 +1,16 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import Media from '../Media.vue'
-import { path } from '../../data/site.js'
 
-const tracks = [
-  { key: 'pro', title: 'Work & study', steps: path.pro },
-  { key: 'life', title: 'Life', steps: path.life },
-]
+// One track of the path: the home page shows work & study, /about-me shows life.
+defineProps({
+  id: { type: String, required: true },
+  kicker: { type: String, required: true },
+  title: { type: String, required: true },
+  tone: { type: String, required: true },
+  // [{ year, what, where, detail, quote?, media? }]
+  steps: { type: Array, required: true },
+})
 
 // The preview follows the cursor, so it only makes sense on devices that hover.
 const canHover = ref(false)
@@ -27,31 +31,27 @@ function move(e) {
 </script>
 
 <template>
-  <section id="path" class="path wrap block tone-gold" data-tone="gold">
-    <p class="kicker"><span>Path</span><span>2021 — now</span></p>
+  <section :id="id" class="path wrap block" :class="`tone-${tone}`" :data-tone="tone">
+    <p class="kicker"><span>{{ kicker }}</span><span>{{ steps[0].year.slice(0, 4) }} — now</span></p>
+    <h2 class="path-title serif">{{ title }}</h2>
 
-    <div class="tracks" @mousemove="move" @mouseleave="preview = null">
-      <div v-for="t in tracks" :key="t.key" class="track">
-        <h3 class="track-title serif">{{ t.title }}</h3>
-        <ol class="steps">
-          <li
-            v-for="(s, i) in t.steps"
-            :key="i"
-            class="step"
-            :class="{ 'has-media': s.media }"
-            @mouseenter="show(s)"
-            v-reveal
-          >
-            <span class="step-year">{{ s.year }}</span>
-            <div class="step-body">
-              <p class="step-what serif" :class="{ quote: s.quote }">{{ s.what }}</p>
-              <p class="step-where">{{ s.where }}</p>
-              <p class="step-detail">{{ s.detail }}</p>
-            </div>
-          </li>
-        </ol>
-      </div>
-    </div>
+    <ol class="steps" @mousemove="move" @mouseleave="preview = null">
+      <li
+        v-for="(s, i) in steps"
+        :key="i"
+        class="step"
+        :class="{ 'has-media': s.media }"
+        @mouseenter="show(s)"
+        v-reveal
+      >
+        <span class="step-year">{{ s.year }}</span>
+        <div class="step-head">
+          <p class="step-what serif" :class="{ quote: s.quote }">{{ s.what }}</p>
+          <p class="step-where">{{ s.where }}</p>
+        </div>
+        <p class="step-detail">{{ s.detail }}</p>
+      </li>
+    </ol>
 
     <div
       v-if="canHover"
@@ -66,35 +66,30 @@ function move(e) {
 </template>
 
 <style scoped>
-.tracks {
-  display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  gap: 64px;
-  align-items: start;
-}
-.track-title {
-  font-size: clamp(36px, 4.4vw, 64px);
-  line-height: 1;
-  letter-spacing: -0.02em;
-  padding-bottom: 18px;
-  border-bottom: 2px solid var(--fg);
+.path-title {
+  font-size: clamp(44px, 6vw, 88px);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  margin-bottom: 32px;
 }
 
 .steps {
   list-style: none;
+  border-top: 2px solid var(--fg);
 }
+/* Year | title and place | what happened: one line per step, read across. */
 .step {
   display: grid;
-  grid-template-columns: 104px 1fr;
-  gap: 20px;
-  padding: 22px 0;
+  grid-template-columns: 120px minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: 28px;
+  align-items: baseline;
+  padding: 24px 0;
   border-bottom: 1px solid var(--rule);
 }
 .step-year {
   font-size: 15px;
   font-variant-numeric: tabular-nums;
   color: var(--dim);
-  padding-top: 8px;
 }
 .step-what {
   font-size: clamp(26px, 2.6vw, 36px);
@@ -114,12 +109,10 @@ function move(e) {
 .step-detail {
   font-size: 17px;
   line-height: 1.55;
-  margin-top: 10px;
-  max-width: 52ch;
 }
+/* Red reaches 3:1 or more on the yellow and gold tones: fine at this size. */
 .step.has-media:hover .step-what {
   transform: translateX(8px);
-  /* Red on gold is 3.5:1: fine at this size (large text needs 3:1). */
   color: var(--red);
 }
 
@@ -140,19 +133,21 @@ function move(e) {
   opacity: 1;
 }
 
-@media (max-width: 960px) {
-  .tracks {
-    grid-template-columns: 1fr;
-    gap: 72px;
+@media (max-width: 900px) {
+  .step {
+    grid-template-columns: 90px 1fr;
+    gap: 8px 20px;
+  }
+  .step-detail {
+    grid-column: 2;
   }
 }
 @media (max-width: 520px) {
   .step {
     grid-template-columns: 1fr;
-    gap: 4px;
   }
-  .step-year {
-    padding-top: 0;
+  .step-detail {
+    grid-column: 1;
   }
 }
 </style>
