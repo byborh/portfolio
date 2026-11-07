@@ -2,6 +2,9 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import './assets/main.css'
+import { startPaletteRotation } from './lib/palette.js'
+
+startPaletteRotation()
 
 const app = createApp(App)
 

@@ -127,7 +127,7 @@ function move(e) {
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.3s;
-  box-shadow: 0 24px 50px -20px rgba(0, 29, 61, 0.5);
+  box-shadow: 0 24px 50px -20px color-mix(in srgb, var(--navy) 50%, transparent);
 }
 .preview.on {
   opacity: 1;

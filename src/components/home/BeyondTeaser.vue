@@ -79,7 +79,7 @@ const peek = stills.slice(0, TILTS.length).map((s, i) => ({ ...s, tilt: TILTS[i]
   height: auto;
   object-fit: cover;
   transform: rotate(var(--tilt));
-  box-shadow: 0 24px 50px -24px rgba(0, 29, 61, 0.7);
+  box-shadow: 0 24px 50px -24px color-mix(in srgb, var(--navy) 70%, transparent);
   border: 6px solid var(--yellow);
   transition: transform 0.7s var(--ease);
 }

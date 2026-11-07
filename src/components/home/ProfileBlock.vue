@@ -86,7 +86,7 @@ import { about, skills } from '../../data/site.js'
   height: 10px;
   border-radius: 50%;
   background: var(--red);
-  box-shadow: 0 0 0 3px rgba(208, 0, 0, 0.25);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--red) 25%, transparent);
 }
 
 /* ---- Skills ---- */

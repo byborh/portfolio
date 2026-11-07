@@ -124,11 +124,11 @@ onBeforeUnmount(() => {
   background: var(--well);
   overflow: hidden;
   cursor: zoom-in;
-  box-shadow: 0 26px 50px -26px rgba(0, 29, 61, 0.55);
+  box-shadow: 0 26px 50px -26px color-mix(in srgb, var(--navy) 55%, transparent);
   transition: box-shadow 0.7s var(--ease);
 }
 .frame:hover .frame-open {
-  box-shadow: 0 40px 70px -30px rgba(0, 29, 61, 0.6);
+  box-shadow: 0 40px 70px -30px color-mix(in srgb, var(--navy) 60%, transparent);
 }
 .frame-open img {
   width: 100%;
@@ -156,7 +156,7 @@ onBeforeUnmount(() => {
   display: grid;
   place-items: center;
   padding: 64px 72px 96px;
-  background: rgba(0, 29, 61, 0.96);
+  background: color-mix(in srgb, var(--navy) 96%, transparent);
   color: var(--yellow);
 }
 .viewer-img {

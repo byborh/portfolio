@@ -1,20 +1,41 @@
 /* =========================================================================
    Beibarys Rakhymberdi — portfolio
-   Palette "Sunset Splash". Yellow leads, navy grounds, red marks.
+   Yellow leads, navy grounds, red marks.
+   src/data/palettes.js holds the 3 base colors. JS writes them on :root.
    ========================================================================= */
 
+/* Registration lets the browser interpolate the base colors when the palette changes.
+   The initial value never shows: JS sets the first palette before Vue mounts. */
+@property --red {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: transparent;
+}
+@property --blue {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: transparent;
+}
+@property --yellow {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: transparent;
+}
+
 :root {
-  --red: #d00000;
-  --navy: #001d3d;
-  --blue: #003566;
-  --gold: #ffc300;
-  --yellow: #ffd60a;
+  /* Navy is a deeper blue. Gold is yellow warmed by the red. */
+  --navy: color-mix(in srgb, var(--blue), black 43%);
+  --gold: color-mix(in srgb, var(--yellow), var(--red) 9%);
 
   --serif: 'Instrument Serif', 'Times New Roman', serif;
   --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
   --gutter: clamp(16px, 4vw, 48px);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+/* palette.js adds this class after the first palette, so the page does not fade in from transparent. */
+:root.palette-live {
+  transition: --red 1.2s var(--ease), --blue 1.2s var(--ease), --yellow 1.2s var(--ease);
 }
 
 /* Each section picks a tone. Components only read --bg / --fg / --dim / --rule / --well.
@@ -23,41 +44,41 @@
   --accent: var(--red);
   --bg: var(--yellow);
   --fg: var(--navy);
-  --dim: rgba(0, 29, 61, 0.72);
-  --rule: rgba(0, 29, 61, 0.2);
+  --dim: color-mix(in srgb, var(--navy) 72%, transparent);
+  --rule: color-mix(in srgb, var(--navy) 20%, transparent);
   --well: var(--gold);
 }
 .tone-gold {
   --accent: var(--red);
   --bg: var(--gold);
   --fg: var(--navy);
-  --dim: rgba(0, 29, 61, 0.76);
-  --rule: rgba(0, 29, 61, 0.22);
+  --dim: color-mix(in srgb, var(--navy) 76%, transparent);
+  --rule: color-mix(in srgb, var(--navy) 22%, transparent);
   --well: var(--yellow);
 }
 .tone-navy {
   --accent: var(--red);
   --bg: var(--navy);
   --fg: var(--yellow);
-  --dim: rgba(255, 214, 10, 0.66);
-  --rule: rgba(255, 214, 10, 0.18);
+  --dim: color-mix(in srgb, var(--yellow) 66%, transparent);
+  --rule: color-mix(in srgb, var(--yellow) 18%, transparent);
   --well: var(--blue);
 }
 .tone-blue {
   --accent: var(--red);
   --bg: var(--blue);
   --fg: var(--yellow);
-  --dim: rgba(255, 214, 10, 0.74);
-  --rule: rgba(255, 214, 10, 0.22);
+  --dim: color-mix(in srgb, var(--yellow) 74%, transparent);
+  --rule: color-mix(in srgb, var(--yellow) 22%, transparent);
   --well: var(--navy);
 }
-/* Red holds yellow at 4.0:1: enough for large type only. The red block uses no small text. */
+/* Red holds yellow at 3.8:1 or more in every palette: enough for large type only. The red block uses no small text. */
 .tone-red {
   --accent: var(--yellow);
   --bg: var(--red);
   --fg: var(--yellow);
   --dim: var(--yellow);
-  --rule: rgba(255, 214, 10, 0.35);
+  --rule: color-mix(in srgb, var(--yellow) 35%, transparent);
   --well: var(--navy);
 }
 .tone-yellow,

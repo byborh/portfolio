@@ -86,7 +86,7 @@ function place(sq) {
   background: var(--yellow);
 }
 .square.hit {
-  box-shadow: inset 0 0 0 999px rgba(208, 0, 0, 0.2);
+  box-shadow: inset 0 0 0 999px color-mix(in srgb, var(--red) 20%, transparent);
 }
 .piece {
   position: absolute;
