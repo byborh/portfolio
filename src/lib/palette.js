@@ -16,6 +16,24 @@ function validate() {
   }
 }
 
+// Fisher-Yates on a copy: every order has the same probability.
+function shuffle(palettes) {
+  const order = [...palettes]
+  for (let i = order.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[order[i], order[j]] = [order[j], order[i]]
+  }
+  return order
+}
+
+// A new cycle can start with the palette that ended the last one. The swap prevents
+// the same palette on screen for two intervals in a row.
+function nextCycle(previous) {
+  const order = shuffle(PALETTES)
+  if (order.length > 1 && order[0] === previous) [order[0], order[order.length - 1]] = [order[order.length - 1], order[0]]
+  return order
+}
+
 function apply(root, themeColor, palette) {
   for (const role of ROLES) root.style.setProperty(`--${role}`, palette[role])
   themeColor.setAttribute('content', palette.yellow)
@@ -34,11 +52,15 @@ export function startPaletteRotation() {
   root.classList.add('palette-live')
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
-  let index = 0
+  // The first palette always opens the site: it matches the favicon. The rest of the
+  // first cycle is random. Every cycle shows each palette once, in a new random order.
+  let current = PALETTES[0]
+  let queue = shuffle(PALETTES.slice(1))
   setInterval(() => {
     // Checked on each tick, so a change of the OS setting takes effect without a reload.
     if (reducedMotion.matches) return
-    index = (index + 1) % PALETTES.length
-    apply(root, themeColor, PALETTES[index])
+    if (queue.length === 0) queue = nextCycle(current)
+    current = queue.shift()
+    apply(root, themeColor, current)
   }, PALETTE_INTERVAL_MS)
 }
