@@ -2,6 +2,7 @@
 import { ref, nextTick, watch, onMounted, onBeforeUnmount } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import { profile } from '../data/profile.js'
+import { paletteState, setPaletteRunning } from '../lib/palette.js'
 
 // Professional sections of the home page, then the personal page. Router links work from any page.
 const links = [
@@ -66,6 +67,18 @@ onBeforeUnmount(() => {
       <RouterLink v-for="l in links" :key="l.label" :to="l.to" class="ulink" :class="{ page: l.page }">{{ l.label }}</RouterLink>
       <a :href="`mailto:${profile.email}`" class="ulink">Email</a>
     </nav>
+    <button
+      type="button"
+      class="palette-toggle"
+      aria-label="Keep this color palette"
+      :aria-pressed="!paletteState.running"
+      :title="paletteState.running ? `Keep these colors (${paletteState.name})` : 'Change the colors again'"
+      @click="setPaletteRunning(!paletteState.running)"
+    >
+      <span class="swatch" aria-hidden="true"><i></i><i></i><i></i></span>
+      <svg v-if="paletteState.running" viewBox="0 0 10 10" aria-hidden="true"><rect x="1.5" y="1" width="2.5" height="8" /><rect x="6" y="1" width="2.5" height="8" /></svg>
+      <svg v-else viewBox="0 0 10 10" aria-hidden="true"><path d="M2 1 L9 5 L2 9 Z" /></svg>
+    </button>
   </header>
 </template>
 
@@ -77,6 +90,7 @@ onBeforeUnmount(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
   height: 60px;
   font-size: 15px;
   /* Tinted glass: the section colour shows through, blurred, so the links stay readable over photos. */
@@ -88,6 +102,59 @@ onBeforeUnmount(() => {
 }
 .nav-name {
   font-weight: 500;
+}
+.nav-links {
+  margin-left: auto;
+}
+
+/* Small pill: the 3 live colors say "palette", the glyph says pause or play. */
+.palette-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 26px;
+  margin-left: 10px;
+  padding: 0 8px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: border-color 0.3s var(--ease);
+}
+.palette-toggle:hover {
+  border-color: currentColor;
+}
+.palette-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.swatch {
+  display: flex;
+}
+.swatch i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  /* The ring keeps the dot of the header's own color visible on the header. */
+  box-shadow: 0 0 0 1px var(--rule);
+}
+.swatch i + i {
+  margin-left: -2px;
+}
+.swatch i:nth-child(1) {
+  background: var(--yellow);
+}
+.swatch i:nth-child(2) {
+  background: var(--blue);
+}
+.swatch i:nth-child(3) {
+  background: var(--red);
+}
+.palette-toggle svg {
+  width: 9px;
+  height: 9px;
+  fill: currentColor;
 }
 .page {
   padding-left: 22px;
@@ -103,9 +170,23 @@ onBeforeUnmount(() => {
     max-width: 9ch;
     line-height: 1.15;
   }
+  .nav {
+    gap: 8px;
+  }
   .nav-links {
-    gap: 12px;
+    gap: 10px;
     font-size: 14px;
+  }
+  .nav-links a {
+    white-space: nowrap;
+  }
+  /* The palette button takes the room this spacing had. */
+  .page {
+    padding-left: 10px;
+  }
+  .palette-toggle {
+    margin-left: 10px;
+    padding: 0 6px;
   }
   /* Keep Work, About me and Email on phones. */
   .nav-links a:nth-child(1),

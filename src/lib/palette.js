@@ -1,3 +1,4 @@
+import { reactive } from 'vue'
 import { PALETTES, PALETTE_INTERVAL_MS } from '@/data/palettes.js'
 
 const HEX = /^#[0-9a-f]{6}$/i
@@ -34,6 +35,21 @@ function nextCycle(previous) {
   return order
 }
 
+// The Header button reads this state and calls setPaletteRunning().
+export const paletteState = reactive({ running: false, name: '' })
+
+let advance = null
+let timer = 0
+
+export function setPaletteRunning(running) {
+  if (!advance) throw new Error('palette.js: call startPaletteRotation() before setPaletteRunning()')
+  if (running === paletteState.running) return
+  paletteState.running = running
+  clearInterval(timer)
+  // A new interval on resume: the next palette comes a full interval after the click, not at once.
+  if (running) timer = setInterval(advance, PALETTE_INTERVAL_MS)
+}
+
 function apply(root, themeColor, palette) {
   for (const role of ROLES) root.style.setProperty(`--${role}`, palette[role])
   themeColor.setAttribute('content', palette.yellow)
@@ -51,16 +67,22 @@ export function startPaletteRotation() {
   getComputedStyle(root).getPropertyValue('--red')
   root.classList.add('palette-live')
 
+  // Under reduced motion the rotation starts stopped. The visitor can still start it with the button.
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+  reducedMotion.addEventListener('change', (event) => {
+    if (event.matches) setPaletteRunning(false)
+  })
+
   // The first palette always opens the site: it matches the favicon. The rest of the
   // first cycle is random. Every cycle shows each palette once, in a new random order.
   let current = PALETTES[0]
   let queue = shuffle(PALETTES.slice(1))
-  setInterval(() => {
-    // Checked on each tick, so a change of the OS setting takes effect without a reload.
-    if (reducedMotion.matches) return
+  paletteState.name = current.name
+  advance = () => {
     if (queue.length === 0) queue = nextCycle(current)
     current = queue.shift()
     apply(root, themeColor, current)
-  }, PALETTE_INTERVAL_MS)
+    paletteState.name = current.name
+  }
+  setPaletteRunning(!reducedMotion.matches)
 }
