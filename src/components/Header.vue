@@ -2,7 +2,7 @@
 import { ref, nextTick, watch, onMounted, onBeforeUnmount } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import { profile } from '../data/profile.js'
-import { paletteState, setPaletteRunning } from '../lib/palette.js'
+import { paletteState, togglePaletteKept } from '../lib/palette.js'
 
 // Professional sections of the home page, then the personal page. Router links work from any page.
 const links = [
@@ -73,7 +73,7 @@ onBeforeUnmount(() => {
       aria-label="Keep this color palette"
       :aria-pressed="!paletteState.running"
       :title="paletteState.running ? `Keep these colors (${paletteState.name})` : 'Change the colors again'"
-      @click="setPaletteRunning(!paletteState.running)"
+      @click="togglePaletteKept"
     >
       <span class="swatch" aria-hidden="true"><i></i><i></i><i></i></span>
       <svg v-if="paletteState.running" viewBox="0 0 10 10" aria-hidden="true"><rect x="1.5" y="1" width="2.5" height="8" /><rect x="6" y="1" width="2.5" height="8" /></svg>
