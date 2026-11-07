@@ -34,6 +34,30 @@ export const PALETTES = [
   { name: 'Sunset Glow', yellow: '#ffe6cb', blue: '#2b1c72', red: '#ba5a0a' },
   { name: 'Tropical Sunset', yellow: '#fed88f', blue: '#30068c', red: '#d1146e' },
   { name: 'Desert Sand', yellow: '#fed9bf', blue: '#4e3326', red: '#9d4f2a' },
+
+  // From https://www.color-meanings.com/retro-color-palettes/ (same method).
+  { name: 'Warm Rainbow', yellow: '#fef2db', blue: '#01204e', red: '#e23f00' },
+  { name: '80s Colorslide', yellow: '#b4e8c4', blue: '#6e071f', red: '#c0370c' },
+  { name: 'Chocolate and Cream', yellow: '#fffcc7', blue: '#59322b', red: '#d54751' },
+  { name: 'Pop Art', yellow: '#fdb05d', blue: '#1a0856', red: '#9f255a' },
+  { name: 'Throwback Stripes', yellow: '#fff1e3', blue: '#8c030c', red: '#c95708' },
+  { name: 'California Skies', yellow: '#fbf0dd', blue: '#014c48', red: '#c45810' },
+  { name: 'Cirrostratus', yellow: '#86eeda', blue: '#6a0618', red: '#cc2a03' },
+  { name: '3D Movie', yellow: '#feb432', blue: '#012939', red: '#b10a09' },
+  { name: 'Open Air', yellow: '#b2e4e1', blue: '#3d2c2c', red: '#be011a' },
+  { name: 'Tape Deck', yellow: '#ffedd9', blue: '#35312e', red: '#c55920' },
+  { name: 'Highway Hypnosis', yellow: '#fddca9', blue: '#562717', red: '#c21717' },
+  { name: 'VHS Tape', yellow: '#fedb8e', blue: '#611439', red: '#db0b22' },
+  { name: 'Raspberry Road', yellow: '#eed37a', blue: '#522134', red: '#c02942' },
+  { name: 'Tropical Vaporwave', yellow: '#fec684', blue: '#480255', red: '#b52b44' },
+  { name: 'Butterscotch Blonde', yellow: '#fce2bf', blue: '#4c1d09', red: '#b92a18' },
+
+  // From https://www.orbix.studio/blogs/best-color-combinations (same method).
+  { name: 'Charcoal Coral', yellow: '#f7f3ee', blue: '#2d2d2d', red: '#cf5439' },
+  { name: 'Electric Blue', yellow: '#ffffff', blue: '#0d1b2a', red: '#307cf4' },
+  { name: 'Forest Copper', yellow: '#f5f0e8', blue: '#1a3025', red: '#ab6725' },
+  { name: 'Black Red White', yellow: '#ffffff', blue: '#1a1a1a', red: '#e63946' },
+  { name: 'Coral Navy', yellow: '#ffffff', blue: '#264653', red: '#df4d51' },
 ]
 
 export const PALETTE_INTERVAL_MS = 5000

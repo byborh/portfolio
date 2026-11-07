@@ -1,6 +1,12 @@
 <script setup>
 import { profile, socials } from '../../data/profile.js'
 import { about } from '../../data/site.js'
+
+// The full address is wider than a 320 px screen. Splitting it lets the line break after the @.
+const at = profile.email.indexOf('@')
+if (at < 1) throw new Error(`profile.js: invalid email "${profile.email}"`)
+const emailUser = profile.email.slice(0, at + 1)
+const emailDomain = profile.email.slice(at + 1)
 </script>
 
 <template>
@@ -9,7 +15,7 @@ import { about } from '../../data/site.js'
 
     <a :href="`mailto:${profile.email}`" class="hello serif">Say hello <span class="hello-arrow">↗</span></a>
     <div class="contact-links">
-      <a :href="`mailto:${profile.email}`" class="ulink">{{ profile.email }}</a>
+      <a :href="`mailto:${profile.email}`" class="ulink">{{ emailUser }}<wbr />{{ emailDomain }}</a>
       <a v-for="s in socials" :key="s.label" :href="s.url" target="_blank" rel="noopener" class="ulink">
         {{ s.label }}
       </a>

@@ -195,4 +195,25 @@ onBeforeUnmount(() => {
     display: none;
   }
 }
+/* 320 px phones: the bar needs about 38 px more than it has. The button becomes a circle
+   whose ring carries the 3 palette colors, and the links get smaller. */
+@media (max-width: 359px) {
+  .nav-links {
+    font-size: 13px;
+  }
+  .palette-toggle {
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    margin-left: 0;
+    padding: 0;
+    border: 2px solid transparent;
+    background:
+      linear-gradient(var(--bg), var(--bg)) padding-box,
+      conic-gradient(var(--yellow) 0 120deg, var(--blue) 0 240deg, var(--red) 0) border-box;
+  }
+  .swatch {
+    display: none;
+  }
+}
 </style>
