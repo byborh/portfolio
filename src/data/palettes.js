@@ -60,4 +60,4 @@ export const PALETTES = [
   { name: 'Coral Navy', yellow: '#ffffff', blue: '#264653', red: '#df4d51' },
 ]
 
-export const PALETTE_INTERVAL_MS = 5000
+export const PALETTE_INTERVAL_MS = 3500;
